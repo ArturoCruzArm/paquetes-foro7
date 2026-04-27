@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+/* Renderizar este HTML a 1200x630 para crear og-image.jpg */
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;background:#0d1b2a;font-family:'DM Sans',sans-serif;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+body::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#0d1b2a 0%,#1b2838 50%,#0d1b2a 100%)}
+body::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#c9a84c,transparent)}
+.container{position:relative;z-index:1;text-align:center;padding:0 80px}
+.logo{font-family:Georgia,serif;font-size:52px;font-weight:700;color:#c9a84c;margin-bottom:8px;letter-spacing:4px}
+.logo span{color:#fff;font-weight:400}
+h1{font-family:Georgia,serif;font-size:58px;font-weight:700;margin:20px 0 10px;line-height:1.2}
+h1 em{font-style:normal;color:#c9a84c}
+.sub{color:rgba(255,255,255,.55);font-size:22px;margin-bottom:30px}
+.prices{display:flex;justify-content:center;gap:30px;margin-top:10px}
+.price-tag{padding:12px 24px;border:1px solid rgba(201,168,76,.3);border-radius:3px}
+.price-tag.pop{border-color:#c9a84c;background:rgba(201,168,76,.08)}
+.price-tag .name{font-size:14px;color:rgba(255,255,255,.55);letter-spacing:2px;text-transform:uppercase}
+.price-tag .amount{font-size:22px;font-weight:700;color:#c9a84c;margin-top:4px}
+.city{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:14px;color:rgba(255,255,255,.3);letter-spacing:3px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">FORO <span>7</span></div>
+    <h1>Fotografía y Video <em>Profesional</em></h1>
+    <p class="sub">Dron · Video Cinematográfico · Invitación Web · Transmisión en Vivo</p>
+    <div class="prices">
+        <div class="price-tag"><div class="name">Básico</div><div class="amount">$6,500</div></div>
+        <div class="price-tag"><div class="name">Clásico</div><div class="amount">$9,000</div></div>
+        <div class="price-tag pop"><div class="name">★ Plus</div><div class="amount">$11,500</div></div>
+        <div class="price-tag"><div class="name">Premium</div><div class="amount">$14,000</div></div>
+        <div class="price-tag"><div class="name">Master</div><div class="amount">$17,000</div></div>
+    </div>
+</div>
+<div class="city">León, Guanajuato</div>
+</body>
+</html>
