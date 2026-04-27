@@ -414,50 +414,42 @@
 <!-- PERSONALIZAR PAQUETE -->
 <section class="custom" id="personalizar">
     <h2 class="stitle">Arma tu Paquete</h2>
-    <p class="ssub">Elige solo lo que necesitas · Descuento automático entre más agregues</p>
+    <p class="ssub">Elige tus servicios · Descuento automático entre más contrates</p>
 
     <div class="custom-grid" id="customGrid">
-        <!-- TU EVENTO -->
-        <div class="custom-section-title">Tu evento</div>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Sesión previa en locación (~2 hrs)"><div class="ci-text"><div class="ci-name">Sesión previa en locación</div><div class="ci-desc">~2 horas · Tú eliges el lugar para tu sesión profesional</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="500" data-name="Visita a casa + Misa (~1 hr)"><div class="ci-text"><div class="ci-name">Visita a casa + Misa</div><div class="ci-desc">~1 hora · Momentos previos en casa y ceremonia</div></div><div class="ci-price">$500</div></label>
-        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Horas de fiesta</div><div class="ci-desc">$500 por hora · En promedio 5 horas</div></div><select id="horasFiesta"><option value="0">Sin fiesta</option><option value="3">3 hrs — $1,500</option><option value="4">4 hrs — $2,000</option><option value="5" selected>5 hrs — $2,500</option><option value="6">6 hrs — $3,000</option><option value="7">7 hrs — $3,500</option><option value="8">8 hrs — $4,000</option><option value="9">9 hrs — $4,500</option><option value="10">10 hrs — $5,000</option><option value="11">11 hrs — $5,500</option><option value="12">12 hrs — $6,000</option></select></div>
-        <div class="ci-note">Incluye ~100 fotos digitales editadas por cada hora de cobertura</div>
+        <!-- COBERTURA -->
+        <div class="custom-section-title">① Cobertura</div>
+        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Horas de evento</div><div class="ci-desc">Misa + fiesta · En promedio 5–6 horas</div></div><select id="horasEvento"><option value="0">Seleccionar</option><option value="3">3 hrs</option><option value="4">4 hrs</option><option value="5" selected>5 hrs</option><option value="6">6 hrs</option><option value="7">7 hrs</option><option value="8">8 hrs</option><option value="9">9 hrs</option><option value="10">10 hrs</option><option value="11">11 hrs</option><option value="12">12 hrs</option></select></div>
+        <label class="custom-item"><input type="checkbox" id="cbSesion"><div class="ci-text"><div class="ci-name">Sesión previa en locación</div><div class="ci-desc">~2 horas adicionales · Tú eliges el lugar</div></div><div class="ci-price">$1,500</div></label>
+        <div class="ci-note">~100 fotos digitales editadas por cada hora con fotografía</div>
 
-        <!-- FOTOGRAFÍA -->
-        <div class="custom-section-title">Fotografía</div>
-        <label class="custom-item"><input type="radio" name="fotos" data-price="1000" data-name="50 fotos impresas 5×7&quot;"><div class="ci-text"><div class="ci-name">50 fotos impresas 5×7"</div><div class="ci-desc">Base $500 + $10/foto</div></div><div class="ci-price">$1,000</div></label>
-        <label class="custom-item"><input type="radio" name="fotos" data-price="1500" data-name="100 fotos impresas 5×7&quot;"><div class="ci-text"><div class="ci-name">100 fotos impresas 5×7"</div><div class="ci-desc">Base $500 + $10/foto</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="radio" name="fotos" data-price="2000" data-name="150 fotos impresas 5×7&quot;"><div class="ci-text"><div class="ci-name">150 fotos impresas 5×7"</div><div class="ci-desc">Base $500 + $10/foto</div></div><div class="ci-price">$2,000</div></label>
-        <label class="custom-item"><input type="radio" name="fotos" data-price="2500" data-name="200 fotos impresas 5×7&quot;"><div class="ci-text"><div class="ci-name">200 fotos impresas 5×7"</div><div class="ci-desc">Base $500 + $10/foto · La colección más completa</div></div><div class="ci-price">$2,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Galería web privada"><div class="ci-text"><div class="ci-name">Galería web privada</div><div class="ci-desc">Tus fotos en la nube para descargar y compartir</div></div><div class="ci-price">$800</div></label>
-        <div class="ci-note">Mi historia en fotos (collage de crecimiento) incluido en todos los paquetes</div>
+        <!-- SERVICIOS PRINCIPALES -->
+        <div class="custom-section-title">② Servicios principales <small style="font-family:'DM Sans';font-size:.65rem;color:var(--gold);font-weight:400">· más servicios = más descuento</small></div>
+        <label class="custom-item"><input type="checkbox" id="cbFoto" data-main="1"><div class="ci-text"><div class="ci-name">Fotografía profesional</div><div class="ci-desc">$600/hr · Combo foto+video: $900/hr</div></div><div class="ci-price" id="pFoto">$3,000</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbVideo" data-main="1"><div class="ci-text"><div class="ci-name">Video profesional</div><div class="ci-desc">$600/hr · Combo foto+video: $900/hr (ahorras $300/hr)</div></div><div class="ci-price" id="pVideo">$3,000</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbDron" data-main="1"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas integradas en tus videos</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbLive" data-main="1"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">YouTube + Facebook · Para familia a distancia</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbWebInv" data-main="1"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Sitio propio con RSVP, contrato, logística e invitados</div></div><div class="ci-price">$2,000</div></label>
+        <div id="discountBadge" class="ci-note" style="color:var(--gold);font-weight:500"></div>
 
-        <!-- VIDEO Y MÚSICA -->
-        <div class="custom-section-title">Video y música</div>
-        <div class="ci-note">Cada video incluye canciones originales creadas para el momento</div>
-        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Video completo YouTube"><div class="ci-text"><div class="ci-name">Video completo del evento</div><div class="ci-desc">Editado con 6 canciones originales · Subido a YouTube</div></div><div class="ci-price">$2,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Video resumen"><div class="ci-text"><div class="ci-name">Video resumen</div><div class="ci-desc">Todo tu evento en una canción original · Para compartir en redes</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Clip proyección salón"><div class="ci-text"><div class="ci-name">Clip para proyección en salón</div><div class="ci-desc">Collage de crecimiento + videoclip de la sesión con canción · Se proyecta en la fiesta</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="5000" data-name="Película cinematográfica"><div class="ci-text"><div class="ci-name">Película cinematográfica</div><div class="ci-desc">Video tipo película (15–50 min) con banda sonora original · YouTube para siempre</div></div><div class="ci-price">$5,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Tomas con dron"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas integradas en tus videos</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="2500" data-name="Transmisión en vivo"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">Streaming a YouTube + Facebook para familia a distancia</div></div><div class="ci-price">$2,500</div></label>
-        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Canciones adicionales (vals / momentos especiales)</div><div class="ci-desc">$700 por canción personalizada para momentos únicos</div></div><select id="cancionesExtra"><option value="0">Ninguna</option><option value="1">1 canción — $700</option><option value="2">2 canciones — $1,400</option><option value="3">3 canciones — $2,100</option></select></div>
+        <!-- PRODUCCIÓN DE VIDEO -->
+        <div class="custom-section-title">③ Producción de video</div>
+        <div class="ci-note">Cada video incluye canciones originales · Precio según tus horas</div>
+        <label class="custom-item"><input type="checkbox" id="cbVidComp"><div class="ci-text"><div class="ci-name">Video completo del evento</div><div class="ci-desc">$1,200 + $250/hr · Editado con canciones originales</div></div><div class="ci-price" id="pVidComp">$2,450</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbVidRes"><div class="ci-text"><div class="ci-name">Video resumen</div><div class="ci-desc">$1,200 + $150/hr · Todo tu evento en una canción</div></div><div class="ci-price" id="pVidRes">$1,950</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbClipProy"><div class="ci-text"><div class="ci-name">Clip para proyección en salón</div><div class="ci-desc">$1,000 + $250/hr sesión · Se proyecta en la fiesta</div></div><div class="ci-price" id="pClipProy">$1,000</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbPelicula"><div class="ci-text"><div class="ci-name">Película cinematográfica</div><div class="ci-desc">$3,000 + $400/hr · Video tipo película 15–50 min</div></div><div class="ci-price" id="pPelicula">$5,000</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbReel"><div class="ci-text"><div class="ci-name">Reel vertical</div><div class="ci-desc">Clip corto para Instagram / TikTok</div></div><div class="ci-price">$700</div></label>
+        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Canciones adicionales</div><div class="ci-desc">$700/canción · Para vals o momentos especiales</div></div><select id="selCanciones"><option value="0">Ninguna</option><option value="1">1 canción — $700</option><option value="2">2 canciones — $1,400</option><option value="3">3 canciones — $2,100</option></select></div>
 
-        <!-- FOTOLIBRO Y ENTREGABLES -->
-        <div class="custom-section-title">Fotolibro y entregables</div>
-        <label class="custom-item"><input type="checkbox" data-price="3500" data-name="Fotolibro 12×24&quot; + caja + mini"><div class="ci-text"><div class="ci-name">Fotolibro 12×24" (10 hojas, 100 fotos)</div><div class="ci-desc">Incluye caja del fotolibro + mini fotolibro 5×10" de regalo</div></div><div class="ci-price">$3,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="500" data-name="USB personalizada"><div class="ci-text"><div class="ci-name">USB personalizada</div><div class="ci-desc">Grabada con nombre y fecha</div></div><div class="ci-price">$500</div></label>
-
-        <!-- AMPLIACIONES -->
-        <label class="custom-item"><input type="radio" name="ampliacion" data-price="800" data-name="Ampliación 11×14&quot;"><div class="ci-text"><div class="ci-name">Ampliación 11×14" (28×36cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$800</div></label>
-        <label class="custom-item"><input type="radio" name="ampliacion" data-price="1200" data-name="Ampliación 16×20&quot;"><div class="ci-text"><div class="ci-name">Ampliación 16×20" (40×50cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,200</div></label>
-        <label class="custom-item"><input type="radio" name="ampliacion" data-price="1500" data-name="Ampliación 20×24&quot;"><div class="ci-text"><div class="ci-name">Ampliación 20×24" (50×60cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="radio" name="ampliacion" data-price="2000" data-name="Ampliación 24×32&quot;"><div class="ci-text"><div class="ci-name">Ampliación 24×32" (60×80cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$2,000</div></label>
-
-        <!-- EXTRAS -->
-        <div class="custom-section-title">Extras</div>
-        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Invitación web completa"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Sitio propio con RSVP, contrato, logística e invitados</div></div><div class="ci-price">$2,000</div></label>
+        <!-- ENTREGABLES FÍSICOS -->
+        <div class="custom-section-title">④ Entregables físicos <small style="font-family:'DM Sans';font-size:.65rem;color:var(--smoke);font-weight:400">· máx. 25% desc.</small></div>
+        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Fotos impresas 5×7"</div><div class="ci-desc">Base $220 + $7 por foto</div></div><select id="selFotos"><option value="0">Sin impresas (solo digitales)</option><option value="570">50 fotos — $570</option><option value="920">100 fotos — $920</option><option value="1270">150 fotos — $1,270</option><option value="1620">200 fotos — $1,620</option></select></div>
+        <label class="custom-item"><input type="checkbox" id="cbGaleria"><div class="ci-text"><div class="ci-name">Galería web privada</div><div class="ci-desc">Tus fotos en la nube para descargar y compartir</div></div><div class="ci-price">$800</div></label>
+        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Ampliación con marco</div><div class="ci-desc">Tu mejor foto en gran formato</div></div><select id="selAmp"><option value="0">Sin ampliación</option><option value="600">Chica 28×36cm — $600</option><option value="1700">Grande 60×80cm — $1,700</option></select></div>
+        <label class="custom-item"><input type="checkbox" id="cbUSB"><div class="ci-text"><div class="ci-name">USB personalizada</div><div class="ci-desc">Grabada con nombre y fecha</div></div><div class="ci-price">$200</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbFotolibro"><div class="ci-text"><div class="ci-name">Fotolibro 12×24"</div><div class="ci-desc">10 hojas, 100 fotos + caja + mini 5×10" de regalo</div></div><div class="ci-price">$2,400</div></label>
+        <div class="ci-note">Mi historia en fotos (collage de crecimiento) incluido siempre</div>
     </div>
 
     <div id="customDiscount" style="text-align:center;font-size:.8rem;color:var(--gold);min-height:1.2rem;margin-top:1rem"></div>
@@ -485,7 +477,7 @@
 
     <div class="faq-item"><div class="faq-q">¿Cuánto tiempo tardan en entregar el material?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Las fotos digitales se entregan en 2–3 semanas. El video completo y cinematográfico en 4–6 semanas. Los entregables físicos (fotolibro, ampliaciones, USB) en 6–8 semanas después del evento.</p></div></div>
     <div class="faq-item"><div class="faq-q">¿Cómo funciona el anticipo y los pagos?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Tú decides con cuánto apartar tu fecha — no hay monto mínimo. Después pagas en parcialidades sin intereses a tu ritmo. El único requisito es liquidar 8 días antes del evento.</p></div></div>
-    <div class="faq-item"><div class="faq-q">¿Puedo agregar horas extra el día del evento?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Sí, cada hora adicional tiene un costo de $500 MXN. Se acuerda directamente el día del evento si es necesario.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿Puedo agregar horas extra el día del evento?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Sí, se pueden agregar horas adicionales. El costo depende de los servicios contratados (foto, video, dron). Se acuerda directamente el día del evento.</p></div></div>
     <div class="faq-item"><div class="faq-q">¿Qué pasa si llueve o hay mal clima?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>La sesión previa se puede reprogramar sin costo. Para el día del evento, contamos con equipo profesional para adaptar la iluminación y trabajar en interiores sin problema.</p></div></div>
     <div class="faq-item"><div class="faq-q">¿Dónde hacen las sesiones previas?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Las locaciones más populares son el Templo Expiatorio, Forum Cultural Guanajuato, Jardín El Molino y La Calzada. Dependiendo del paquete puedes elegir 1, 2 o hasta 3 locaciones diferentes el mismo día.</p></div></div>
     <div class="faq-item"><div class="faq-q">¿Cubren eventos fuera de León?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Sí, cubrimos eventos en todo Guanajuato y estados cercanos. Para eventos fuera de León se aplica un cargo por viáticos dependiendo de la distancia.</p></div></div>
@@ -526,15 +518,18 @@
 
 <script>
 (function(){
-    /* CUSTOM BUILDER */
+    /* CUSTOM BUILDER — Motor de precios basado en costos reales */
     var grid = document.getElementById('customGrid');
     var totalEl = document.getElementById('customTotal');
     var discountEl = document.getElementById('customDiscount');
     var savingsEl = document.getElementById('customSavings');
     var suggestionEl = document.getElementById('customSuggestion');
+    var discBadge = document.getElementById('discountBadge');
     var sendBtn = document.getElementById('customSend');
-    var selFiesta = document.getElementById('horasFiesta');
-    var selCanciones = document.getElementById('cancionesExtra');
+    var selHoras = document.getElementById('horasEvento');
+    var selCanciones = document.getElementById('selCanciones');
+    var selFotos = document.getElementById('selFotos');
+    var selAmp = document.getElementById('selAmp');
 
     var paquetes = [
         {name:'Esencial',price:4500,href:'esencial.html'},
@@ -545,108 +540,178 @@
         {name:'Master Cinemático',price:17000,href:'master.html'}
     ];
 
+    function fmt(n){ return '$'+n.toLocaleString('es-MX'); }
+
     function calcBuilder(){
-        var subtotal = 0;
-        var count = 0;
+        var hrs = parseInt(selHoras.value) || 0;
+        var hasSesion = document.getElementById('cbSesion').checked;
+        var hasFoto = document.getElementById('cbFoto').checked;
+        var hasVideo = document.getElementById('cbVideo').checked;
+        var hasDron = document.getElementById('cbDron').checked;
+        var hasLive = document.getElementById('cbLive').checked;
+        var hasWeb = document.getElementById('cbWebInv').checked;
         var items = [];
 
-        /* Checkboxes & radios */
-        grid.querySelectorAll('input:checked').forEach(function(inp){
-            subtotal += parseInt(inp.dataset.price);
-            count++;
-            items.push(inp.dataset.name);
-        });
+        /* Servicios principales (determinan descuento) */
+        var mainCount = (hasFoto?1:0)+(hasVideo?1:0)+(hasDron?1:0)+(hasLive?1:0)+(hasWeb?1:0);
 
-        /* Horas de fiesta ($500/hr) */
-        var hrsFiesta = parseInt(selFiesta.value) || 0;
-        if(hrsFiesta > 0){
-            var costoFiesta = hrsFiesta * 500;
-            subtotal += costoFiesta;
-            count++;
-            items.push('Fiesta ' + hrsFiesta + ' hrs ($' + costoFiesta.toLocaleString('es-MX') + ')');
+        /* Descuento por servicios: 10% por cada servicio principal */
+        var discSvc = mainCount * 10;
+        /* Descuento por horas: 3h=5%, 4h=10%, 5h=15%, 6+=20% */
+        var discHrs = hrs>=6?20:hrs>=5?15:hrs>=4?10:hrs>=3?5:0;
+        var discCombined = discSvc + discHrs;
+        /* Topes por categoría */
+        var capSvc = Math.min(discCombined, 45);
+        var capEdit = Math.min(discCombined, 35);
+        var capPhys = Math.min(discCombined, 25);
+
+        /* Badge de descuento */
+        if(mainCount > 0){
+            var txt = mainCount + ' servicio' + (mainCount>1?'s':'') + ' → ' + discSvc + '% desc.';
+            if(discHrs > 0) txt += ' + ' + discHrs + '% por ' + hrs + ' hrs';
+            discBadge.textContent = txt;
+        } else {
+            discBadge.textContent = 'Selecciona servicios para activar descuentos';
         }
 
-        /* Canciones adicionales ($700 c/u) */
+        /* --- Precios por hora (servicios) --- */
+        var fotoPrice = 0, videoPrice = 0;
+        if(hasFoto && hasVideo){
+            /* Combo foto+video: $900/hr en vez de $1,200/hr */
+            var comboTotal = 900 * hrs;
+            fotoPrice = Math.round(comboTotal / 2);
+            videoPrice = comboTotal - fotoPrice;
+            items.push('Foto+Video combo ' + hrs + 'hrs (' + fmt(comboTotal) + ')');
+        } else {
+            if(hasFoto){ fotoPrice = 600 * hrs; items.push('Fotografía ' + hrs + 'hrs (' + fmt(fotoPrice) + ')'); }
+            if(hasVideo){ videoPrice = 600 * hrs; items.push('Video ' + hrs + 'hrs (' + fmt(videoPrice) + ')'); }
+        }
+        /* Actualizar etiquetas dinámicas de precio */
+        document.getElementById('pFoto').textContent = fmt(hasFoto && hasVideo ? Math.round(900*hrs/2) : 600*hrs);
+        document.getElementById('pVideo').textContent = fmt(hasFoto && hasVideo ? 900*hrs - Math.round(900*hrs/2) : 600*hrs);
+
+        var sesionPrice = hasSesion ? 1500 : 0;
+        if(hasSesion) items.push('Sesión previa ($1,500)');
+
+        var dronPrice = hasDron ? 1500 : 0;
+        if(hasDron) items.push('Dron ($1,500)');
+
+        var livePrice = hasLive ? 2500 : 0;
+        if(hasLive) items.push('Transmisión en vivo ($2,500)');
+
+        var webPrice = hasWeb ? 2000 : 0;
+        if(hasWeb) items.push('Invitación web ($2,000)');
+
+        var svcSubtotal = fotoPrice + videoPrice + sesionPrice + dronPrice + livePrice + webPrice;
+
+        /* --- Productos de video (dependen de horas) --- */
+        var vidCompP = 1200 + 250*hrs;
+        var vidResP = 1200 + 150*hrs;
+        var clipProyP = 1000 + (hasSesion ? 500 : 0);
+        var peliculaP = 3000 + 400*hrs;
+
+        document.getElementById('pVidComp').textContent = fmt(vidCompP);
+        document.getElementById('pVidRes').textContent = fmt(vidResP);
+        document.getElementById('pClipProy').textContent = fmt(clipProyP);
+        document.getElementById('pPelicula').textContent = fmt(peliculaP);
+
+        var vidCompPrice = document.getElementById('cbVidComp').checked ? vidCompP : 0;
+        var vidResPrice = document.getElementById('cbVidRes').checked ? vidResP : 0;
+        var clipProyPrice = document.getElementById('cbClipProy').checked ? clipProyP : 0;
+        var peliculaPrice = document.getElementById('cbPelicula').checked ? peliculaP : 0;
+        var reelPrice = document.getElementById('cbReel').checked ? 700 : 0;
+
+        if(vidCompPrice) items.push('Video completo (' + fmt(vidCompPrice) + ')');
+        if(vidResPrice) items.push('Video resumen (' + fmt(vidResPrice) + ')');
+        if(clipProyPrice) items.push('Clip proyección (' + fmt(clipProyPrice) + ')');
+        if(peliculaPrice) items.push('Película cinematográfica (' + fmt(peliculaPrice) + ')');
+        if(reelPrice) items.push('Reel vertical ($700)');
+
         var numCanciones = parseInt(selCanciones.value) || 0;
-        if(numCanciones > 0){
-            var costoCanciones = numCanciones * 700;
-            subtotal += costoCanciones;
-            count++;
-            items.push(numCanciones + ' canción' + (numCanciones > 1 ? 'es' : '') + ' adicional' + (numCanciones > 1 ? 'es' : '') + ' ($' + costoCanciones.toLocaleString('es-MX') + ')');
+        var cancionesPrice = numCanciones * 700;
+        if(cancionesPrice > 0) items.push(numCanciones + ' canción' + (numCanciones>1?'es':'') + ' extra (' + fmt(cancionesPrice) + ')');
+
+        var editSubtotal = vidCompPrice + vidResPrice + clipProyPrice + peliculaPrice + reelPrice + cancionesPrice;
+
+        /* --- Entregables físicos --- */
+        var fotosPrice = parseInt(selFotos.value) || 0;
+        var galeriaPrice = document.getElementById('cbGaleria').checked ? 800 : 0;
+        var ampPrice = parseInt(selAmp.value) || 0;
+        var usbPrice = document.getElementById('cbUSB').checked ? 200 : 0;
+        var fotolibroPrice = document.getElementById('cbFotolibro').checked ? 2400 : 0;
+
+        if(fotosPrice > 0){
+            var nf = fotosPrice===570?50:fotosPrice===920?100:fotosPrice===1270?150:200;
+            items.push(nf + ' fotos impresas (' + fmt(fotosPrice) + ')');
         }
+        if(galeriaPrice) items.push('Galería web ($800)');
+        if(ampPrice) items.push('Ampliación (' + fmt(ampPrice) + ')');
+        if(usbPrice) items.push('USB ($200)');
+        if(fotolibroPrice) items.push('Fotolibro 12×24" ($2,400)');
 
-        /* Calculate total hours for info */
-        var totalHrs = hrsFiesta;
-        var cbSesion = grid.querySelector('[data-name*="Sesión previa"]');
-        var cbMisa = grid.querySelector('[data-name*="Misa"]');
-        if(cbSesion && cbSesion.checked) totalHrs += 2;
-        if(cbMisa && cbMisa.checked) totalHrs += 1;
+        var physSubtotal = fotosPrice + galeriaPrice + ampPrice + usbPrice + fotolibroPrice;
 
-        /* Active class toggle */
+        /* --- Aplicar descuentos por categoría --- */
+        var svcDisc = Math.round(svcSubtotal * capSvc / 100);
+        var editDisc = Math.round(editSubtotal * capEdit / 100);
+        var physDisc = Math.round(physSubtotal * capPhys / 100);
+        var totalDiscAmount = svcDisc + editDisc + physDisc;
+
+        var subtotal = svcSubtotal + editSubtotal + physSubtotal;
+        var total = subtotal - totalDiscAmount;
+
+        /* --- Estados activos visuales --- */
         grid.querySelectorAll('.custom-item').forEach(function(item){
-            var inp = item.querySelector('input');
-            if(!inp) return;
-            if(inp.type === 'radio'){
-                var checked = grid.querySelector('input[name="'+inp.name+'"]:checked');
-                item.classList.toggle('active', checked === inp);
-            } else {
-                item.classList.toggle('active', inp.checked);
-            }
+            var inp = item.querySelector('input[type="checkbox"]');
+            if(inp) item.classList.toggle('active', inp.checked);
         });
-        /* Select items active state */
-        selFiesta.closest('.custom-item').classList.toggle('active', hrsFiesta > 0);
+        selHoras.closest('.custom-item').classList.toggle('active', hrs > 0);
+        selFotos.closest('.custom-item').classList.toggle('active', fotosPrice > 0);
+        selAmp.closest('.custom-item').classList.toggle('active', ampPrice > 0);
         selCanciones.closest('.custom-item').classList.toggle('active', numCanciones > 0);
 
-        /* Progressive discount */
-        var discountPct = 0;
-        if(count >= 9) discountPct = 15;
-        else if(count >= 6) discountPct = 10;
-        else if(count >= 3) discountPct = 5;
+        /* --- Mostrar totales --- */
+        totalEl.textContent = fmt(total) + ' MXN';
 
-        var discount = Math.round(subtotal * discountPct / 100);
-        var total = subtotal - discount;
+        var totalHrs = hrs + (hasSesion ? 2 : 0);
+        var hrsInfo = (hasFoto && totalHrs > 0) ? ' · ~' + (totalHrs * 100) + ' fotos digitales' : '';
 
-        totalEl.textContent = '$' + total.toLocaleString('es-MX') + ' MXN';
-
-        /* Info text */
-        var hrsInfo = totalHrs > 0 ? ' · ~' + (totalHrs * 100) + ' fotos digitales' : '';
-        if(discountPct > 0 && subtotal > 0){
-            discountEl.textContent = 'Descuento ' + discountPct + '% aplicado · Ahorras $' + discount.toLocaleString('es-MX') + hrsInfo;
-            savingsEl.textContent = 'Subtotal sin descuento: $' + subtotal.toLocaleString('es-MX');
+        if(totalDiscAmount > 0 && subtotal > 0){
+            discountEl.innerHTML = 'Ahorras <strong>' + fmt(totalDiscAmount) + '</strong> con tu descuento' + hrsInfo;
+            savingsEl.textContent = 'Precio de lista: ' + fmt(subtotal);
         } else {
-            var faltan = 3 - count;
-            discountEl.textContent = count > 0 ? (faltan > 0 ? 'Agrega '+faltan+' servicio'+(faltan===1?'':'s')+' más para 5% de descuento' + hrsInfo : hrsInfo) : '';
+            discountEl.textContent = subtotal > 0 ? ('Agrega servicios principales para activar descuentos' + hrsInfo) : '';
             savingsEl.textContent = '';
         }
 
-        /* Package suggestion */
+        /* --- Sugerencia de paquete --- */
         suggestionEl.style.display = 'none';
         if(total > 0){
             for(var i = paquetes.length - 1; i >= 0; i--){
                 var pkg = paquetes[i];
                 if(pkg.price <= total && (total - pkg.price) >= 500){
                     var ahorro = total - pkg.price;
-                    suggestionEl.innerHTML = '💡 <strong>Te conviene el paquete ' + pkg.name + '</strong> por $' + pkg.price.toLocaleString('es-MX') + ' MXN — incluye más servicios y <strong>ahorras $' + ahorro.toLocaleString('es-MX') + '</strong>. <a href="' + pkg.href + '" style="color:var(--gold);text-decoration:underline">Ver detalle →</a>';
+                    suggestionEl.innerHTML = '💡 <strong>Te conviene el paquete ' + pkg.name + '</strong> por ' + fmt(pkg.price) + ' MXN — incluye más servicios y <strong>ahorras ' + fmt(ahorro) + '</strong>. <a href="' + pkg.href + '" style="color:var(--gold);text-decoration:underline">Ver detalle →</a>';
                     suggestionEl.style.display = 'block';
                     break;
                 }
             }
         }
 
-        return {total: total, subtotal: subtotal, discount: discount, discountPct: discountPct, count: count, items: items};
+        return {total:total,subtotal:subtotal,discount:totalDiscAmount,items:items,hrs:totalHrs};
     }
 
     grid.addEventListener('change', calcBuilder);
-    /* Initial calc since fiesta has default value */
     calcBuilder();
 
     sendBtn.addEventListener('click', function(){
         var info = calcBuilder();
-        if (!info.items.length) { alert('Selecciona al menos un servicio'); return; }
-        var msg = 'Hola, me interesa un paquete personalizado:\n\n' + info.items.map(function(i){ return '• ' + i; }).join('\n');
-        if(info.discountPct > 0) msg += '\n\nDescuento ' + info.discountPct + '% aplicado (-$' + info.discount.toLocaleString('es-MX') + ')';
-        msg += '\n\nTotal estimado: $' + info.total.toLocaleString('es-MX') + ' MXN';
-        window.open('https://wa.me/5214779203776?text=' + encodeURIComponent(msg) + '&utm_source=web&utm_medium=builder&utm_campaign=paquete_custom', '_blank');
+        if(!info.items.length){alert('Selecciona al menos un servicio');return;}
+        var msg = 'Hola, me interesa un paquete personalizado:\n\n' + info.items.map(function(i){return '• '+i;}).join('\n');
+        if(info.discount > 0) msg += '\n\nDescuento aplicado: -' + fmt(info.discount);
+        msg += '\n\nTotal estimado: ' + fmt(info.total) + ' MXN';
+        if(info.hrs > 0) msg += '\nCobertura: ~' + info.hrs + ' horas';
+        window.open('https://wa.me/5214779203776?text='+encodeURIComponent(msg)+'&utm_source=web&utm_medium=builder&utm_campaign=paquete_custom','_blank');
         if(typeof fbq==='function') fbq('track','Lead',{value:info.total,currency:'MXN'});
         if(typeof gtag==='function') gtag('event','generate_lead',{value:info.total,currency:'MXN'});
     });
