@@ -407,37 +407,57 @@
 <!-- PERSONALIZAR PAQUETE -->
 <section class="custom" id="personalizar">
     <h2 class="stitle">Arma tu Paquete</h2>
-    <p class="ssub">Elige solo lo que necesitas · El precio se calcula automáticamente</p>
+    <p class="ssub">Elige solo lo que necesitas · Descuento automático entre más agregues</p>
 
     <div class="custom-grid" id="customGrid">
-        <label class="custom-item"><input type="checkbox" data-price="3000" data-name="Cobertura 6 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 6 hrs</div><div class="ci-desc">Sesión el día del evento + ceremonia + fiesta (~600 fotos digitales)</div></div><div class="ci-price">$3,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="4500" data-name="Cobertura 8 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 8 hrs</div><div class="ci-desc">Sesión previa o día del evento + ceremonia + fiesta (~800 fotos digitales)</div></div><div class="ci-price">$4,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="6000" data-name="Cobertura 10+ hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 10+ hrs</div><div class="ci-desc">Sesión previa + evento completo sin reloj (~1,000+ fotos digitales)</div></div><div class="ci-price">$6,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="40 fotos impresas"><div class="ci-text"><div class="ci-name">40 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="2500" data-name="80 fotos impresas"><div class="ci-text"><div class="ci-name">80 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$2,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="3500" data-name="120 fotos impresas"><div class="ci-text"><div class="ci-name">120 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$3,500</div></label>
+        <!-- COBERTURA (mutuamente excluyente) -->
+        <label class="custom-item"><input type="radio" name="cobertura" data-price="3000" data-name="Cobertura 6 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 6 hrs</div><div class="ci-desc">Sesión el día del evento + ceremonia + fiesta (~600 fotos digitales)</div></div><div class="ci-price">$3,000</div></label>
+        <label class="custom-item"><input type="radio" name="cobertura" data-price="4500" data-name="Cobertura 8 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 8 hrs</div><div class="ci-desc">Sesión previa o día del evento + ceremonia + fiesta (~800 fotos digitales)</div></div><div class="ci-price">$4,500</div></label>
+        <label class="custom-item"><input type="radio" name="cobertura" data-price="6000" data-name="Cobertura 10+ hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 10+ hrs</div><div class="ci-desc">Sesión previa + evento completo sin reloj (~1,000+ fotos digitales)</div></div><div class="ci-price">$6,000</div></label>
+
+        <!-- FOTOS IMPRESAS (mutuamente excluyente) -->
+        <label class="custom-item"><input type="radio" name="fotos" data-price="1500" data-name="40 fotos impresas"><div class="ci-text"><div class="ci-name">40 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="radio" name="fotos" data-price="2500" data-name="80 fotos impresas"><div class="ci-text"><div class="ci-name">80 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item"><input type="radio" name="fotos" data-price="3500" data-name="120 fotos impresas"><div class="ci-text"><div class="ci-name">120 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$3,500</div></label>
+        <label class="custom-item"><input type="radio" name="fotos" data-price="4500" data-name="150 fotos impresas"><div class="ci-text"><div class="ci-name">150 fotos impresas 5×7"</div><div class="ci-desc">La colección más completa en papel premium</div></div><div class="ci-price">$4,500</div></label>
+
+        <!-- VIDEO -->
         <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Video completo YouTube"><div class="ci-text"><div class="ci-name">Video completo del evento</div><div class="ci-desc">Editado profesionalmente · Subido a YouTube</div></div><div class="ci-price">$2,000</div></label>
         <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Videoclip highlight"><div class="ci-text"><div class="ci-name">Videoclip highlight (3–5 min)</div><div class="ci-desc">Lo mejor de tu evento para compartir</div></div><div class="ci-price">$1,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Clip proyección salón"><div class="ci-text"><div class="ci-name">Videoclip para proyección en salón</div><div class="ci-desc">Se graba en la sesión previa y se proyecta en pantalla durante la fiesta</div></div><div class="ci-price">$1,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="5000" data-name="Película cinematográfica"><div class="ci-text"><div class="ci-name">Película cinematográfica</div><div class="ci-desc">Video tipo película (15–50 min) · Subido a YouTube para siempre</div></div><div class="ci-price">$5,000</div></label>
         <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Tomas con dron"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas cinematográficas del evento</div></div><div class="ci-price">$1,500</div></label>
+
+        <!-- ENTREGABLES -->
         <label class="custom-item"><input type="checkbox" data-price="500" data-name="USB personalizada"><div class="ci-text"><div class="ci-name">USB personalizada</div><div class="ci-desc">Grabada con nombre y fecha</div></div><div class="ci-price">$500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Ampliación 11×14&quot;"><div class="ci-text"><div class="ci-name">Ampliación 11×14" (28×36cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$800</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1200" data-name="Ampliación 16×20&quot;"><div class="ci-text"><div class="ci-name">Ampliación 16×20" (40×50cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,200</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Ampliación 20×24&quot;"><div class="ci-text"><div class="ci-name">Ampliación 20×24" (50×60cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Ampliación 24×32&quot;"><div class="ci-text"><div class="ci-name">Ampliación 24×32" (60×80cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$2,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="3500" data-name="Fotolibro 30×30cm"><div class="ci-text"><div class="ci-name">Fotolibro premium 30×30cm (40 pág)</div><div class="ci-desc">Álbum de pasta dura con diseño profesional</div></div><div class="ci-price">$3,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="5000" data-name="Fotolibro lujo 30×60cm"><div class="ci-text"><div class="ci-name">Fotolibro de lujo 30×60cm (50 pág)</div><div class="ci-desc">Álbum panorámico de alta gama</div></div><div class="ci-price">$5,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Caja de fotos"><div class="ci-text"><div class="ci-name">Caja de presentación para fotos</div><div class="ci-desc">Caja estándar para fotos impresas</div></div><div class="ci-price">$800</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Caja premium"><div class="ci-text"><div class="ci-name">Caja premium / rígida personalizada</div><div class="ci-desc">Presentación elegante para entregables</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="2500" data-name="Caja de madera"><div class="ci-text"><div class="ci-name">Caja de madera grabada</div><div class="ci-desc">Artesanal con nombre y fecha grabados</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Galería web privada"><div class="ci-text"><div class="ci-name">Galería web privada</div><div class="ci-desc">Tus fotos en la nube para descargar y compartir</div></div><div class="ci-price">$800</div></label>
+
+        <!-- AMPLIACIONES (mutuamente excluyente) -->
+        <label class="custom-item"><input type="radio" name="ampliacion" data-price="800" data-name="Ampliación 11×14&quot;"><div class="ci-text"><div class="ci-name">Ampliación 11×14" (28×36cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$800</div></label>
+        <label class="custom-item"><input type="radio" name="ampliacion" data-price="1200" data-name="Ampliación 16×20&quot;"><div class="ci-text"><div class="ci-name">Ampliación 16×20" (40×50cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,200</div></label>
+        <label class="custom-item"><input type="radio" name="ampliacion" data-price="1500" data-name="Ampliación 20×24&quot;"><div class="ci-text"><div class="ci-name">Ampliación 20×24" (50×60cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="radio" name="ampliacion" data-price="2000" data-name="Ampliación 24×32&quot;"><div class="ci-text"><div class="ci-name">Ampliación 24×32" (60×80cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$2,000</div></label>
+
+        <!-- FOTOLIBRO (mutuamente excluyente) -->
+        <label class="custom-item"><input type="radio" name="fotolibro" data-price="3500" data-name="Fotolibro 30×30cm"><div class="ci-text"><div class="ci-name">Fotolibro premium 30×30cm (40 pág)</div><div class="ci-desc">Álbum de pasta dura con diseño profesional</div></div><div class="ci-price">$3,500</div></label>
+        <label class="custom-item"><input type="radio" name="fotolibro" data-price="5000" data-name="Fotolibro lujo 30×60cm"><div class="ci-text"><div class="ci-name">Fotolibro de lujo 30×60cm (50 pág)</div><div class="ci-desc">Álbum panorámico de alta gama</div></div><div class="ci-price">$5,000</div></label>
+
+        <!-- CAJAS (mutuamente excluyente) -->
+        <label class="custom-item"><input type="radio" name="caja" data-price="800" data-name="Caja de fotos"><div class="ci-text"><div class="ci-name">Caja de presentación para fotos</div><div class="ci-desc">Caja estándar para fotos impresas</div></div><div class="ci-price">$800</div></label>
+        <label class="custom-item"><input type="radio" name="caja" data-price="1500" data-name="Caja premium"><div class="ci-text"><div class="ci-name">Caja premium / rígida personalizada</div><div class="ci-desc">Presentación elegante para entregables</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="radio" name="caja" data-price="2500" data-name="Caja de madera"><div class="ci-text"><div class="ci-name">Caja de madera grabada</div><div class="ci-desc">Artesanal con nombre y fecha grabados</div></div><div class="ci-price">$2,500</div></label>
+
+        <!-- EXTRAS -->
         <label class="custom-item"><input type="checkbox" data-price="800" data-name="Fotos niña a grande"><div class="ci-text"><div class="ci-name">Fotos de niña a grande</div><div class="ci-desc">Collage fotográfico mostrando tu crecimiento desde bebé hasta hoy</div></div><div class="ci-price">$800</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Canción personalizada"><div class="ci-text"><div class="ci-name">Canción hecha a la medida</div><div class="ci-desc">Composición original para vals, entrada o video</div></div><div class="ci-price">$2,000</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2500" data-name="Transmisión en vivo"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">Streaming a YouTube + Facebook para familia a distancia</div></div><div class="ci-price">$2,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Invitación web completa"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Invitación con RSVP, contrato, logística, invitados — sitio propio del evento</div></div><div class="ci-price">$2,000</div></label>
     </div>
 
+    <div id="customDiscount" style="text-align:center;font-size:.8rem;color:var(--gold);min-height:1.2rem;margin-top:1rem"></div>
     <div id="customTotal">$0 MXN</div>
+    <div id="customSavings" style="text-align:center;font-size:.75rem;color:var(--smoke);min-height:1rem"></div>
+    <div id="customSuggestion" style="text-align:center;margin:1rem 0;padding:1rem;background:rgba(201,168,76,.08);border:1px solid var(--border);border-radius:3px;display:none;font-size:.82rem"></div>
     <button id="customSend">Enviar cotización por WhatsApp</button>
 </section>
 
@@ -499,29 +519,84 @@
     /* CUSTOM BUILDER */
     var grid = document.getElementById('customGrid');
     var totalEl = document.getElementById('customTotal');
+    var discountEl = document.getElementById('customDiscount');
+    var savingsEl = document.getElementById('customSavings');
+    var suggestionEl = document.getElementById('customSuggestion');
     var sendBtn = document.getElementById('customSend');
 
-    grid.addEventListener('change', function(){
-        var total = 0;
-        grid.querySelectorAll('input:checked').forEach(function(cb){ total += parseInt(cb.dataset.price); });
-        totalEl.textContent = '$' + total.toLocaleString('es-MX') + ' MXN';
+    var paquetes = [
+        {name:'Básico',price:6500,href:'basico.html'},
+        {name:'Clásico',price:9000,href:'clasico.html'},
+        {name:'Plus',price:11500,href:'plus.html'},
+        {name:'Premium',price:14000,href:'premium.html'},
+        {name:'Master Cinemático',price:17000,href:'master.html'}
+    ];
+
+    function calcBuilder(){
+        var subtotal = 0;
+        var count = 0;
+        grid.querySelectorAll('input:checked').forEach(function(inp){ subtotal += parseInt(inp.dataset.price); count++; });
+
+        /* Active class — clear radios in same group when another is selected */
         grid.querySelectorAll('.custom-item').forEach(function(item){
-            item.classList.toggle('active', item.querySelector('input').checked);
+            var inp = item.querySelector('input');
+            if(inp.type === 'radio'){
+                var checked = grid.querySelector('input[name="'+inp.name+'"]:checked');
+                item.classList.toggle('active', checked === inp);
+            } else {
+                item.classList.toggle('active', inp.checked);
+            }
         });
-    });
+
+        /* Progressive discount: more items = bigger discount */
+        var discountPct = 0;
+        if(count >= 9) discountPct = 15;
+        else if(count >= 6) discountPct = 10;
+        else if(count >= 3) discountPct = 5;
+
+        var discount = Math.round(subtotal * discountPct / 100);
+        var total = subtotal - discount;
+
+        totalEl.textContent = '$' + total.toLocaleString('es-MX') + ' MXN';
+
+        if(discountPct > 0 && subtotal > 0){
+            discountEl.textContent = 'Descuento ' + discountPct + '% aplicado · Ahorras $' + discount.toLocaleString('es-MX');
+            savingsEl.textContent = 'Subtotal sin descuento: $' + subtotal.toLocaleString('es-MX');
+        } else {
+            discountEl.textContent = count > 0 ? 'Agrega '+(3 - count)+' servicio'+(3-count===1?'':'s')+' más para obtener 5% de descuento' : '';
+            savingsEl.textContent = '';
+        }
+
+        /* Package suggestion — find closest package that costs less */
+        suggestionEl.style.display = 'none';
+        if(total > 0){
+            for(var i = paquetes.length - 1; i >= 0; i--){
+                var pkg = paquetes[i];
+                if(pkg.price <= total && (total - pkg.price) >= 500){
+                    var ahorro = total - pkg.price;
+                    suggestionEl.innerHTML = '💡 <strong>Te conviene el paquete ' + pkg.name + '</strong> por $' + pkg.price.toLocaleString('es-MX') + ' MXN — incluye más servicios y <strong>ahorras $' + ahorro.toLocaleString('es-MX') + '</strong>. <a href="' + pkg.href + '" style="color:var(--gold);text-decoration:underline">Ver detalle →</a>';
+                    suggestionEl.style.display = 'block';
+                    break;
+                }
+            }
+        }
+
+        return {total: total, subtotal: subtotal, discount: discount, discountPct: discountPct, count: count};
+    }
+
+    grid.addEventListener('change', calcBuilder);
 
     sendBtn.addEventListener('click', function(){
         var items = [];
-        var total = 0;
-        grid.querySelectorAll('input:checked').forEach(function(cb){
-            items.push(cb.dataset.name);
-            total += parseInt(cb.dataset.price);
-        });
+        var info = calcBuilder();
+        grid.querySelectorAll('input:checked').forEach(function(inp){ items.push(inp.dataset.name); });
         if (!items.length) { alert('Selecciona al menos un servicio'); return; }
-        var msg = 'Hola, me interesa un paquete personalizado:\n\n' + items.map(function(i){ return '• ' + i; }).join('\n') + '\n\nTotal estimado: $' + total.toLocaleString('es-MX') + ' MXN';
-        window.open('https://wa.me/5214779203776?text=' + encodeURIComponent(msg), '_blank');
-        if(typeof fbq==='function') fbq('track','Lead',{value:total,currency:'MXN'});
-        if(typeof gtag==='function') gtag('event','generate_lead',{value:total,currency:'MXN'});
+        var msg = 'Hola, me interesa un paquete personalizado:\n\n' + items.map(function(i){ return '• ' + i; }).join('\n');
+        if(info.discountPct > 0) msg += '\n\nDescuento ' + info.discountPct + '% aplicado (-$' + info.discount.toLocaleString('es-MX') + ')';
+        msg += '\n\nTotal estimado: $' + info.total.toLocaleString('es-MX') + ' MXN';
+        window.open('https://wa.me/5214779203776?text=' + encodeURIComponent(msg) + '&utm_source=web&utm_medium=builder&utm_campaign=paquete_custom', '_blank');
+        if(typeof fbq==='function') fbq('track','Lead',{value:info.total,currency:'MXN'});
+        if(typeof gtag==='function') gtag('event','generate_lead',{value:info.total,currency:'MXN'});
     });
 
     /* FAQ ACCORDION */
