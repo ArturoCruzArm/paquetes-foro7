@@ -12,7 +12,7 @@
         .pkg-hero{text-align:center;padding:4rem 1.5rem 3rem;background:linear-gradient(180deg,var(--navy),var(--navy2));position:relative}.pkg-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}.pkg-tag{font-size:.6rem;letter-spacing:.6em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.6rem}.pkg-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),#d4b85a);color:var(--navy);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem 1rem;margin-bottom:.8rem;font-weight:700}.pkg-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,3.5rem);font-weight:700;margin-bottom:.3rem}.pkg-hero h1 small{display:block;font-size:.5em;color:var(--gold-dim);font-weight:400;margin-top:.2rem}.pkg-price{font-size:2.5rem;font-weight:700;color:var(--gold);margin:.5rem 0}.pkg-price small{font-size:.9rem;color:var(--gold-dim);font-weight:400}.pkg-desc{color:var(--smoke);font-size:.95rem;max-width:500px;margin:0 auto}
         .content{max-width:800px;margin:0 auto;padding:3rem 1.5rem}.section-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}.section-title::before{content:'';width:20px;height:1px;background:var(--gold)}
         .features{display:grid;gap:.6rem;margin-bottom:3rem}.feature{display:flex;align-items:flex-start;gap:.8rem;padding:1rem 1.2rem;background:var(--card);border:1px solid rgba(255,255,255,.04);border-radius:2px;transition:border-color .3s}.feature:hover{border-color:var(--border)}.feature-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem}.feature-text h4{font-size:.9rem;font-weight:500;margin-bottom:.2rem}.feature-text p{font-size:.78rem;color:var(--smoke);line-height:1.5}
-        .products-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-bottom:3rem}.prod-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}.prod-card iframe{width:100%;height:180px;border:none;pointer-events:none}.prod-card-info{padding:1rem}.prod-card-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}.prod-card-desc{font-size:.72rem;color:var(--smoke);margin-top:.2rem}
+        .products-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-bottom:3rem}.prod-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}.prod-card iframe{width:100%;height:180px;border:none;pointer-events:auto}.prod-card-info{padding:1rem}.prod-card-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}.prod-card-desc{font-size:.72rem;color:var(--smoke);margin-top:.2rem}
         .cta-box{text-align:center;padding:3rem 1.5rem;margin:2rem 0;background:rgba(201,168,76,.04);border:1px solid var(--border);border-radius:4px}.cta-box h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:.4rem}.cta-box p{font-size:.85rem;color:var(--smoke);margin-bottom:1.2rem}.btn-wa{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.5rem;background:#25D366;color:#fff;font-size:.85rem;font-weight:600;transition:transform .3s}.btn-wa:hover{transform:translateY(-2px)}.btn-compare{display:inline-block;margin-top:1rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid transparent;transition:border-color .3s}.btn-compare:hover{border-color:var(--gold)}
         .footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.7rem;color:rgba(255,255,255,.25)}
         @media(max-width:600px){.content{padding:2rem 1.2rem}.products-row{grid-template-columns:1fr}}
@@ -26,7 +26,7 @@
     <span class="pkg-badge">Producción de Alto Nivel</span>
     <h1>Master <small>Cinemático</small></h1>
     <div class="pkg-price">$17,000 <small>MXN</small></div>
-    <p class="pkg-desc">Un recuerdo tipo película — la máxima producción para tu evento</p>
+    <p class="pkg-desc">La máxima producción — película, transmisión en vivo, canción y dron completo</p>
 </section>
 
 <div class="content">
@@ -34,24 +34,30 @@
     <div class="features">
         <div class="feature"><span class="feature-icon">⏱</span><div class="feature-text"><h4>Evento completo sin límite de horas</h4><p>Desde el primer momento hasta que tú decidas — sin reloj</p></div></div>
         <div class="feature"><span class="feature-icon">📸</span><div class="feature-text"><h4>2 sesiones fotográficas + evento completo</h4><p>Sesión profesional previa + sesión el día del evento</p></div></div>
-        <div class="feature"><span class="feature-icon">🌐</span><div class="feature-text"><h4>Galería web con fotos digitales editadas</h4><p>Todas tus fotografías con edición profesional de alta calidad</p></div></div>
+        <div class="feature"><span class="feature-icon">🏠</span><div class="feature-text"><h4>Visita a casa antes de misa</h4><p>Capturamos los momentos previos en casa</p></div></div>
+        <div class="feature"><span class="feature-icon">🌐</span><div class="feature-text"><h4>1,500+ fotos digitales editadas</h4><p>Aproximadamente 100 fotos por hora de cobertura</p></div></div>
+        <div class="feature"><span class="feature-icon">🌐</span><div class="feature-text"><h4>Galería web privada</h4><p>Todas tus fotos disponibles para descargar y compartir</p></div></div>
         <div class="feature"><span class="feature-icon">🖼</span><div class="feature-text"><h4>150 fotografías impresas 5×7"</h4><p>La colección más completa de fotos impresas</p></div></div>
+        <div class="feature"><span class="feature-icon">👧</span><div class="feature-text"><h4>Fotos de niña a grande</h4><p>Secuencia de crecimiento para proyección o impresión</p></div></div>
         <div class="feature"><span class="feature-icon">📖</span><div class="feature-text"><h4>Fotolibro de lujo 30×60cm — 50 páginas</h4><p>Álbum panorámico de alta gama con diseño editorial</p></div></div>
-        <div class="feature"><span class="feature-icon">🎬</span><div class="feature-text"><h4>Video cinematográfico principal (15–25 min)</h4><p>Tu evento narrado como película con producción de alto nivel</p></div></div>
+        <div class="feature"><span class="feature-icon">🎬</span><div class="feature-text"><h4>Video cinematográfico principal (15–25 min)</h4><p>Tu evento narrado como película · Subido a YouTube</p></div></div>
         <div class="feature"><span class="feature-icon">🎥</span><div class="feature-text"><h4>Video completo del evento</h4><p>Cobertura total editada profesionalmente</p></div></div>
         <div class="feature"><span class="feature-icon">🎞</span><div class="feature-text"><h4>Trailer cinematográfico (1–2 min)</h4><p>Versión corta impactante para redes sociales</p></div></div>
         <div class="feature"><span class="feature-icon">📽</span><div class="feature-text"><h4>Videoclip para proyección en el evento</h4><p>Video especial para mostrar durante la fiesta</p></div></div>
         <div class="feature"><span class="feature-icon">🚁</span><div class="feature-text"><h4>Dron — uso completo durante todo el evento</h4><p>Tomas aéreas cinematográficas durante toda la cobertura</p></div></div>
+        <div class="feature"><span class="feature-icon">🎵</span><div class="feature-text"><h4>Canción personalizada</h4><p>Composición original para vals, entrada o video</p></div></div>
+        <div class="feature"><span class="feature-icon">📡</span><div class="feature-text"><h4>Transmisión en vivo (YouTube + Facebook)</h4><p>Streaming profesional para familia a distancia</p></div></div>
         <div class="feature"><span class="feature-icon">💾</span><div class="feature-text"><h4>USB premium + galería online + respaldo</h4><p>Triple seguridad: USB, nube y respaldo adicional</p></div></div>
-        <div class="feature"><span class="feature-icon">🖼</span><div class="feature-text"><h4>2 fotografías ampliadas 60×80cm</h4><p>Dos de tus mejores fotos en gran formato</p></div></div>
+        <div class="feature"><span class="feature-icon">🖼</span><div class="feature-text"><h4>2 ampliaciones 24×32" (60×80cm) con marco</h4><p>Dos de tus mejores fotos en gran formato</p></div></div>
         <div class="feature"><span class="feature-icon">📦</span><div class="feature-text"><h4>Caja de madera premium personalizada</h4><p>Empaque artesanal de madera grabada con nombre y fecha</p></div></div>
+        <div class="feature"><span class="feature-icon">💌</span><div class="feature-text"><h4>Invitación web completa</h4><p>Sitio propio con invitación, RSVP, datos, contrato, logística e invitados</p></div></div>
     </div>
 
     <h2 class="section-title">Tus entregables en 3D</h2>
     <div class="products-row">
         <div class="prod-card"><iframe src="https://fotolibro.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">Fotolibro Lujo 30×60cm</h3><p class="prod-card-desc">50 páginas, formato panorámico</p></div></div>
         <div class="prod-card"><iframe src="https://usb-3d.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">USB Premium</h3><p class="prod-card-desc">Todo tu contenido + respaldo</p></div></div>
-        <div class="prod-card"><iframe src="https://ampliacion-con-marco.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">2 Ampliaciones 60×80cm</h3><p class="prod-card-desc">Tus mejores fotos en grande</p></div></div>
+        <div class="prod-card"><iframe src="https://ampliacion-con-marco.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">2 Ampliaciones 24×32"</h3><p class="prod-card-desc">60×80cm con marco</p></div></div>
         <div class="prod-card"><iframe src="https://fotos-impresas.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">150 Fotos Impresas</h3><p class="prod-card-desc">La colección más completa</p></div></div>
         <div class="prod-card"><iframe src="https://caja-fotolibro.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">Caja de Madera</h3><p class="prod-card-desc">Grabada y personalizada</p></div></div>
     </div>

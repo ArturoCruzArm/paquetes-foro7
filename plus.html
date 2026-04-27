@@ -12,7 +12,7 @@
         .pkg-hero{text-align:center;padding:4rem 1.5rem 3rem;background:linear-gradient(180deg,var(--navy),var(--navy2));position:relative}.pkg-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}.pkg-tag{font-size:.6rem;letter-spacing:.6em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.6rem}.pkg-badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem 1rem;margin-bottom:.8rem;font-weight:600}.pkg-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,3.5rem);font-weight:700;margin-bottom:.3rem}.pkg-price{font-size:2.5rem;font-weight:700;color:var(--gold);margin:.5rem 0}.pkg-price small{font-size:.9rem;color:var(--gold-dim);font-weight:400}.pkg-desc{color:var(--smoke);font-size:.95rem;max-width:500px;margin:0 auto}
         .content{max-width:800px;margin:0 auto;padding:3rem 1.5rem}.section-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}.section-title::before{content:'';width:20px;height:1px;background:var(--gold)}
         .features{display:grid;gap:.6rem;margin-bottom:3rem}.feature{display:flex;align-items:flex-start;gap:.8rem;padding:1rem 1.2rem;background:var(--card);border:1px solid rgba(255,255,255,.04);border-radius:2px;transition:border-color .3s}.feature:hover{border-color:var(--border)}.feature-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem}.feature-text h4{font-size:.9rem;font-weight:500;margin-bottom:.2rem}.feature-text p{font-size:.78rem;color:var(--smoke);line-height:1.5}
-        .products-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-bottom:3rem}.prod-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}.prod-card iframe{width:100%;height:180px;border:none;pointer-events:none}.prod-card-info{padding:1rem}.prod-card-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}.prod-card-desc{font-size:.72rem;color:var(--smoke);margin-top:.2rem}
+        .products-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-bottom:3rem}.prod-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden}.prod-card iframe{width:100%;height:180px;border:none;pointer-events:auto}.prod-card-info{padding:1rem}.prod-card-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}.prod-card-desc{font-size:.72rem;color:var(--smoke);margin-top:.2rem}
         .cta-box{text-align:center;padding:3rem 1.5rem;margin:2rem 0;background:rgba(201,168,76,.04);border:1px solid var(--border);border-radius:4px}.cta-box h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:.4rem}.cta-box p{font-size:.85rem;color:var(--smoke);margin-bottom:1.2rem}.btn-wa{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.5rem;background:#25D366;color:#fff;font-size:.85rem;font-weight:600;transition:transform .3s}.btn-wa:hover{transform:translateY(-2px)}.btn-compare{display:inline-block;margin-top:1rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid transparent;transition:border-color .3s}.btn-compare:hover{border-color:var(--gold)}
         .footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.7rem;color:rgba(255,255,255,.25)}
         @media(max-width:600px){.content{padding:2rem 1.2rem}.products-row{grid-template-columns:1fr}}
@@ -26,29 +26,34 @@
     <span class="pkg-badge">★ Recomendado</span>
     <h1>Plus</h1>
     <div class="pkg-price">$11,500 <small>MXN</small></div>
-    <p class="pkg-desc">Más producción, más contenido y mejor calidad visual</p>
+    <p class="pkg-desc">Más producción, invitación web incluida y videoclip para proyección en salón</p>
 </section>
 
 <div class="content">
     <h2 class="section-title">Qué incluye</h2>
     <div class="features">
         <div class="feature"><span class="feature-icon">⏱</span><div class="feature-text"><h4>10 horas de cobertura</h4><p>Sesión previa completa + ceremonia + fiesta hasta el final</p></div></div>
-        <div class="feature"><span class="feature-icon">📸</span><div class="feature-text"><h4>Sesión previa + cobertura completa</h4><p>Sesión en locación a elegir más la cobertura total del evento</p></div></div>
-        <div class="feature"><span class="feature-icon">🌐</span><div class="feature-text"><h4>Galería web con fotos digitales</h4><p>Todas tus fotografías editadas para descargar</p></div></div>
+        <div class="feature"><span class="feature-icon">📸</span><div class="feature-text"><h4>Sesión previa + cobertura completa del evento</h4><p>Sesión en locación a elegir más la cobertura total</p></div></div>
+        <div class="feature"><span class="feature-icon">🏠</span><div class="feature-text"><h4>Visita a casa antes de misa</h4><p>Capturamos los momentos previos en casa</p></div></div>
+        <div class="feature"><span class="feature-icon">🌐</span><div class="feature-text"><h4>~1,000 fotos digitales editadas</h4><p>Aproximadamente 100 fotos por hora de cobertura</p></div></div>
+        <div class="feature"><span class="feature-icon">🌐</span><div class="feature-text"><h4>Galería web privada</h4><p>Todas tus fotos disponibles para descargar y compartir</p></div></div>
         <div class="feature"><span class="feature-icon">🖼</span><div class="feature-text"><h4>100 fotografías impresas 5×7"</h4><p>Gran selección de tus mejores momentos impresos</p></div></div>
-        <div class="feature"><span class="feature-icon">🎬</span><div class="feature-text"><h4>1 video completo del evento</h4><p>Cobertura completa editada en alta calidad</p></div></div>
+        <div class="feature"><span class="feature-icon">👧</span><div class="feature-text"><h4>Fotos de niña a grande</h4><p>Secuencia de crecimiento para proyección o impresión</p></div></div>
+        <div class="feature"><span class="feature-icon">🎬</span><div class="feature-text"><h4>Video completo del evento</h4><p>Cobertura editada profesionalmente · Subido a YouTube</p></div></div>
         <div class="feature"><span class="feature-icon">🎞</span><div class="feature-text"><h4>Videoclip highlight (3–5 min)</h4><p>Lo mejor de tu evento en un video cinematográfico corto</p></div></div>
-        <div class="feature"><span class="feature-icon">🚁</span><div class="feature-text"><h4>Tomas con dron integradas en video</h4><p>Las tomas aéreas se integran al video final</p></div></div>
+        <div class="feature"><span class="feature-icon">📽</span><div class="feature-text"><h4>Videoclip para proyección en salón</h4><p>Se graba en la sesión y se proyecta durante la fiesta</p></div></div>
+        <div class="feature"><span class="feature-icon">🚁</span><div class="feature-text"><h4>Tomas con dron integradas</h4><p>Las tomas aéreas se integran al video final</p></div></div>
         <div class="feature"><span class="feature-icon">💾</span><div class="feature-text"><h4>USB + galería digital online</h4><p>Tu contenido en USB personalizada más galería privada en la nube</p></div></div>
-        <div class="feature"><span class="feature-icon">🖼</span><div class="feature-text"><h4>Fotografía ampliada 60×80cm</h4><p>Tu mejor foto en tamaño impactante</p></div></div>
+        <div class="feature"><span class="feature-icon">🖼</span><div class="feature-text"><h4>Ampliación 20×24" (50×60cm) con marco</h4><p>Tu mejor foto en tamaño impactante para el salón</p></div></div>
         <div class="feature"><span class="feature-icon">📦</span><div class="feature-text"><h4>Caja rígida personalizada</h4><p>Presentación premium para tus fotos y USB</p></div></div>
+        <div class="feature"><span class="feature-icon">💌</span><div class="feature-text"><h4>Invitación web completa</h4><p>Sitio propio con invitación personalizada, RSVP, datos, contrato, logística e invitados</p></div></div>
     </div>
 
     <h2 class="section-title">Tus entregables en 3D</h2>
     <div class="products-row">
         <div class="prod-card"><iframe src="https://usb-3d.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">USB Personalizada</h3><p class="prod-card-desc">Fotos + video + highlight</p></div></div>
         <div class="prod-card"><iframe src="https://fotos-impresas.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">100 Fotos Impresas</h3><p class="prod-card-desc">Papel premium 5×7"</p></div></div>
-        <div class="prod-card"><iframe src="https://ampliacion-con-marco.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">Ampliación 60×80cm</h3><p class="prod-card-desc">Gran formato impactante</p></div></div>
+        <div class="prod-card"><iframe src="https://ampliacion-con-marco.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">Ampliación 20×24"</h3><p class="prod-card-desc">50×60cm con marco</p></div></div>
         <div class="prod-card"><iframe src="https://caja-fotolibro.invitados.org/" loading="lazy"></iframe><div class="prod-card-info"><h3 class="prod-card-name">Caja Rígida</h3><p class="prod-card-desc">Presentación personalizada</p></div></div>
     </div>
 

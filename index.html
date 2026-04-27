@@ -3,92 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paquetes — Foro 7 Producciones</title>
+    <title>Paquetes Fotografía y Video — Foro 7 Producciones</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root{--navy:#0d1b2a;--navy2:#1b2838;--gold:#c9a84c;--gold-dim:#a08030;--gold-bg:rgba(201,168,76,.06);--cream:#fdfcfa;--smoke:rgba(255,255,255,.55);--card:#111c2e;--border:rgba(201,168,76,.18)}
+        :root{--navy:#0d1b2a;--navy2:#1b2838;--gold:#c9a84c;--gold-dim:#a08030;--gold-bg:rgba(201,168,76,.06);--smoke:rgba(255,255,255,.55);--card:#111c2e;--border:rgba(201,168,76,.18);--green:#25D366}
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'DM Sans',sans-serif;background:var(--navy);color:#fff;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}
 
-        /* NAV */
         .nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
-        .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--gold);letter-spacing:.05em}
-        .nav-logo span{color:#fff;font-weight:400}
-        .nav-links{display:flex;gap:1rem;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase}
+        .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--gold)}.nav-logo span{color:#fff;font-weight:400}
+        .nav-links{display:flex;gap:1.2rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
         .nav-links a{color:var(--smoke);transition:color .3s}.nav-links a:hover{color:var(--gold)}
 
         /* HERO */
-        .hero{text-align:center;padding:5rem 1.5rem 3rem;background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);position:relative}
+        .hero{text-align:center;padding:5rem 1.5rem 3rem;background:linear-gradient(180deg,var(--navy),var(--navy2));position:relative}
         .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-        .hero-tag{font-size:.65rem;letter-spacing:.6em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:block}
-        .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;line-height:1.15;margin-bottom:.8rem}
+        .hero-tag{font-size:.6rem;letter-spacing:.6em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.8rem}
+        .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,6vw,3.5rem);font-weight:700;line-height:1.15;margin-bottom:.8rem}
         .hero h1 em{font-style:normal;color:var(--gold)}
-        .hero p{color:var(--smoke);max-width:520px;margin:0 auto;font-size:.95rem;line-height:1.6}
+        .hero p{color:var(--smoke);max-width:600px;margin:0 auto;font-size:.9rem;line-height:1.7}
 
-        /* TABLE SECTION */
-        .compare{padding:3rem 1rem 4rem;max-width:1200px;margin:0 auto}
-        .compare-title{text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:.4rem}
-        .compare-sub{text-align:center;font-size:.8rem;color:var(--smoke);margin-bottom:2rem;letter-spacing:.1em}
+        /* TABLE */
+        .compare{padding:3rem 1rem 2rem;max-width:1300px;margin:0 auto}
+        .stitle{text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:.3rem}
+        .ssub{text-align:center;font-size:.75rem;color:var(--smoke);margin-bottom:1.5rem;letter-spacing:.1em}
 
-        .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:4px}
-        table{width:100%;border-collapse:collapse;min-width:820px}
-        thead th{position:sticky;top:0;background:var(--navy2);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:1rem .8rem;text-align:center;border-bottom:1px solid var(--border);color:var(--smoke);font-weight:500}
-        thead th:first-child{text-align:left;min-width:200px}
-        thead th.popular{color:var(--gold);position:relative}
-        thead th.popular::before{content:'Recomendado';position:absolute;top:-.1rem;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:.55rem;padding:2px 10px;border-radius:0 0 4px 4px;letter-spacing:.1em;font-weight:600}
+        .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:3px}
+        table{width:100%;border-collapse:collapse;min-width:900px;font-size:.8rem}
+        thead th{position:sticky;top:0;background:var(--navy2);padding:.9rem .6rem;text-align:center;border-bottom:1px solid var(--border);color:var(--smoke);font-weight:500;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;vertical-align:bottom}
+        thead th:first-child{text-align:left;min-width:220px;font-size:.7rem}
+        thead th.pop{color:var(--gold);position:relative}
+        thead th.pop::before{content:'★ Recomendado';position:absolute;top:-.1rem;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:.5rem;padding:2px 8px;border-radius:0 0 3px 3px;letter-spacing:.08em;font-weight:600}
+        .pname{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;display:block;color:#fff}
+        .pprice{font-size:1.1rem;font-weight:700;color:var(--gold);display:block;margin-top:.15rem}
+        .pprice small{font-size:.65rem;color:var(--gold-dim);font-weight:400}
 
-        .pkg-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;display:block;margin-bottom:.2rem}
-        .pkg-price{font-size:1.3rem;font-weight:700;color:var(--gold);display:block}
-        .pkg-price small{font-size:.7rem;color:var(--gold-dim);font-weight:400}
+        tbody td{padding:.5rem .6rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);color:var(--smoke);vertical-align:middle}
+        tbody td:first-child{text-align:left;color:rgba(255,255,255,.65);font-size:.78rem;padding-left:.8rem}
+        tbody tr:hover{background:rgba(201,168,76,.02)}
+        .cpop{background:rgba(201,168,76,.035)}
+        .ck{color:var(--gold);font-weight:700}.no{opacity:.2}
 
-        tbody td{padding:.7rem .8rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem;color:var(--smoke);vertical-align:middle}
-        tbody td:first-child{text-align:left;color:rgba(255,255,255,.7);font-size:.82rem;font-weight:400}
-        tbody tr:hover{background:rgba(201,168,76,.03)}
-        .col-pop{background:rgba(201,168,76,.04)}
-        .ck{color:var(--gold);font-weight:700;font-size:1rem}
-        .no{opacity:.2;font-size:.8rem}
-
-        /* CATEGORY ROW */
-        .cat-row td{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);padding:.9rem .8rem .4rem;border-bottom:1px solid var(--border);font-weight:600}
-
-        /* DETAIL LINKS ROW */
-        .link-row td{padding:1.2rem .8rem;border-bottom:none}
-        .btn-detail{display:inline-block;padding:.55rem 1.4rem;border:1px solid var(--gold);color:var(--gold);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;transition:all .3s;font-family:'DM Sans',sans-serif}
-        .btn-detail:hover{background:var(--gold);color:var(--navy)}
-        .btn-detail-pop{background:var(--gold);color:var(--navy);font-weight:600}
-        .btn-detail-pop:hover{background:#d4b85a}
+        .cat td{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);padding:.8rem .6rem .3rem;border-bottom:1px solid var(--border);font-weight:600}
+        .lrow td{padding:1rem .6rem;border-bottom:none}
+        .bd{display:inline-block;padding:.45rem 1.1rem;border:1px solid var(--gold);color:var(--gold);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;transition:all .3s;font-family:'DM Sans',sans-serif}
+        .bd:hover{background:var(--gold);color:var(--navy)}
+        .bdp{background:var(--gold);color:var(--navy);font-weight:600}.bdp:hover{background:#d4b85a}
 
         /* PRODUCTOS 3D */
-        .products{padding:4rem 1.5rem;max-width:1100px;margin:0 auto}
-        .products-header{text-align:center;margin-bottom:2rem}
-        .products-header h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:.3rem}
-        .products-header p{color:var(--smoke);font-size:.85rem}
-        .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-        .product-card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color .3s}
-        .product-card:hover{border-color:var(--gold)}
-        .product-iframe{width:100%;height:220px;border:none;pointer-events:none}
-        .product-info{padding:1.2rem}
-        .product-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
-        .product-desc{font-size:.78rem;color:var(--smoke);line-height:1.5}
-        .product-link{display:inline-block;margin-top:.8rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid transparent;transition:border-color .3s}
-        .product-link:hover{border-color:var(--gold)}
+        .products{padding:3rem 1.5rem;max-width:1100px;margin:0 auto}
+        .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.5rem}
+        .pcard{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;transition:border-color .3s}.pcard:hover{border-color:var(--gold)}
+        .pcard iframe{width:100%;height:200px;border:none;pointer-events:auto}
+        .pcard-info{padding:1rem}
+        .pcard-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}
+        .pcard-desc{font-size:.72rem;color:var(--smoke);margin-top:.2rem}
+        .pcard-link{display:inline-block;margin-top:.6rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 
-        /* WA CTA */
+        /* PERSONALIZAR */
+        .custom{padding:3rem 1.5rem 4rem;max-width:900px;margin:0 auto}
+        .custom-grid{display:grid;gap:.5rem;margin:1.5rem 0}
+        .custom-item{display:flex;align-items:center;gap:.8rem;padding:.8rem 1rem;background:var(--card);border:1px solid rgba(255,255,255,.04);border-radius:2px;cursor:pointer;transition:border-color .3s;user-select:none}
+        .custom-item:hover{border-color:var(--border)}
+        .custom-item.active{border-color:var(--gold);background:rgba(201,168,76,.06)}
+        .custom-item input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px;cursor:pointer}
+        .ci-text{flex:1}
+        .ci-name{font-size:.85rem;font-weight:500}
+        .ci-desc{font-size:.7rem;color:var(--smoke);margin-top:.1rem}
+        .ci-price{font-size:.85rem;font-weight:600;color:var(--gold);white-space:nowrap}
+        #customTotal{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);text-align:center;margin:1.5rem 0 .5rem}
+        #customSend{display:block;width:100%;max-width:400px;margin:0 auto;padding:1rem;background:var(--green);color:#fff;border:none;font-size:.85rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.05em;transition:transform .3s}
+        #customSend:hover{transform:translateY(-2px)}
+
+        /* AMPLIFICACIONES */
+        .amp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin:1rem 0 2rem}
+        .amp-card{text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px}
+        .amp-size{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold)}
+        .amp-cm{font-size:.7rem;color:var(--smoke);margin-top:.2rem}
+
+        /* CTA */
         .cta{text-align:center;padding:4rem 1.5rem;background:linear-gradient(180deg,var(--navy2),var(--navy))}
-        .cta h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:.5rem}
-        .cta p{color:var(--smoke);font-size:.9rem;margin-bottom:1.5rem}
-        .btn-wa{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.5rem;background:#25D366;color:#fff;border-radius:0;font-size:.85rem;font-weight:600;letter-spacing:.05em;transition:transform .3s}
-        .btn-wa:hover{transform:translateY(-2px)}
+        .cta h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:.4rem}
+        .cta p{color:var(--smoke);font-size:.85rem;margin-bottom:1.2rem}
+        .btn-wa{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.5rem;background:var(--green);color:#fff;font-size:.85rem;font-weight:600;transition:transform .3s}.btn-wa:hover{transform:translateY(-2px)}
 
-        /* FOOTER */
-        .footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.7rem;color:rgba(255,255,255,.25)}
+        .footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.65rem;color:rgba(255,255,255,.2)}
 
-        @media(max-width:700px){
-            .nav-links{display:none}
-            .hero{padding:3.5rem 1.2rem 2rem}
-            .compare{padding:2rem .5rem 3rem}
-        }
+        @media(max-width:700px){.nav-links{display:none}.hero{padding:3rem 1.2rem 2rem}.amp-grid{grid-template-columns:repeat(2,1fr)}}
     </style>
 </head>
 <body>
@@ -96,137 +98,190 @@
 <nav class="nav">
     <div class="nav-logo">FORO <span>7</span></div>
     <div class="nav-links">
-        <a href="https://studio.invitados.org" target="_blank">Studio 3D</a>
-        <a href="https://wa.me/5214779203776" target="_blank">Contacto</a>
+        <a href="#comparar">Comparar</a>
+        <a href="#productos">Entregables 3D</a>
+        <a href="#personalizar">Personalizar</a>
+        <a href="https://studio.invitados.org" target="_blank">Studio</a>
     </div>
 </nav>
 
 <section class="hero">
-    <span class="hero-tag">Fotografía & Video Profesional</span>
-    <h1>Elige tu <em>Experiencia</em></h1>
-    <p>5 paquetes diseñados para capturar cada momento de tu evento. Desde lo esencial hasta una producción cinematográfica completa.</p>
+    <span class="hero-tag">Foro 7 Producciones · León, Gto.</span>
+    <h1>Fotografía y Video <em>Profesional</em></h1>
+    <p>Capturamos cada momento de tu evento: sesión fotográfica, ceremonia, fiesta, tomas con dron, video cinematográfico, transmisión en vivo y más. 5 paquetes a tu medida o arma el tuyo.</p>
 </section>
 
-<section class="compare">
-    <h2 class="compare-title">Comparar Paquetes</h2>
-    <p class="compare-sub">Desliza para ver todos los paquetes</p>
+<!-- COMPARAR PAQUETES -->
+<section class="compare" id="comparar">
+    <h2 class="stitle">Comparar Paquetes</h2>
+    <p class="ssub">Desliza para ver todos · Toca "Ver detalle" para más info</p>
 
     <div class="table-wrap">
     <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th><span class="pkg-name">Básico</span><span class="pkg-price">$6,500 <small>MXN</small></span></th>
-                <th><span class="pkg-name">Clásico</span><span class="pkg-price">$9,000 <small>MXN</small></span></th>
-                <th class="popular"><span class="pkg-name">Plus</span><span class="pkg-price">$11,500 <small>MXN</small></span></th>
-                <th><span class="pkg-name">Premium</span><span class="pkg-price">$14,000 <small>MXN</small></span></th>
-                <th><span class="pkg-name">Master</span><span class="pkg-price">$17,000 <small>MXN</small></span></th>
-            </tr>
-        </thead>
+        <thead><tr>
+            <th></th>
+            <th><span class="pname">Básico</span><span class="pprice">$6,500 <small>MXN</small></span></th>
+            <th><span class="pname">Clásico</span><span class="pprice">$9,000 <small>MXN</small></span></th>
+            <th class="pop"><span class="pname">Plus</span><span class="pprice">$11,500 <small>MXN</small></span></th>
+            <th><span class="pname">Premium</span><span class="pprice">$14,000 <small>MXN</small></span></th>
+            <th><span class="pname">Master</span><span class="pprice">$17,000 <small>MXN</small></span></th>
+        </tr></thead>
         <tbody>
-            <!-- COBERTURA -->
-            <tr class="cat-row"><td colspan="6">Cobertura</td></tr>
-            <tr><td>Horas de cobertura</td><td>6 hrs</td><td>8 hrs</td><td class="col-pop">10 hrs</td><td>12 hrs</td><td><strong style="color:var(--gold)">Sin límite</strong></td></tr>
-            <tr><td>Sesión fotográfica previa</td><td class="ck">✓</td><td class="ck">✓</td><td class="col-pop ck">✓</td><td class="ck">✓</td><td>2 sesiones</td></tr>
+            <tr class="cat"><td colspan="6">Cobertura</td></tr>
+            <tr><td>Horas de cobertura</td><td>6 hrs</td><td>8 hrs</td><td class="cpop">10 hrs</td><td>12 hrs</td><td><strong style="color:var(--gold)">Sin límite</strong></td></tr>
+            <tr><td>Sesión fotográfica</td><td>Día del evento</td><td>Previa o día</td><td class="cpop">Previa + evento</td><td>Previa + evento</td><td>2 sesiones + evento</td></tr>
+            <tr><td>Visita a casa antes de misa</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
 
-            <!-- FOTOGRAFÍA -->
-            <tr class="cat-row"><td colspan="6">Fotografía</td></tr>
-            <tr><td>Galería web digital</td><td class="ck">✓</td><td class="ck">✓</td><td class="col-pop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
-            <tr><td>Fotos impresas 5×7"</td><td>40</td><td>80</td><td class="col-pop">100</td><td>120</td><td>150</td></tr>
-            <tr><td>Tomas con dron</td><td class="ck">✓</td><td class="ck">✓</td><td class="col-pop">Integrado</td><td class="ck">✓</td><td>Completo</td></tr>
+            <tr class="cat"><td colspan="6">Fotografía</td></tr>
+            <tr><td>Fotos digitales editadas</td><td>~600</td><td>~800</td><td class="cpop">~1,000</td><td>~1,200</td><td>1,500+</td></tr>
+            <tr><td>Galería web privada</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Fotos impresas 5×7"</td><td>40</td><td>80</td><td class="cpop">100</td><td>120</td><td>150</td></tr>
+            <tr><td>Fotos de niña a grande</td><td class="no">—</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Tomas con dron</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop">Integrado</td><td class="ck">✓</td><td>Completo</td></tr>
 
-            <!-- VIDEO -->
-            <tr class="cat-row"><td colspan="6">Video</td></tr>
-            <tr><td>Video completo del evento</td><td class="ck">✓</td><td class="ck">✓</td><td class="col-pop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
-            <tr><td>Videoclip / Highlight</td><td class="no">—</td><td>2–4 min</td><td class="col-pop">3–5 min</td><td class="ck">✓</td><td class="ck">✓</td></tr>
-            <tr><td>Video cinematográfico</td><td class="no">—</td><td class="no">—</td><td class="col-pop no">—</td><td>30–50 min</td><td>15–25 min</td></tr>
-            <tr><td>Trailer cinematográfico</td><td class="no">—</td><td class="no">—</td><td class="col-pop no">—</td><td>1–3 min</td><td>1–2 min</td></tr>
-            <tr><td>Clip para proyección</td><td class="no">—</td><td class="no">—</td><td class="col-pop no">—</td><td class="no">—</td><td class="ck">✓</td></tr>
+            <tr class="cat"><td colspan="6">Video</td></tr>
+            <tr><td>Video completo (YouTube)</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Videoclip para proyección en salón</td><td class="no">—</td><td class="no">—</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Videoclip highlight</td><td class="no">—</td><td>2–4 min</td><td class="cpop">3–5 min</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Video cinematográfico (película)</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td>30–50 min</td><td>15–25 min</td></tr>
+            <tr><td>Trailer cinematográfico</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td>1–3 min</td><td>1–2 min</td></tr>
 
-            <!-- ENTREGABLES -->
-            <tr class="cat-row"><td colspan="6">Entregables</td></tr>
-            <tr><td>USB personalizada</td><td class="ck">✓</td><td class="ck">✓</td><td class="col-pop ck">✓</td><td class="ck">✓</td><td>Premium</td></tr>
-            <tr><td>Galería online privada</td><td class="no">—</td><td class="no">—</td><td class="col-pop ck">✓</td><td class="ck">✓</td><td>+ Respaldo</td></tr>
-            <tr><td>Fotografía ampliada</td><td>11×14"</td><td>50×60cm marco</td><td class="col-pop">60×80cm</td><td>60×80cm</td><td>2 × 60×80cm</td></tr>
-            <tr><td>Fotolibro</td><td class="no">—</td><td class="no">—</td><td class="col-pop no">—</td><td>30×30cm 40pág</td><td>30×60cm lujo 50pág</td></tr>
-            <tr><td>Caja de presentación</td><td>Fotos</td><td>Fotos</td><td class="col-pop">Rígida</td><td>Premium</td><td>Madera premium</td></tr>
+            <tr class="cat"><td colspan="6">Entregables físicos</td></tr>
+            <tr><td>USB personalizada</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td>Premium</td></tr>
+            <tr><td>Galería online privada</td><td class="no">—</td><td class="no">—</td><td class="cpop ck">✓</td><td class="ck">✓</td><td>+ Respaldo</td></tr>
+            <tr><td>Ampliación con marco</td><td>11×14" (28×36cm)</td><td>16×20" (40×50cm)</td><td class="cpop">20×24" (50×60cm)</td><td>24×32" (60×80cm)</td><td>2 × 24×32"</td></tr>
+            <tr><td>Fotolibro</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td>30×30cm · 40 pág</td><td>30×60cm lujo · 50 pág</td></tr>
+            <tr><td>Caja de presentación</td><td>Fotos</td><td>Fotos</td><td class="cpop">Rígida</td><td>Premium</td><td>Madera grabada</td></tr>
 
-            <!-- LINKS -->
-            <tr class="link-row">
+            <tr class="cat"><td colspan="6">Extras</td></tr>
+            <tr><td>Canción personalizada</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Transmisión en vivo (YouTube + Facebook)</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td class="no">—</td><td class="ck">✓</td></tr>
+            <tr><td>Invitación web completa</td><td class="no">—</td><td class="no">—</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+
+            <tr class="lrow">
                 <td></td>
-                <td><a href="basico.html" class="btn-detail">Ver detalle</a></td>
-                <td><a href="clasico.html" class="btn-detail">Ver detalle</a></td>
-                <td class="col-pop"><a href="plus.html" class="btn-detail btn-detail-pop">Ver detalle</a></td>
-                <td><a href="premium.html" class="btn-detail">Ver detalle</a></td>
-                <td><a href="master.html" class="btn-detail">Ver detalle</a></td>
+                <td><a href="basico.html" class="bd">Ver detalle</a></td>
+                <td><a href="clasico.html" class="bd">Ver detalle</a></td>
+                <td class="cpop"><a href="plus.html" class="bd bdp">Ver detalle</a></td>
+                <td><a href="premium.html" class="bd">Ver detalle</a></td>
+                <td><a href="master.html" class="bd">Ver detalle</a></td>
             </tr>
         </tbody>
     </table>
     </div>
 </section>
 
+<!-- INVITACIÓN WEB -->
+<section style="padding:2rem 1.5rem 1rem;max-width:900px;margin:0 auto;">
+    <h2 class="stitle">Invitación Web Incluida</h2>
+    <p class="ssub">Desde el paquete Plus · Cada evento incluye su propio sitio web con:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem;">
+        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">💌</div><div style="font-size:.8rem;font-weight:500">Invitación</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Personalizada con RSVP y enlace único por invitado</div></div>
+        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">📋</div><div style="font-size:.8rem;font-weight:500">Datos</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">El cliente llena datos del evento desde su celular</div></div>
+        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">📝</div><div style="font-size:.8rem;font-weight:500">Contrato</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Contrato digital con firma y pagos</div></div>
+        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">🗓</div><div style="font-size:.8rem;font-weight:500">Logística</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Timeline del día, horarios y ubicaciones</div></div>
+        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">👥</div><div style="font-size:.8rem;font-weight:500">Invitados</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Gestión de lista, pases y confirmaciones</div></div>
+    </div>
+</section>
+
+<!-- TAMAÑOS DE AMPLIACIÓN -->
+<section style="padding:2rem 1.5rem;max-width:900px;margin:0 auto;">
+    <h2 class="stitle">Ampliaciones con Marco</h2>
+    <p class="ssub">Se colocan en el salón el día del evento · Puedes combinar tamaños</p>
+    <div class="amp-grid">
+        <div class="amp-card"><div class="amp-size">11×14"</div><div class="amp-cm">28 × 36 cm</div></div>
+        <div class="amp-card"><div class="amp-size">16×20"</div><div class="amp-cm">40 × 50 cm</div></div>
+        <div class="amp-card"><div class="amp-size">20×24"</div><div class="amp-cm">50 × 60 cm</div></div>
+        <div class="amp-card"><div class="amp-size">24×32"</div><div class="amp-cm">60 × 80 cm</div></div>
+    </div>
+</section>
+
 <!-- PRODUCTOS 3D -->
-<section class="products">
-    <div class="products-header">
-        <h2>Explora tus Entregables en 3D</h2>
-        <p>Productos reales que recibirás — explóralos en nuestro Studio interactivo</p>
+<section class="products" id="productos">
+    <h2 class="stitle">Explora tus Entregables en 3D</h2>
+    <p class="ssub">Productos reales que recibirás — explóralos en nuestro Studio interactivo</p>
+    <div class="pgrid">
+        <div class="pcard"><iframe src="https://fotolibro.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Fotolibro Premium</h3><p class="pcard-desc">Pasta dura con tus mejores momentos. Desde paquete Premium.</p><a href="https://fotolibro.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
+        <div class="pcard"><iframe src="https://usb-3d.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">USB Personalizada</h3><p class="pcard-desc">Grabada con nombre y fecha. Fotos + videos en HD.</p><a href="https://usb-3d.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
+        <div class="pcard"><iframe src="https://ampliacion-con-marco.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Ampliación con Marco</h3><p class="pcard-desc">Desde 11×14" hasta 24×32". Se pone en el salón.</p><a href="https://ampliacion-con-marco.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
+        <div class="pcard"><iframe src="https://fotos-impresas.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Fotos Impresas 5×7"</h3><p class="pcard-desc">De 40 a 150 fotos según tu paquete.</p><a href="https://fotos-impresas.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
+        <div class="pcard"><iframe src="https://caja-fotolibro.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Caja de Presentación</h3><p class="pcard-desc">Desde caja de fotos hasta madera grabada.</p><a href="https://caja-fotolibro.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
     </div>
-    <div class="products-grid">
-        <div class="product-card">
-            <iframe class="product-iframe" src="https://fotolibro.invitados.org/" loading="lazy"></iframe>
-            <div class="product-info">
-                <h3 class="product-name">Fotolibro Premium</h3>
-                <p class="product-desc">Pasta dura, 20 páginas con tus mejores momentos. Incluido desde el paquete Premium.</p>
-                <a href="https://fotolibro.invitados.org/" target="_blank" class="product-link">Abrir en 3D →</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <iframe class="product-iframe" src="https://usb-3d.invitados.org/" loading="lazy"></iframe>
-            <div class="product-info">
-                <h3 class="product-name">USB Personalizada</h3>
-                <p class="product-desc">Memoria USB grabada con nombre y fecha. Todas tus fotos y videos en HD.</p>
-                <a href="https://usb-3d.invitados.org/" target="_blank" class="product-link">Abrir en 3D →</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <iframe class="product-iframe" src="https://ampliacion-con-marco.invitados.org/" loading="lazy"></iframe>
-            <div class="product-info">
-                <h3 class="product-name">Ampliación con Marco</h3>
-                <p class="product-desc">Foto en gran formato con marco dorado. Tamaños desde 11×14" hasta 60×80cm.</p>
-                <a href="https://ampliacion-con-marco.invitados.org/" target="_blank" class="product-link">Abrir en 3D →</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <iframe class="product-iframe" src="https://fotos-impresas.invitados.org/" loading="lazy"></iframe>
-            <div class="product-info">
-                <h3 class="product-name">Fotos Impresas 5×7"</h3>
-                <p class="product-desc">Impresiones en papel fotográfico premium. De 40 a 150 fotos según tu paquete.</p>
-                <a href="https://fotos-impresas.invitados.org/" target="_blank" class="product-link">Abrir en 3D →</a>
-            </div>
-        </div>
-        <div class="product-card">
-            <iframe class="product-iframe" src="https://caja-fotolibro.invitados.org/" loading="lazy"></iframe>
-            <div class="product-info">
-                <h3 class="product-name">Caja de Presentación</h3>
-                <p class="product-desc">Desde caja para fotos hasta caja de madera premium personalizada.</p>
-                <a href="https://caja-fotolibro.invitados.org/" target="_blank" class="product-link">Abrir en 3D →</a>
-            </div>
-        </div>
+</section>
+
+<!-- PERSONALIZAR PAQUETE -->
+<section class="custom" id="personalizar">
+    <h2 class="stitle">Arma tu Paquete</h2>
+    <p class="ssub">Elige solo lo que necesitas · El precio se calcula automáticamente</p>
+
+    <div class="custom-grid" id="customGrid">
+        <label class="custom-item"><input type="checkbox" data-price="3000" data-name="Cobertura 6 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 6 hrs</div><div class="ci-desc">Sesión el día del evento + ceremonia + fiesta</div></div><div class="ci-price">$3,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="4500" data-name="Cobertura 8 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 8 hrs</div><div class="ci-desc">Sesión previa o día del evento + ceremonia + fiesta</div></div><div class="ci-price">$4,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="6000" data-name="Cobertura 10+ hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 10+ hrs</div><div class="ci-desc">Sesión previa + evento completo sin reloj</div></div><div class="ci-price">$6,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="40 fotos impresas"><div class="ci-text"><div class="ci-name">40 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2500" data-name="80 fotos impresas"><div class="ci-text"><div class="ci-name">80 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="3500" data-name="120 fotos impresas"><div class="ci-text"><div class="ci-name">120 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$3,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Video completo YouTube"><div class="ci-text"><div class="ci-name">Video completo del evento</div><div class="ci-desc">Editado profesionalmente · Subido a YouTube</div></div><div class="ci-price">$2,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Videoclip highlight"><div class="ci-text"><div class="ci-name">Videoclip highlight (3–5 min)</div><div class="ci-desc">Lo mejor de tu evento para compartir</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Clip proyección salón"><div class="ci-text"><div class="ci-name">Videoclip para proyección en salón</div><div class="ci-desc">Se graba el día de la sesión y se proyecta en la fiesta</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="5000" data-name="Película cinematográfica"><div class="ci-text"><div class="ci-name">Película cinematográfica</div><div class="ci-desc">Video tipo película (15–50 min) · Subido a YouTube</div></div><div class="ci-price">$5,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Tomas con dron"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas del evento</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="500" data-name="USB personalizada"><div class="ci-text"><div class="ci-name">USB personalizada</div><div class="ci-desc">Grabada con nombre y fecha</div></div><div class="ci-price">$500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Ampliación 11×14&quot;"><div class="ci-text"><div class="ci-name">Ampliación 11×14" (28×36cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$800</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1200" data-name="Ampliación 16×20&quot;"><div class="ci-text"><div class="ci-name">Ampliación 16×20" (40×50cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,200</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Ampliación 20×24&quot;"><div class="ci-text"><div class="ci-name">Ampliación 20×24" (50×60cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Ampliación 24×32&quot;"><div class="ci-text"><div class="ci-name">Ampliación 24×32" (60×80cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$2,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="3500" data-name="Fotolibro 30×30cm"><div class="ci-text"><div class="ci-name">Fotolibro premium 30×30cm (40 pág)</div><div class="ci-desc">Álbum de pasta dura con diseño profesional</div></div><div class="ci-price">$3,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="5000" data-name="Fotolibro lujo 30×60cm"><div class="ci-text"><div class="ci-name">Fotolibro de lujo 30×60cm (50 pág)</div><div class="ci-desc">Álbum panorámico de alta gama</div></div><div class="ci-price">$5,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Caja de fotos"><div class="ci-text"><div class="ci-name">Caja de presentación para fotos</div><div class="ci-desc">Caja estándar para fotos impresas</div></div><div class="ci-price">$800</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Caja premium"><div class="ci-text"><div class="ci-name">Caja premium / rígida personalizada</div><div class="ci-desc">Presentación elegante para entregables</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2500" data-name="Caja de madera"><div class="ci-text"><div class="ci-name">Caja de madera grabada</div><div class="ci-desc">Artesanal con nombre y fecha grabados</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Fotos niña a grande"><div class="ci-text"><div class="ci-name">Fotos de niña a grande</div><div class="ci-desc">Collage o secuencia de crecimiento para proyección o impresión</div></div><div class="ci-price">$800</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Canción personalizada"><div class="ci-text"><div class="ci-name">Canción hecha a la medida</div><div class="ci-desc">Composición original para vals, entrada o video</div></div><div class="ci-price">$2,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2500" data-name="Transmisión en vivo"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">Streaming a YouTube + Facebook para familia a distancia</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Invitación web completa"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Invitación, contrato, logística, invitados, datos — sitio propio</div></div><div class="ci-price">$2,000</div></label>
     </div>
+
+    <div id="customTotal">$0 MXN</div>
+    <button id="customSend">Enviar cotización por WhatsApp</button>
 </section>
 
 <section class="cta">
-    <h2>¿Listo para reservar?</h2>
-    <p>Escríbenos y armamos el paquete perfecto para tu evento</p>
-    <a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesan%20sus%20paquetes%20de%20fotograf%C3%ADa%20y%20video" target="_blank" class="btn-wa">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.352 0-4.55-.721-6.365-1.953l-.444-.305-2.628.881.881-2.628-.305-.444A9.963 9.963 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        WhatsApp: 477-920-3776
-    </a>
+    <h2>¿Dudas? Escríbenos</h2>
+    <p>Te ayudamos a elegir el paquete perfecto para tu evento</p>
+    <a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesan%20sus%20paquetes%20de%20fotograf%C3%ADa%20y%20video" target="_blank" class="btn-wa">WhatsApp: 477-920-3776</a>
 </section>
 
-<footer class="footer">
-    <p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto.</p>
-</footer>
+<footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto.</p></footer>
+
+<script>
+(function(){
+    const grid = document.getElementById('customGrid');
+    const totalEl = document.getElementById('customTotal');
+    const sendBtn = document.getElementById('customSend');
+
+    grid.addEventListener('change', function(){
+        let total = 0;
+        grid.querySelectorAll('input:checked').forEach(function(cb){ total += parseInt(cb.dataset.price); });
+        totalEl.textContent = '$' + total.toLocaleString('es-MX') + ' MXN';
+        grid.querySelectorAll('.custom-item').forEach(function(item){
+            item.classList.toggle('active', item.querySelector('input').checked);
+        });
+    });
+
+    sendBtn.addEventListener('click', function(){
+        const items = [];
+        let total = 0;
+        grid.querySelectorAll('input:checked').forEach(function(cb){
+            items.push(cb.dataset.name);
+            total += parseInt(cb.dataset.price);
+        });
+        if (!items.length) { alert('Selecciona al menos un servicio'); return; }
+        const msg = 'Hola, me interesa un paquete personalizado:\n\n' + items.map(function(i){ return '• ' + i; }).join('\n') + '\n\nTotal estimado: $' + total.toLocaleString('es-MX') + ' MXN';
+        window.open('https://wa.me/5214779203776?text=' + encodeURIComponent(msg), '_blank');
+    });
+})();
+</script>
 
 </body>
 </html>
