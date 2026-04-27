@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paquetes Fotografía y Video — Foro 7 Producciones</title>
+    <title>Paquetes Fotografía y Video — Foro 7 Producciones · León, Gto.</title>
+    <meta name="description" content="Paquetes de fotografía y video profesional para XV años, bodas y eventos en León, Gto. Desde $6,500. Dron, video cinematográfico, invitación web y más.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Paquetes de Fotografía y Video — Foro 7 Producciones">
+    <meta property="og:description" content="5 paquetes profesionales para tu evento. Foto, video, dron, invitación web, transmisión en vivo. Desde $6,500 MXN. León, Gto.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paquetes.invitados.org/">
+    <meta property="og:image" content="https://paquetes.invitados.org/og-image.jpg">
+    <meta property="og:locale" content="es_MX">
+
+    <!-- WhatsApp / Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Paquetes Foto y Video — Foro 7">
+    <meta name="twitter:description" content="5 paquetes profesionales desde $6,500. León, Gto.">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics 4 — REEMPLAZA G-XXXXXXXXXX con tu ID real -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
+    </script>
+
+    <!-- Meta Pixel — REEMPLAZA TU_PIXEL_ID con tu ID real -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','TU_PIXEL_ID');fbq('track','PageView');
+    </script>
+
     <style>
         :root{--navy:#0d1b2a;--navy2:#1b2838;--gold:#c9a84c;--gold-dim:#a08030;--gold-bg:rgba(201,168,76,.06);--smoke:rgba(255,255,255,.55);--card:#111c2e;--border:rgba(201,168,76,.18);--green:#25D366}
         *{margin:0;padding:0;box-sizing:border-box}
@@ -24,11 +54,21 @@
         .hero h1 em{font-style:normal;color:var(--gold)}
         .hero p{color:var(--smoke);max-width:600px;margin:0 auto;font-size:.9rem;line-height:1.7}
 
-        /* TABLE */
-        .compare{padding:3rem 1rem 2rem;max-width:1300px;margin:0 auto}
+        /* SECTION TITLES */
         .stitle{text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:.3rem}
         .ssub{text-align:center;font-size:.75rem;color:var(--smoke);margin-bottom:1.5rem;letter-spacing:.1em}
 
+        /* POR QUÉ FORO 7 */
+        .why{padding:3rem 1.5rem;max-width:1000px;margin:0 auto}
+        .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem}
+        .why-card{text-align:center;padding:1.5rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:3px;transition:border-color .3s}
+        .why-card:hover{border-color:var(--gold)}
+        .why-icon{font-size:2rem;margin-bottom:.6rem}
+        .why-card h3{font-size:.85rem;font-weight:600;margin-bottom:.3rem}
+        .why-card p{font-size:.7rem;color:var(--smoke);line-height:1.5}
+
+        /* TABLE */
+        .compare{padding:3rem 1rem 2rem;max-width:1300px;margin:0 auto}
         .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:3px}
         table{width:100%;border-collapse:collapse;min-width:900px;font-size:.8rem}
         thead th{position:sticky;top:0;background:var(--navy2);padding:.9rem .6rem;text-align:center;border-bottom:1px solid var(--border);color:var(--smoke);font-weight:500;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;vertical-align:bottom}
@@ -51,15 +91,73 @@
         .bd:hover{background:var(--gold);color:var(--navy)}
         .bdp{background:var(--gold);color:var(--navy);font-weight:600}.bdp:hover{background:#d4b85a}
 
+        /* MOBILE CARDS (alternativa a tabla) */
+        .mobile-cards{display:none;padding:0 1rem}
+        .mcard{background:var(--card);border:1px solid var(--border);border-radius:4px;margin-bottom:1rem;overflow:hidden}
+        .mcard.popular{border-color:var(--gold)}
+        .mcard-head{padding:1.2rem;text-align:center;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+        .mcard-head-left{text-align:left}
+        .mcard-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700}
+        .mcard-price{color:var(--gold);font-weight:700;font-size:1.1rem}
+        .mcard-badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;font-weight:600;margin-bottom:.3rem}
+        .mcard-toggle{color:var(--gold);font-size:1.2rem;transition:transform .3s}
+        .mcard.open .mcard-toggle{transform:rotate(180deg)}
+        .mcard-body{display:none;padding:1rem 1.2rem}
+        .mcard.open .mcard-body{display:block}
+        .mcard-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.78rem}
+        .mcard-row span:first-child{color:var(--smoke)}
+        .mcard-row span:last-child{color:#fff;font-weight:500}
+        .mcard-cat{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);padding:.6rem 0 .2rem;font-weight:600}
+        .mcard-cta{display:block;text-align:center;padding:.8rem;margin-top:.8rem}
+
+        /* VIDEOS */
+        .videos{padding:3rem 1.5rem;max-width:1000px;margin:0 auto}
+        .vid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem;margin-top:1.5rem}
+        .vid-card{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+        .vid-card .vid-placeholder{width:100%;aspect-ratio:16/9;background:var(--navy2);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden}
+        .vid-card .vid-placeholder::after{content:'▶';font-size:2.5rem;color:var(--gold);z-index:1}
+        .vid-card .vid-placeholder img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6}
+        .vid-card iframe{width:100%;aspect-ratio:16/9;border:none}
+        .vid-info{padding:1rem}
+        .vid-info h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}
+        .vid-info p{font-size:.7rem;color:var(--smoke);margin-top:.2rem}
+
+        /* INVITACIÓN WEB */
+        .inv-section{padding:2rem 1.5rem 1rem;max-width:900px;margin:0 auto}
+        .inv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem}
+        .inv-card{text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px}
+        .inv-card-icon{font-size:1.5rem;margin-bottom:.4rem}
+        .inv-card h4{font-size:.8rem;font-weight:500}
+        .inv-card p{font-size:.65rem;color:var(--smoke);margin-top:.2rem}
+
+        /* AMPLIACIONES */
+        .amp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin:1rem 0 2rem}
+        .amp-card{text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px}
+        .amp-size{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold)}
+        .amp-cm{font-size:.7rem;color:var(--smoke);margin-top:.2rem}
+
         /* PRODUCTOS 3D */
         .products{padding:3rem 1.5rem;max-width:1100px;margin:0 auto}
         .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.5rem}
         .pcard{background:var(--card);border:1px solid var(--border);border-radius:3px;overflow:hidden;transition:border-color .3s}.pcard:hover{border-color:var(--gold)}
-        .pcard iframe{width:100%;height:200px;border:none;pointer-events:auto}
+        .pcard-3d{width:100%;height:220px;display:flex;align-items:center;justify-content:center;background:var(--navy2);cursor:pointer;transition:background .3s;position:relative}
+        .pcard-3d:hover{background:rgba(201,168,76,.08)}
+        .pcard-3d::after{content:'Clic para explorar en 3D';font-size:.7rem;color:var(--gold);letter-spacing:.1em}
+        .pcard-3d.loaded::after{display:none}
+        .pcard-3d iframe{width:100%;height:100%;border:none;pointer-events:auto}
         .pcard-info{padding:1rem}
         .pcard-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}
         .pcard-desc{font-size:.72rem;color:var(--smoke);margin-top:.2rem}
         .pcard-link{display:inline-block;margin-top:.6rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+
+        /* TESTIMONIOS */
+        .testimonials{padding:3rem 1.5rem;max-width:1000px;margin:0 auto}
+        .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:1.5rem}
+        .test-card{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:3px;position:relative}
+        .test-card::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--gold);opacity:.3;position:absolute;top:-.2rem;left:.8rem;line-height:1}
+        .test-quote{font-size:.85rem;color:var(--smoke);line-height:1.6;font-style:italic;margin-bottom:1rem;padding-top:1.5rem}
+        .test-author{font-size:.78rem;font-weight:600}.test-event{font-size:.65rem;color:var(--gold-dim)}
+        .test-stars{color:var(--gold);font-size:.8rem;margin-bottom:.3rem}
 
         /* PERSONALIZAR */
         .custom{padding:3rem 1.5rem 4rem;max-width:900px;margin:0 auto}
@@ -76,11 +174,34 @@
         #customSend{display:block;width:100%;max-width:400px;margin:0 auto;padding:1rem;background:var(--green);color:#fff;border:none;font-size:.85rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.05em;transition:transform .3s}
         #customSend:hover{transform:translateY(-2px)}
 
-        /* AMPLIFICACIONES */
-        .amp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin:1rem 0 2rem}
-        .amp-card{text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px}
-        .amp-size{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold)}
-        .amp-cm{font-size:.7rem;color:var(--smoke);margin-top:.2rem}
+        /* PAGOS */
+        .pagos{padding:2rem 1.5rem;max-width:800px;margin:0 auto;text-align:center}
+        .pagos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.2rem}
+        .pago-card{padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:3px}
+        .pago-card h4{font-size:.85rem;margin-bottom:.3rem;color:var(--gold)}
+        .pago-card p{font-size:.72rem;color:var(--smoke);line-height:1.5}
+
+        /* FAQ */
+        .faq{padding:3rem 1.5rem;max-width:800px;margin:0 auto}
+        .faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+        .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;cursor:pointer;font-size:.88rem;font-weight:500;transition:color .3s}
+        .faq-q:hover{color:var(--gold)}
+        .faq-arrow{color:var(--gold);font-size:1rem;transition:transform .3s}
+        .faq-item.open .faq-arrow{transform:rotate(180deg)}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+        .faq-item.open .faq-a{max-height:300px}
+        .faq-a p{padding:0 0 1rem;font-size:.8rem;color:var(--smoke);line-height:1.6}
+
+        /* SOBRE */
+        .about{padding:2.5rem 1.5rem;max-width:800px;margin:0 auto;text-align:center}
+        .about p{font-size:.82rem;color:var(--smoke);line-height:1.7;max-width:600px;margin:.8rem auto 0}
+        .about-stats{display:flex;justify-content:center;gap:2.5rem;margin-top:1.5rem;flex-wrap:wrap}
+        .about-stat{text-align:center}
+        .about-stat strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold)}
+        .about-stat span{font-size:.65rem;color:var(--smoke);letter-spacing:.1em;text-transform:uppercase}
+        .about-links{margin-top:1.2rem;display:flex;justify-content:center;gap:1.5rem}
+        .about-links a{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid transparent;transition:border-color .3s}
+        .about-links a:hover{border-color:var(--gold)}
 
         /* CTA */
         .cta{text-align:center;padding:4rem 1.5rem;background:linear-gradient(180deg,var(--navy2),var(--navy))}
@@ -90,7 +211,14 @@
 
         .footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:.65rem;color:rgba(255,255,255,.2)}
 
-        @media(max-width:700px){.nav-links{display:none}.hero{padding:3rem 1.2rem 2rem}.amp-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:700px){
+            .nav-links{display:none}
+            .hero{padding:3rem 1.2rem 2rem}
+            .amp-grid{grid-template-columns:repeat(2,1fr)}
+            .table-wrap{display:none}
+            .mobile-cards{display:block}
+            .about-stats{gap:1.5rem}
+        }
     </style>
 </head>
 <body>
@@ -99,9 +227,10 @@
     <div class="nav-logo">FORO <span>7</span></div>
     <div class="nav-links">
         <a href="#comparar">Comparar</a>
+        <a href="#trabajo">Nuestro Trabajo</a>
         <a href="#productos">Entregables 3D</a>
         <a href="#personalizar">Personalizar</a>
-        <a href="https://studio.invitados.org" target="_blank">Studio</a>
+        <a href="#faq">FAQ</a>
     </div>
 </nav>
 
@@ -111,11 +240,26 @@
     <p>Capturamos cada momento de tu evento: sesión fotográfica, ceremonia, fiesta, tomas con dron, video cinematográfico, transmisión en vivo y más. 5 paquetes a tu medida o arma el tuyo.</p>
 </section>
 
+<!-- ¿POR QUÉ FORO 7? -->
+<section class="why">
+    <h2 class="stitle">¿Por qué Foro 7?</h2>
+    <p class="ssub">Lo que nos hace diferentes de cualquier otro fotógrafo en León</p>
+    <div class="why-grid">
+        <div class="why-card"><div class="why-icon">💌</div><h3>Invitación Web con RSVP</h3><p>Tu evento tiene su propio sitio web con invitación personalizada, confirmación de asistencia, contrato digital y logística.</p></div>
+        <div class="why-card"><div class="why-icon">📡</div><h3>Transmisión en Vivo</h3><p>Streaming profesional a YouTube y Facebook simultáneamente para familia que no puede asistir.</p></div>
+        <div class="why-card"><div class="why-icon">🎵</div><h3>Canción Personalizada</h3><p>Composición musical original hecha a la medida para tu vals, entrada o video cinematográfico.</p></div>
+        <div class="why-card"><div class="why-icon">🎬</div><h3>Película Cinematográfica</h3><p>No solo grabamos — producimos una película de tu evento que se sube a YouTube para siempre.</p></div>
+        <div class="why-card"><div class="why-icon">🚁</div><h3>Tomas con Dron 4K</h3><p>Perspectivas aéreas cinematográficas que ningún otro fotógrafo incluye en todos sus paquetes.</p></div>
+        <div class="why-card"><div class="why-icon">📽</div><h3>Videoclip para el Salón</h3><p>Se graba durante la sesión previa y se proyecta en pantalla el día de la fiesta.</p></div>
+    </div>
+</section>
+
 <!-- COMPARAR PAQUETES -->
 <section class="compare" id="comparar">
     <h2 class="stitle">Comparar Paquetes</h2>
     <p class="ssub">Desliza para ver todos · Toca "Ver detalle" para más info</p>
 
+    <!-- TABLA DESKTOP -->
     <div class="table-wrap">
     <table>
         <thead><tr>
@@ -169,18 +313,23 @@
         </tbody>
     </table>
     </div>
+
+    <!-- MOBILE CARDS -->
+    <div class="mobile-cards" id="mobileCards">
+        <!-- Se generan con JS -->
+    </div>
 </section>
 
 <!-- INVITACIÓN WEB -->
-<section style="padding:2rem 1.5rem 1rem;max-width:900px;margin:0 auto;">
+<section class="inv-section">
     <h2 class="stitle">Invitación Web Incluida</h2>
     <p class="ssub">Desde el paquete Plus · Cada evento incluye su propio sitio web con:</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem;">
-        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">💌</div><div style="font-size:.8rem;font-weight:500">Invitación</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Personalizada con RSVP y enlace único por invitado</div></div>
-        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">📋</div><div style="font-size:.8rem;font-weight:500">Datos</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">El cliente llena datos del evento desde su celular</div></div>
-        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">📝</div><div style="font-size:.8rem;font-weight:500">Contrato</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Contrato digital con firma y pagos</div></div>
-        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">🗓</div><div style="font-size:.8rem;font-weight:500">Logística</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Timeline del día, horarios y ubicaciones</div></div>
-        <div style="text-align:center;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:2px"><div style="font-size:1.5rem;margin-bottom:.4rem">👥</div><div style="font-size:.8rem;font-weight:500">Invitados</div><div style="font-size:.65rem;color:var(--smoke);margin-top:.2rem">Gestión de lista, pases y confirmaciones</div></div>
+    <div class="inv-grid">
+        <div class="inv-card"><div class="inv-card-icon">💌</div><h4>Invitación</h4><p>Personalizada con RSVP y enlace único por invitado</p></div>
+        <div class="inv-card"><div class="inv-card-icon">📋</div><h4>Datos</h4><p>El cliente llena datos del evento desde su celular</p></div>
+        <div class="inv-card"><div class="inv-card-icon">📝</div><h4>Contrato</h4><p>Contrato digital con firma y pagos</p></div>
+        <div class="inv-card"><div class="inv-card-icon">🗓</div><h4>Logística</h4><p>Timeline del día, horarios y ubicaciones</p></div>
+        <div class="inv-card"><div class="inv-card-icon">👥</div><h4>Invitados</h4><p>Gestión de lista, pases y confirmaciones</p></div>
     </div>
 </section>
 
@@ -196,16 +345,59 @@
     </div>
 </section>
 
+<!-- NUESTRO TRABAJO -->
+<section class="videos" id="trabajo">
+    <h2 class="stitle">Nuestro Trabajo</h2>
+    <p class="ssub">Ejemplos reales de eventos que hemos producido</p>
+    <div class="vid-grid">
+        <div class="vid-card">
+            <div class="vid-placeholder" data-yt="VIDEO_ID_1"><img src="" alt=""></div>
+            <div class="vid-info"><h3>Video Cinematográfico</h3><p>Ejemplo de película de evento completa</p></div>
+        </div>
+        <div class="vid-card">
+            <div class="vid-placeholder" data-yt="VIDEO_ID_2"><img src="" alt=""></div>
+            <div class="vid-info"><h3>Highlight / Trailer</h3><p>Versión corta para redes sociales</p></div>
+        </div>
+    </div>
+    <p style="text-align:center;margin-top:1rem;font-size:.7rem;color:var(--smoke)">Reemplaza VIDEO_ID_1 y VIDEO_ID_2 con tus IDs de YouTube reales</p>
+</section>
+
 <!-- PRODUCTOS 3D -->
 <section class="products" id="productos">
     <h2 class="stitle">Explora tus Entregables en 3D</h2>
-    <p class="ssub">Productos reales que recibirás — explóralos en nuestro Studio interactivo</p>
+    <p class="ssub">Toca cada producto para interactuar · Rota, acerca y explora</p>
     <div class="pgrid">
-        <div class="pcard"><iframe src="https://fotolibro.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Fotolibro Premium</h3><p class="pcard-desc">Pasta dura con tus mejores momentos. Desde paquete Premium.</p><a href="https://fotolibro.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
-        <div class="pcard"><iframe src="https://usb-3d.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">USB Personalizada</h3><p class="pcard-desc">Grabada con nombre y fecha. Fotos + videos en HD.</p><a href="https://usb-3d.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
-        <div class="pcard"><iframe src="https://ampliacion-con-marco.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Ampliación con Marco</h3><p class="pcard-desc">Desde 11×14" hasta 24×32". Se pone en el salón.</p><a href="https://ampliacion-con-marco.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
-        <div class="pcard"><iframe src="https://fotos-impresas.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Fotos Impresas 5×7"</h3><p class="pcard-desc">De 40 a 150 fotos según tu paquete.</p><a href="https://fotos-impresas.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
-        <div class="pcard"><iframe src="https://caja-fotolibro.invitados.org/" loading="lazy"></iframe><div class="pcard-info"><h3 class="pcard-name">Caja de Presentación</h3><p class="pcard-desc">Desde caja de fotos hasta madera grabada.</p><a href="https://caja-fotolibro.invitados.org/" target="_blank" class="pcard-link">Abrir en 3D →</a></div></div>
+        <div class="pcard"><div class="pcard-3d" data-src="https://fotolibro.invitados.org/"></div><div class="pcard-info"><h3 class="pcard-name">Fotolibro Premium</h3><p class="pcard-desc">Pasta dura con tus mejores momentos. Desde paquete Premium.</p><a href="https://fotolibro.invitados.org/" target="_blank" class="pcard-link">Abrir completo →</a></div></div>
+        <div class="pcard"><div class="pcard-3d" data-src="https://usb-3d.invitados.org/"></div><div class="pcard-info"><h3 class="pcard-name">USB Personalizada</h3><p class="pcard-desc">Grabada con nombre y fecha. Fotos + videos en HD.</p><a href="https://usb-3d.invitados.org/" target="_blank" class="pcard-link">Abrir completo →</a></div></div>
+        <div class="pcard"><div class="pcard-3d" data-src="https://ampliacion-con-marco.invitados.org/"></div><div class="pcard-info"><h3 class="pcard-name">Ampliación con Marco</h3><p class="pcard-desc">Desde 11×14" hasta 24×32". Se pone en el salón.</p><a href="https://ampliacion-con-marco.invitados.org/" target="_blank" class="pcard-link">Abrir completo →</a></div></div>
+        <div class="pcard"><div class="pcard-3d" data-src="https://fotos-impresas.invitados.org/"></div><div class="pcard-info"><h3 class="pcard-name">Fotos Impresas 5×7"</h3><p class="pcard-desc">De 40 a 150 fotos según tu paquete.</p><a href="https://fotos-impresas.invitados.org/" target="_blank" class="pcard-link">Abrir completo →</a></div></div>
+        <div class="pcard"><div class="pcard-3d" data-src="https://caja-fotolibro.invitados.org/"></div><div class="pcard-info"><h3 class="pcard-name">Caja de Presentación</h3><p class="pcard-desc">Desde caja de fotos hasta madera grabada.</p><a href="https://caja-fotolibro.invitados.org/" target="_blank" class="pcard-link">Abrir completo →</a></div></div>
+    </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonials">
+    <h2 class="stitle">Lo que Dicen Nuestros Clientes</h2>
+    <p class="ssub">Familias reales que confiaron en Foro 7</p>
+    <div class="test-grid">
+        <div class="test-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">Superaron nuestras expectativas. El video cinematográfico quedó increíble — lo vemos y se nos enchina la piel cada vez. La invitación web fue el hit con los invitados.</p>
+            <div class="test-author">Familia García López</div>
+            <div class="test-event">XV Años · León, Gto.</div>
+        </div>
+        <div class="test-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">Lo que más nos gustó fue que transmitieron en vivo para mis papás que están en Estados Unidos. Pudieron ver toda la misa y la fiesta como si estuvieran ahí.</p>
+            <div class="test-author">Familia Rodríguez</div>
+            <div class="test-event">XV Años · León, Gto.</div>
+        </div>
+        <div class="test-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">La canción personalizada para el vals fue lo más emotivo de toda la noche. Todos lloramos. Y las fotos con dron se ven espectaculares.</p>
+            <div class="test-author">Familia Martínez</div>
+            <div class="test-event">XV Años · León, Gto.</div>
+        </div>
     </div>
 </section>
 
@@ -215,17 +407,17 @@
     <p class="ssub">Elige solo lo que necesitas · El precio se calcula automáticamente</p>
 
     <div class="custom-grid" id="customGrid">
-        <label class="custom-item"><input type="checkbox" data-price="3000" data-name="Cobertura 6 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 6 hrs</div><div class="ci-desc">Sesión el día del evento + ceremonia + fiesta</div></div><div class="ci-price">$3,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="4500" data-name="Cobertura 8 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 8 hrs</div><div class="ci-desc">Sesión previa o día del evento + ceremonia + fiesta</div></div><div class="ci-price">$4,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="6000" data-name="Cobertura 10+ hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 10+ hrs</div><div class="ci-desc">Sesión previa + evento completo sin reloj</div></div><div class="ci-price">$6,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="3000" data-name="Cobertura 6 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 6 hrs</div><div class="ci-desc">Sesión el día del evento + ceremonia + fiesta (~600 fotos digitales)</div></div><div class="ci-price">$3,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="4500" data-name="Cobertura 8 hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 8 hrs</div><div class="ci-desc">Sesión previa o día del evento + ceremonia + fiesta (~800 fotos digitales)</div></div><div class="ci-price">$4,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="6000" data-name="Cobertura 10+ hrs"><div class="ci-text"><div class="ci-name">Cobertura fotográfica 10+ hrs</div><div class="ci-desc">Sesión previa + evento completo sin reloj (~1,000+ fotos digitales)</div></div><div class="ci-price">$6,000</div></label>
         <label class="custom-item"><input type="checkbox" data-price="1500" data-name="40 fotos impresas"><div class="ci-text"><div class="ci-name">40 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$1,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2500" data-name="80 fotos impresas"><div class="ci-text"><div class="ci-name">80 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$2,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="3500" data-name="120 fotos impresas"><div class="ci-text"><div class="ci-name">120 fotos impresas 5×7"</div><div class="ci-desc">Papel fotográfico premium</div></div><div class="ci-price">$3,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Video completo YouTube"><div class="ci-text"><div class="ci-name">Video completo del evento</div><div class="ci-desc">Editado profesionalmente · Subido a YouTube</div></div><div class="ci-price">$2,000</div></label>
         <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Videoclip highlight"><div class="ci-text"><div class="ci-name">Videoclip highlight (3–5 min)</div><div class="ci-desc">Lo mejor de tu evento para compartir</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Clip proyección salón"><div class="ci-text"><div class="ci-name">Videoclip para proyección en salón</div><div class="ci-desc">Se graba el día de la sesión y se proyecta en la fiesta</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="5000" data-name="Película cinematográfica"><div class="ci-text"><div class="ci-name">Película cinematográfica</div><div class="ci-desc">Video tipo película (15–50 min) · Subido a YouTube</div></div><div class="ci-price">$5,000</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Tomas con dron"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas del evento</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Clip proyección salón"><div class="ci-text"><div class="ci-name">Videoclip para proyección en salón</div><div class="ci-desc">Se graba en la sesión previa y se proyecta en pantalla durante la fiesta</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="5000" data-name="Película cinematográfica"><div class="ci-text"><div class="ci-name">Película cinematográfica</div><div class="ci-desc">Video tipo película (15–50 min) · Subido a YouTube para siempre</div></div><div class="ci-price">$5,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Tomas con dron"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas cinematográficas del evento</div></div><div class="ci-price">$1,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="500" data-name="USB personalizada"><div class="ci-text"><div class="ci-name">USB personalizada</div><div class="ci-desc">Grabada con nombre y fecha</div></div><div class="ci-price">$500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="800" data-name="Ampliación 11×14&quot;"><div class="ci-text"><div class="ci-name">Ampliación 11×14" (28×36cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$800</div></label>
         <label class="custom-item"><input type="checkbox" data-price="1200" data-name="Ampliación 16×20&quot;"><div class="ci-text"><div class="ci-name">Ampliación 16×20" (40×50cm)</div><div class="ci-desc">Con marco · Para colocar en el salón</div></div><div class="ci-price">$1,200</div></label>
@@ -236,32 +428,75 @@
         <label class="custom-item"><input type="checkbox" data-price="800" data-name="Caja de fotos"><div class="ci-text"><div class="ci-name">Caja de presentación para fotos</div><div class="ci-desc">Caja estándar para fotos impresas</div></div><div class="ci-price">$800</div></label>
         <label class="custom-item"><input type="checkbox" data-price="1500" data-name="Caja premium"><div class="ci-text"><div class="ci-name">Caja premium / rígida personalizada</div><div class="ci-desc">Presentación elegante para entregables</div></div><div class="ci-price">$1,500</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2500" data-name="Caja de madera"><div class="ci-text"><div class="ci-name">Caja de madera grabada</div><div class="ci-desc">Artesanal con nombre y fecha grabados</div></div><div class="ci-price">$2,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Fotos niña a grande"><div class="ci-text"><div class="ci-name">Fotos de niña a grande</div><div class="ci-desc">Collage o secuencia de crecimiento para proyección o impresión</div></div><div class="ci-price">$800</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="800" data-name="Fotos niña a grande"><div class="ci-text"><div class="ci-name">Fotos de niña a grande</div><div class="ci-desc">Collage fotográfico mostrando tu crecimiento desde bebé hasta hoy</div></div><div class="ci-price">$800</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Canción personalizada"><div class="ci-text"><div class="ci-name">Canción hecha a la medida</div><div class="ci-desc">Composición original para vals, entrada o video</div></div><div class="ci-price">$2,000</div></label>
         <label class="custom-item"><input type="checkbox" data-price="2500" data-name="Transmisión en vivo"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">Streaming a YouTube + Facebook para familia a distancia</div></div><div class="ci-price">$2,500</div></label>
-        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Invitación web completa"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Invitación, contrato, logística, invitados, datos — sitio propio</div></div><div class="ci-price">$2,000</div></label>
+        <label class="custom-item"><input type="checkbox" data-price="2000" data-name="Invitación web completa"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Invitación con RSVP, contrato, logística, invitados — sitio propio del evento</div></div><div class="ci-price">$2,000</div></label>
     </div>
 
     <div id="customTotal">$0 MXN</div>
     <button id="customSend">Enviar cotización por WhatsApp</button>
 </section>
 
+<!-- FORMAS DE PAGO -->
+<section class="pagos">
+    <h2 class="stitle">Facilidades de Pago</h2>
+    <p class="ssub">Reserva tu fecha con un anticipo y paga el resto en parcialidades</p>
+    <div class="pagos-grid">
+        <div class="pago-card"><h4>Aparta tu fecha</h4><p>Con $2,000 MXN de anticipo separas la fecha de tu evento y aseguras tu paquete.</p></div>
+        <div class="pago-card"><h4>Parcialidades</h4><p>El resto lo puedes pagar en parcialidades sin intereses antes del evento.</p></div>
+        <div class="pago-card"><h4>Métodos de pago</h4><p>Transferencia bancaria, depósito en efectivo o pago en efectivo.</p></div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+    <h2 class="stitle">Preguntas Frecuentes</h2>
+    <p class="ssub">Las respuestas que siempre nos piden</p>
+
+    <div class="faq-item"><div class="faq-q">¿Cuánto tiempo tardan en entregar el material?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Las fotos digitales se entregan en 2–3 semanas. El video completo y cinematográfico en 4–6 semanas. Los entregables físicos (fotolibro, ampliaciones, USB) en 6–8 semanas después del evento.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿Puedo agregar horas extra el día del evento?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Sí, cada hora adicional tiene un costo de $500 MXN. Se acuerda directamente el día del evento si es necesario.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿Qué pasa si llueve o hay mal clima?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>La sesión previa se puede reprogramar sin costo. Para el día del evento, contamos con equipo profesional para adaptar la iluminación y trabajar en interiores sin problema.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿Cubren eventos fuera de León?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Sí, cubrimos eventos en todo Guanajuato y estados cercanos. Para eventos fuera de León se aplica un cargo por viáticos dependiendo de la distancia.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿Puedo combinar servicios de diferentes paquetes?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Sí, usa nuestra herramienta "Arma tu Paquete" arriba para seleccionar exactamente lo que necesitas y obtener un precio personalizado.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿Cuántas personas van al evento?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Dependiendo del paquete, asistimos de 1 a 3 personas: fotógrafo, videógrafo y operador de dron. En el paquete Master todo el equipo está presente.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿La invitación web qué incluye exactamente?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Un sitio web exclusivo para tu evento con: invitación digital personalizada con enlace único por invitado y confirmación de asistencia (RSVP), formulario de datos, contrato digital, logística del día y gestión de lista de invitados.</p></div></div>
+    <div class="faq-item"><div class="faq-q">¿Cómo funciona la transmisión en vivo?<span class="faq-arrow">▼</span></div><div class="faq-a"><p>Transmitimos en tiempo real a YouTube y Facebook simultáneamente usando equipo profesional. Tu familia que no puede asistir recibe el enlace y puede ver toda la ceremonia y fiesta en vivo.</p></div></div>
+</section>
+
+<!-- SOBRE FORO 7 -->
+<section class="about">
+    <h2 class="stitle">Sobre Foro 7</h2>
+    <p>Somos un estudio de fotografía y video especializado en eventos sociales en León, Guanajuato. Combinamos producción cinematográfica con tecnología (dron, streaming, invitaciones web) para crear recuerdos que duran toda la vida.</p>
+    <div class="about-stats">
+        <div class="about-stat"><strong>120+</strong><span>Eventos</span></div>
+        <div class="about-stat"><strong>8</strong><span>Años</span></div>
+        <div class="about-stat"><strong>León</strong><span>Guanajuato</span></div>
+    </div>
+    <div class="about-links">
+        <a href="https://www.facebook.com/foro7producciones" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/foro7producciones" target="_blank">Instagram</a>
+        <a href="https://www.youtube.com/@foro7producciones" target="_blank">YouTube</a>
+    </div>
+</section>
+
 <section class="cta">
     <h2>¿Dudas? Escríbenos</h2>
     <p>Te ayudamos a elegir el paquete perfecto para tu evento</p>
-    <a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesan%20sus%20paquetes%20de%20fotograf%C3%ADa%20y%20video" target="_blank" class="btn-wa">WhatsApp: 477-920-3776</a>
+    <a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesan%20sus%20paquetes%20de%20fotograf%C3%ADa%20y%20video&utm_source=web&utm_medium=cta&utm_campaign=paquetes" target="_blank" class="btn-wa">WhatsApp: 477-920-3776</a>
 </section>
 
-<footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto.</p></footer>
+<footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto. · © 2026</p></footer>
 
 <script>
 (function(){
-    const grid = document.getElementById('customGrid');
-    const totalEl = document.getElementById('customTotal');
-    const sendBtn = document.getElementById('customSend');
+    /* CUSTOM BUILDER */
+    var grid = document.getElementById('customGrid');
+    var totalEl = document.getElementById('customTotal');
+    var sendBtn = document.getElementById('customSend');
 
     grid.addEventListener('change', function(){
-        let total = 0;
+        var total = 0;
         grid.querySelectorAll('input:checked').forEach(function(cb){ total += parseInt(cb.dataset.price); });
         totalEl.textContent = '$' + total.toLocaleString('es-MX') + ' MXN';
         grid.querySelectorAll('.custom-item').forEach(function(item){
@@ -270,16 +505,85 @@
     });
 
     sendBtn.addEventListener('click', function(){
-        const items = [];
-        let total = 0;
+        var items = [];
+        var total = 0;
         grid.querySelectorAll('input:checked').forEach(function(cb){
             items.push(cb.dataset.name);
             total += parseInt(cb.dataset.price);
         });
         if (!items.length) { alert('Selecciona al menos un servicio'); return; }
-        const msg = 'Hola, me interesa un paquete personalizado:\n\n' + items.map(function(i){ return '• ' + i; }).join('\n') + '\n\nTotal estimado: $' + total.toLocaleString('es-MX') + ' MXN';
+        var msg = 'Hola, me interesa un paquete personalizado:\n\n' + items.map(function(i){ return '• ' + i; }).join('\n') + '\n\nTotal estimado: $' + total.toLocaleString('es-MX') + ' MXN';
         window.open('https://wa.me/5214779203776?text=' + encodeURIComponent(msg), '_blank');
+        if(typeof fbq==='function') fbq('track','Lead',{value:total,currency:'MXN'});
+        if(typeof gtag==='function') gtag('event','generate_lead',{value:total,currency:'MXN'});
     });
+
+    /* FAQ ACCORDION */
+    document.querySelectorAll('.faq-q').forEach(function(q){
+        q.addEventListener('click', function(){
+            var item = this.parentElement;
+            document.querySelectorAll('.faq-item').forEach(function(fi){ if(fi!==item) fi.classList.remove('open'); });
+            item.classList.toggle('open');
+        });
+    });
+
+    /* LAZY IFRAME LOADING (click to load) */
+    document.querySelectorAll('.pcard-3d[data-src]').forEach(function(el){
+        el.addEventListener('click', function(){
+            if(this.classList.contains('loaded')) return;
+            var iframe = document.createElement('iframe');
+            iframe.src = this.dataset.src;
+            iframe.loading = 'lazy';
+            iframe.allow = 'fullscreen';
+            this.innerHTML = '';
+            this.appendChild(iframe);
+            this.classList.add('loaded');
+        });
+    });
+
+    /* VIDEO LAZY LOAD */
+    document.querySelectorAll('.vid-placeholder[data-yt]').forEach(function(el){
+        el.addEventListener('click', function(){
+            var id = this.dataset.yt;
+            if(id.indexOf('VIDEO_ID')===0) return;
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+            iframe.allow = 'autoplay; fullscreen';
+            iframe.style.cssText = 'width:100%;aspect-ratio:16/9;border:none';
+            this.parentElement.replaceChild(iframe, this);
+        });
+    });
+
+    /* MOBILE CARDS GENERATOR */
+    var packages = [
+        {name:'Básico',price:'$6,500',href:'basico.html',badge:'',utm:'basico',features:[
+            ['Cobertura','6 hrs'],['Sesión','Día del evento'],['Fotos digitales','~600'],['Galería web','✓'],['Fotos impresas','40'],['Dron','✓'],['Video completo','✓'],['Ampliación','11×14"'],['USB','✓'],['Caja','Fotos']
+        ]},
+        {name:'Clásico',price:'$9,000',href:'clasico.html',badge:'',utm:'clasico',features:[
+            ['Cobertura','8 hrs'],['Sesión','Previa o día'],['Fotos digitales','~800'],['Galería web','✓'],['Fotos impresas','80'],['Niña a grande','✓'],['Dron','✓'],['Video completo','✓'],['Highlight','2–4 min'],['Ampliación','16×20"'],['USB','✓'],['Caja','Fotos']
+        ]},
+        {name:'Plus',price:'$11,500',href:'plus.html',badge:'★ Recomendado',utm:'plus',features:[
+            ['Cobertura','10 hrs'],['Sesión','Previa + evento'],['Fotos digitales','~1,000'],['Galería web','✓'],['Fotos impresas','100'],['Niña a grande','✓'],['Dron','Integrado'],['Video completo','✓'],['Highlight','3–5 min'],['Clip proyección','✓'],['Ampliación','20×24"'],['USB + galería online','✓'],['Caja','Rígida'],['Invitación web','✓']
+        ]},
+        {name:'Premium',price:'$14,000',href:'premium.html',badge:'',utm:'premium',features:[
+            ['Cobertura','12 hrs'],['Sesión','Previa + evento'],['Fotos digitales','~1,200'],['Galería web','✓'],['Fotos impresas','120'],['Niña a grande','✓'],['Dron','✓'],['Video completo','✓'],['Película','30–50 min'],['Trailer','1–3 min'],['Clip proyección','✓'],['Fotolibro','30×30cm · 40 pág'],['Ampliación','24×32"'],['USB + galería','✓'],['Caja','Premium'],['Canción','✓'],['Invitación web','✓']
+        ]},
+        {name:'Master',price:'$17,000',href:'master.html',badge:'Alto Nivel',utm:'master',features:[
+            ['Cobertura','Sin límite'],['Sesión','2 sesiones + evento'],['Fotos digitales','1,500+'],['Galería web','✓'],['Fotos impresas','150'],['Niña a grande','✓'],['Dron','Completo'],['Video completo','✓'],['Película','15–25 min'],['Trailer','1–2 min'],['Clip proyección','✓'],['Fotolibro','30×60cm lujo · 50 pág'],['Ampliación','2 × 24×32"'],['USB premium + respaldo','✓'],['Caja','Madera grabada'],['Canción','✓'],['Transmisión en vivo','✓'],['Invitación web','✓']
+        ]}
+    ];
+    var mc = document.getElementById('mobileCards');
+    if(mc){
+        packages.forEach(function(pkg, i){
+            var card = document.createElement('div');
+            card.className = 'mcard' + (pkg.badge==='★ Recomendado'?' popular':'') + (i===2?' open':'');
+            var badgeHtml = pkg.badge ? '<div class="mcard-badge">'+pkg.badge+'</div>' : '';
+            var rows = pkg.features.map(function(f){ return '<div class="mcard-row"><span>'+f[0]+'</span><span>'+f[1]+'</span></div>'; }).join('');
+            card.innerHTML = '<div class="mcard-head"><div class="mcard-head-left">'+badgeHtml+'<div class="mcard-name">'+pkg.name+'</div></div><div style="display:flex;align-items:center;gap:1rem"><div class="mcard-price">'+pkg.price+'</div><span class="mcard-toggle">▼</span></div></div><div class="mcard-body">'+rows+'<a href="'+pkg.href+'" class="bd mcard-cta'+(i===2?' bdp':'')+'">Ver detalle completo</a></div>';
+            card.querySelector('.mcard-head').addEventListener('click', function(){ card.classList.toggle('open'); });
+            mc.appendChild(card);
+        });
+    }
 })();
 </script>
 
