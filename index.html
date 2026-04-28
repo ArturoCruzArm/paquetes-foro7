@@ -532,7 +532,7 @@
                 <button onclick="F7.openSplash ? F7.openSplash() : window.scrollTo({top:0,behavior:'smooth'})" style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:transparent;border:1px solid rgba(201,168,76,.4);padding:.2rem .6rem;cursor:pointer;white-space:nowrap">Editar horario</button>
             </div>
         </div>
-        <label class="custom-item"><input type="checkbox" id="cbSesion"><div class="ci-text"><div class="ci-name">Sesión previa en locación</div><div class="ci-desc" id="sesionDesc">~2 hrs adicionales · Tú eliges el lugar</div></div><div class="ci-price">$1,500</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbSesion"><div class="ci-text"><div class="ci-name">Sesión previa en locación</div><div class="ci-desc" id="sesionDesc">~2 hrs adicionales · Tú eliges el lugar</div></div><div class="ci-price" id="pSesion" style="font-size:.7rem;color:var(--gold)">se suma a tu tarifa/hr</div></label>
         <div class="ci-note">~100 fotos digitales editadas por cada hora con fotografía</div>
 
         <!-- SERVICIOS PRINCIPALES -->
@@ -886,60 +886,73 @@
     function calcBuilder(){
         var hrs = builderEventHours;
         var hasSesion = document.getElementById('cbSesion').checked;
-        var hasFoto = document.getElementById('cbFoto').checked;
-        var hasVideo = document.getElementById('cbVideo').checked;
-        var hasDron = document.getElementById('cbDron').checked;
-        var hasLive = document.getElementById('cbLive').checked;
-        var hasWeb = document.getElementById('cbWebInv').checked;
+        var hasFoto   = document.getElementById('cbFoto').checked;
+        var hasVideo  = document.getElementById('cbVideo').checked;
+        var hasDron   = document.getElementById('cbDron').checked;
+        var hasLive   = document.getElementById('cbLive').checked;
+        var hasWeb    = document.getElementById('cbWebInv').checked;
         var sessionHrs = hasSesion ? builderSesionHours : 0;
-        var totalHrs = hrs + sessionHrs;
-        var videoCalcHrs = hrs + ((hasSesion && hasVideo) ? sessionHrs : 0);
+        var totalHrs   = hrs + sessionHrs;   /* todos los servicios usan totalHrs */
         var items = []; /* {name, price} */
 
         var mainCount = (hasFoto?1:0)+(hasVideo?1:0)+(hasDron?1:0)+(hasLive?1:0)+(hasWeb?1:0);
-        var rules = F7.discountRules(mainCount, hrs);
+        var rules = F7.discountRules(mainCount, totalHrs);
         var capSvc = rules.serviceCap, capEdit = rules.editCap, capPhys = rules.physicalCap;
 
         if(mainCount > 0){
-            var txt = mainCount + ' servicio' + (mainCount>1?'s':'') + ' → ' + rules.services + '% desc.';
-            if(rules.hours > 0) txt += ' + ' + rules.hours + '% por ' + hrs + ' hrs';
+            var txt = mainCount + ' servicio' + (mainCount>1?'s':'') + ' -> ' + rules.services + '% desc.';
+            if(rules.hours > 0) txt += ' + ' + rules.hours + '% por ' + totalHrs + ' hrs';
             discBadge.textContent = txt;
         } else { discBadge.textContent = 'Selecciona servicios para activar descuentos'; }
 
-        /* Cobertura */
+        /* Cobertura: totalHrs incluye sesion */
         var fotoPrice = 0, videoPrice = 0;
+        var hrLabel = totalHrs + (sessionHrs > 0 ? ' hrs (' + hrs + ' evento + ' + sessionHrs + ' sesion)' : ' hrs');
         if(hasFoto && hasVideo){
-            var comboTotal = 900 * hrs;
+            var comboTotal = 900 * totalHrs;
             fotoPrice = Math.round(comboTotal / 2);
             videoPrice = comboTotal - fotoPrice;
-            items.push({name:'Foto+Video combo ' + hrs + ' hrs', price:comboTotal});
+            items.push({name:'Foto+Video combo ' + hrLabel, price:comboTotal});
         } else {
-            if(hasFoto){ fotoPrice = 600 * hrs; items.push({name:'Fotografía ' + hrs + ' hrs', price:fotoPrice}); }
-            if(hasVideo){ videoPrice = 600 * hrs; items.push({name:'Video ' + hrs + ' hrs', price:videoPrice}); }
+            if(hasFoto){ fotoPrice = 600 * totalHrs; items.push({name:'Fotografia ' + hrLabel, price:fotoPrice}); }
+            if(hasVideo){ videoPrice = 600 * totalHrs; items.push({name:'Video ' + hrLabel, price:videoPrice}); }
         }
-        document.getElementById('pFoto').textContent = fmt(hasFoto && hasVideo ? Math.round(900*hrs/2) : 600*hrs);
-        document.getElementById('pVideo').textContent = fmt(hasFoto && hasVideo ? 900*hrs - Math.round(900*hrs/2) : 600*hrs);
+        /* Actualizar etiquetas de precio de los servicios */
+        document.getElementById('pFoto').textContent  = fmt(hasFoto && hasVideo ? Math.round(900*totalHrs/2) : 600*totalHrs);
+        document.getElementById('pVideo').textContent = fmt(hasFoto && hasVideo ? 900*totalHrs - Math.round(900*totalHrs/2) : 600*totalHrs);
         var pLive = document.getElementById('pLive');
-        if(pLive) pLive.textContent = fmt(900*hrs);
+        if(pLive) pLive.textContent = fmt(900*totalHrs);
 
-        var sesionPrice = hasSesion ? 1500 : 0;
-        if(hasSesion) items.push({name:'Sesión previa en locación (' + sessionHrs + ' hrs)', price:sesionPrice});
+        /* Sesion: costo = horas extra al mismo rate de servicios seleccionados */
+        var sesRate = (hasFoto && hasVideo) ? 900 : (hasFoto || hasVideo) ? 600 : 0;
+        var pSesionEl = document.getElementById('pSesion');
+        if(pSesionEl && hasSesion){
+            if(sesRate > 0)
+                pSesionEl.textContent = fmt(sesRate * sessionHrs) + ' (' + sessionHrs + 'h x $' + sesRate + '/hr)';
+            else
+                pSesionEl.textContent = sessionHrs + ' hrs adicionales';
+        }
+
+        /* Dron */
         var dronPrice = hasDron ? 2500 : 0;
         if(hasDron) items.push({name:'Dron 4K completo', price:dronPrice});
-        var livePrice = hasLive ? 900 * hrs : 0;
-        if(hasLive) items.push({name:'Transmisión en vivo ' + hrs + ' hrs', price:livePrice});
+
+        /* Live: cubre totalHrs */
+        var livePrice = hasLive ? 900 * totalHrs : 0;
+        if(hasLive) items.push({name:'Transmision en vivo ' + totalHrs + ' hrs', price:livePrice});
+
         var webPrice = hasWeb ? 2000 : 0;
-        if(hasWeb) items.push({name:'Invitación web completa', price:webPrice});
+        if(hasWeb) items.push({name:'Invitacion web completa', price:webPrice});
 
-        var svcSubtotal = fotoPrice + videoPrice + sesionPrice + dronPrice + livePrice + webPrice;
+        var svcSubtotal = fotoPrice + videoPrice + dronPrice + livePrice + webPrice;
 
-        /* Video */
-        var vidCompP = 1200 + 250*videoCalcHrs;
-        var vidResP  = 1200 + 150*videoCalcHrs;
+        /* Video: produccion basada en totalHrs */
+        var vidCompP  = 1200 + 250*totalHrs;
+        var vidResP   = 1200 + 150*totalHrs;
         var clipProyP = 1000 + (hasSesion ? sessionHrs * 250 : 0);
-        var peliculaP = 3000 + 400*videoCalcHrs;
-        document.getElementById('pVidComp').textContent = fmt(vidCompP);
-        document.getElementById('pVidRes').textContent  = fmt(vidResP);
+        var peliculaP = 3000 + 400*totalHrs;
+        document.getElementById('pVidComp').textContent  = fmt(vidCompP);
+        document.getElementById('pVidRes').textContent   = fmt(vidResP);
         document.getElementById('pClipProy').textContent = fmt(clipProyP);
         document.getElementById('pPelicula').textContent = fmt(peliculaP);
 
@@ -947,16 +960,16 @@
         var vidResPrice   = document.getElementById('cbVidRes').checked   ? vidResP   : 0;
         var clipProyPrice = document.getElementById('cbClipProy').checked ? clipProyP : 0;
         var peliculaPrice = document.getElementById('cbPelicula').checked ? peliculaP : 0;
-        var reelPrice     = document.getElementById('cbReel').checked     ? 700        : 0;
+        var reelPrice     = document.getElementById('cbReel').checked     ? 700       : 0;
         if(vidCompPrice)  items.push({name:'Video completo del evento', price:vidCompPrice});
         if(vidResPrice)   items.push({name:'Video resumen', price:vidResPrice});
-        if(clipProyPrice) items.push({name:'Clip para proyección en salón', price:clipProyPrice});
-        if(peliculaPrice) items.push({name:'Película cinematográfica', price:peliculaPrice});
+        if(clipProyPrice) items.push({name:'Clip para proyeccion en salon', price:clipProyPrice});
+        if(peliculaPrice) items.push({name:'Pelicula cinematografica', price:peliculaPrice});
         if(reelPrice)     items.push({name:'Reel vertical', price:reelPrice});
 
         var numCanciones = parseInt(selCanciones.value) || 0;
         var cancionesPrice = numCanciones * 700;
-        if(cancionesPrice > 0) items.push({name:numCanciones + ' canción' + (numCanciones>1?'es adicionales':' adicional'), price:cancionesPrice});
+        if(cancionesPrice > 0) items.push({name:numCanciones + ' cancion' + (numCanciones>1?'es adicionales':' adicional'), price:cancionesPrice});
 
         var editSubtotal = vidCompPrice + vidResPrice + clipProyPrice + peliculaPrice + reelPrice + cancionesPrice;
 
