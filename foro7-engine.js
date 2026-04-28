@@ -473,6 +473,99 @@ F7.updateDetailPrice = function(pkgIndex){
     return true;
 };
 
+/* ─── Cotización personalizada (builder) ─── */
+F7.generateCustomQuoteHTML = function(info){
+    var data = F7.getFreshData() || {};
+    var now = new Date();
+    var folio = 'F7-C-' + now.getFullYear() + '-' + String(Math.floor(Math.random()*9999)+1).padStart(4,'0');
+    var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    var fecha = now.getDate() + ' de ' + meses[now.getMonth()] + ' ' + now.getFullYear();
+
+    var segLabels = {sesion:'Sesión previa',casa:'Casa / arreglo',misa:'Ceremonia / misa',fiesta:'Fiesta / recepción'};
+    var segsHtml = '';
+    if(data.segments){
+        ['sesion','casa','misa','fiesta'].forEach(function(k){
+            var seg = data.segments[k];
+            if(seg && seg.active) segsHtml += '<tr><td>'+segLabels[k]+'</td><td>'+seg.start+' — '+seg.end+'</td><td style="text-align:right">'+seg.hours+' hrs</td></tr>';
+        });
+    }
+    segsHtml += '<tr class="q-total-row"><td style="color:#1a1a1a!important"><strong>Total cobertura</strong></td><td></td><td style="text-align:right;color:#1a1a1a!important"><strong>'+(data.totalHours||info.hrs)+' hrs</strong></td></tr>';
+
+    var itemsHtml = '';
+    info.items.forEach(function(it){
+        itemsHtml += '<tr><td style="color:#1a1a1a!important">'+it.name+'</td><td class="q-amount" style="color:#333!important">'+(it.price > 0 ? F7.fmt(it.price) : 'Incluido')+'</td></tr>';
+    });
+
+    var savingsPct = info.subtotal > 0 ? Math.round((info.discount / info.subtotal) * 100) : 0;
+
+    return '<div class="quote-doc" id="quoteDoc">'
+        +'<div class="q-header"><div class="q-logo">FORO <span>7</span></div><div class="q-company">Fotografía · Video · Producciones<br>León, Guanajuato<br>Tel: 477-920-3776</div></div>'
+        +'<div class="q-title">COTIZACIÓN PERSONALIZADA</div>'
+        +'<div class="q-meta"><div><strong>Folio:</strong> '+folio+'</div><div><strong>Fecha:</strong> '+fecha+'</div></div>'
+        +'<div class="q-section"><div class="q-section-title">Cliente</div>'
+        +'<table class="q-table" style="width:100%!important;table-layout:fixed;border-collapse:collapse;box-sizing:border-box"><tr><td>Nombre</td><td>'+(data.name||'—')+'</td></tr><tr><td>Teléfono</td><td>'+(data.phone||'—')+'</td></tr></table></div>'
+        +'<div class="q-section"><div class="q-section-title">Evento — Horario de cobertura</div>'
+        +'<table class="q-table" style="width:100%!important;table-layout:fixed;border-collapse:collapse;box-sizing:border-box">'+segsHtml+'</table></div>'
+        +'<div class="q-section"><div class="q-section-title">Paquete Personalizado</div>'
+        +'<table class="q-table" style="width:100%!important;table-layout:fixed;border-collapse:collapse;box-sizing:border-box">'+itemsHtml+'</table></div>'
+        +'<div class="q-summary">'
+        +'<div class="q-sum-row"><span>Valor individual de servicios</span><span>'+F7.fmt(info.subtotal)+'</span></div>'
+        +(info.discount > 0 ? '<div class="q-sum-row q-discount"><span>Descuento por paquete personalizado ('+savingsPct+'%)</span><span>−'+F7.fmt(info.discount)+'</span></div>' : '')
+        +'<div class="q-sum-row q-final"><span>TOTAL</span><span>'+F7.fmt(info.total)+' MXN</span></div>'
+        +'</div>'
+        +'<div class="q-payment"><div class="q-section-title">Formas de pago</div>'
+        +'<ul><li>Aparta tu fecha con cualquier monto — sin mínimo</li><li>Parcialidades sin intereses a tu ritmo</li><li>Único requisito: liquidar 8 días antes del evento</li><li>Transferencia bancaria, depósito en efectivo o pago en efectivo</li></ul></div>'
+        +'<div class="q-footer"><div>WhatsApp: <strong>477-920-3776</strong></div><div>paquetes.invitados.org</div><div class="q-valid">Cotización válida por 30 días · Precios sujetos a disponibilidad</div></div>'
+        +'</div>';
+};
+
+F7.showCustomQuote = function(info){
+    var html = F7.generateCustomQuoteHTML(info);
+    var modal = document.getElementById('quoteModal');
+    if(!modal){
+        modal = document.createElement('div');
+        modal.id = 'quoteModal';
+        modal.className = 'q-modal';
+        document.body.appendChild(modal);
+    }
+    modal.innerHTML = '<div class="q-modal-inner">'
+        +'<div class="q-actions">'
+        +'<button class="q-btn-print" onclick="F7.printQuote()">Descargar PDF</button>'
+        +'<button class="q-btn-wa" onclick="F7.sendCustomQuoteWA()">Enviar por WhatsApp</button>'
+        +'<button class="q-btn-close" onclick="F7.closeQuote()">Cerrar</button>'
+        +'</div>'
+        +html
+        +'</div>';
+    F7._pendingCustomInfo = info;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    modal.addEventListener('click', function(e){ if(e.target === modal) F7.closeQuote(); });
+    F7.trackDecision('custom_quote_opened', {total:info.total, subtotal:info.subtotal, discount:info.discount, hours:info.hrs});
+    var data = F7.getData() || {};
+    F7.saveToSupabase(data, undefined, info);
+    if(typeof fbq==='function') fbq('track','Lead',{value:info.total, currency:'MXN'});
+    if(typeof gtag==='function') gtag('event','generate_lead',{value:info.total, currency:'MXN'});
+};
+
+F7.sendCustomQuoteWA = function(){
+    var info = F7._pendingCustomInfo;
+    if(!info) return;
+    var data = F7.getData() || {};
+    var msg = 'Hola, me interesa un *paquete personalizado*:\n\n';
+    if(data.name) msg += 'Nombre: ' + data.name + '\n';
+    if(data.phone) msg += 'Teléfono: ' + data.phone + '\n';
+    var segLabels = {sesion:'Sesión',casa:'Casa',misa:'Misa',fiesta:'Fiesta'};
+    var segs = [];
+    if(data.segments){ ['sesion','casa','misa','fiesta'].forEach(function(k){ var s=data.segments[k]; if(s&&s.active) segs.push(segLabels[k]+' '+s.start+'–'+s.end); }); }
+    if(segs.length) msg += 'Horario: ' + segs.join(', ') + '\n';
+    msg += '\nServicios seleccionados:\n';
+    info.items.forEach(function(it){ msg += '• ' + it.name + (it.price > 0 ? ' — ' + F7.fmt(it.price) : '') + '\n'; });
+    if(info.discount > 0) msg += '\nDescuento: −' + F7.fmt(info.discount);
+    msg += '\n\n*Total: ' + F7.fmt(info.total) + ' MXN*';
+    F7.trackDecision('custom_quote_wa_clicked', {total:info.total, hours:info.hrs});
+    window.open('https://wa.me/5214779203776?text='+encodeURIComponent(msg)+'&utm_source=web&utm_medium=cotizacion&utm_campaign=paquete_custom','_blank');
+};
+
 /* ─── Event bar para subpáginas ─── */
 F7.showEventBar = function(){
     var data = F7.getData();
