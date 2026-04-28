@@ -643,7 +643,7 @@
 <footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto. · © 2026</p></footer>
 
 <script src="foro7-config.js"></script>
-<script src="foro7-engine.js?v=7"></script>
+<script src="foro7-engine.js?v=8"></script>
 <script>
 /* ========== SPLASH SCREEN ========== */
 (function(){
@@ -854,10 +854,35 @@
     var selBasePackage = document.getElementById('selBasePackage');
 
     function fmt(n){ return '$'+n.toLocaleString('es-MX'); }
-    function renderRulesPromo(){
+    function renderRulesPromo(mainCount, totalHrs, rules, context){
         if(!rulesPromo || !F7.getDiscountRulesSummary) return;
         var source = F7.discountConfig && F7.discountConfig.source === 'bd' ? 'Reglas vigentes desde BD' : 'Reglas vigentes';
-        rulesPromo.innerHTML = '<strong>' + source + ':</strong> ' + F7.getDiscountRulesSummary().join(' · ');
+        rules = rules || F7.discountRules(mainCount || 0, totalHrs || 0);
+        context = context || {};
+        mainCount = mainCount || 0;
+        totalHrs = totalHrs || 0;
+        var cfg = F7.discountConfig || {};
+        var perService = cfg.perService || 10;
+        var serviceApplied = mainCount > 0;
+        var nextService = mainCount < 5 ? 'Agrega ' + (mainCount === 0 ? 'foto, video, dron, live o web' : 'otro servicio principal') + ' y suma +' + perService + '%' : 'Ya alcanzaste el máximo práctico de servicios';
+        var hourTarget = totalHrs >= 6 ? 'Bono máximo por horas aplicado' : totalHrs >= 5 ? 'Agrega 1 hr más para llegar a 6 hrs y subir a 20%' : totalHrs >= 4 ? 'Agrega 1 hr más para llegar a 5 hrs y subir a 15%' : totalHrs >= 3 ? 'Agrega 1 hr más para llegar a 4 hrs y subir a 10%' : 'Contrata 3 hrs o más para activar bono por duración';
+        var hourApplied = rules.hours > 0;
+        var hasEdit = (context.editSubtotal || 0) > 0;
+        var hasPhysical = (context.physSubtotal || 0) > 0;
+        var rows = [
+            {ok:serviceApplied, title:'Servicios principales', value:serviceApplied ? (rules.services + '% activo') : 'Disponible', tip:serviceApplied ? (mainCount + ' servicio' + (mainCount>1?'s':'') + ' seleccionado' + (mainCount<5 ? ' · ' + nextService : '')) : nextService},
+            {ok:hourApplied, title:'Bono por horas', value:hourApplied ? (rules.hours + '% activo') : 'Disponible', tip:hourTarget},
+            {ok:serviceApplied && rules.serviceCap >= 45, title:'Tope servicios', value:'Hasta ' + (cfg.serviceCap || 45) + '%', tip:rules.serviceCap >= 45 ? 'Tope alcanzado en servicios principales' : 'Sube con más servicios u horas'},
+            {ok:hasEdit && rules.editCap >= 35, title:'Video y edición', value:'Hasta ' + (cfg.editCap || 35) + '%', tip:hasEdit ? (rules.editCap >= 35 ? 'Tope de edición alcanzado' : 'Agrega servicios/horas para mejorar el descuento de videos') : 'Agrega video resumen, película, reel o canciones para usar este descuento'},
+            {ok:hasPhysical && rules.physicalCap >= 25, title:'Físicos', value:'Hasta ' + (cfg.physicalCap || 25) + '%', tip:hasPhysical ? (rules.physicalCap >= 25 ? 'Tope de físicos alcanzado' : 'Agrega servicios/horas para mejorar impresos, USB y fotolibro') : 'Agrega impresas, ampliación, USB o fotolibro para usar este descuento'}
+        ];
+        rulesPromo.innerHTML = '<strong>' + source + '</strong><div style="display:grid;gap:.35rem;margin-top:.5rem">' + rows.map(function(r){
+            var color = r.ok ? '#4ecdc4' : 'var(--smoke)';
+            var border = r.ok ? 'rgba(78,205,196,.35)' : 'var(--border)';
+            var bg = r.ok ? 'rgba(78,205,196,.08)' : 'rgba(255,255,255,.03)';
+            var tag = r.ok ? 'Aplicada' : 'Cómo activarla';
+            return '<div style="border:1px solid '+border+';background:'+bg+';padding:.45rem .55rem;text-align:left;border-radius:3px"><span style="color:'+color+';font-weight:700">'+(r.ok?'✓':'○')+' '+r.title+' · '+r.value+'</span><br><span style="font-size:.68rem;color:var(--smoke)">'+tag+': '+r.tip+'</span></div>';
+        }).join('') + '</div>';
     }
 
     function setChecked(id, value){
@@ -920,7 +945,7 @@
     }
 
     applySchedule(F7.getData());
-    renderRulesPromo();
+    renderRulesPromo(0, builderTotalHours, F7.discountRules(0, builderTotalHours));
     document.addEventListener('f7schedule', function(e){ applySchedule(e.detail); calcBuilder(); });
     document.addEventListener('f7discounts', function(){ renderRulesPromo(); calcBuilder(); });
 
@@ -945,6 +970,7 @@
 
         var mainCount = (hasFoto?1:0)+(hasVideo?1:0)+(hasDron?1:0)+(hasLive?1:0)+(hasWeb?1:0);
         var rules = F7.discountRules(mainCount, totalHrs);
+        renderRulesPromo(mainCount, totalHrs, rules);
         var capSvc = rules.serviceCap, capEdit = rules.editCap, capPhys = rules.physicalCap;
 
         if(mainCount > 0){
@@ -1020,6 +1046,7 @@
         if(usbPrice)       items.push({name:'USB personalizada', price:usbPrice});
         if(fotolibroPrice) items.push({name:'Fotolibro 12x24" + caja + mini', price:fotolibroPrice});
         var physSubtotal = fotosPrice + galeriaPrice + ampPrice + usbPrice + fotolibroPrice;
+        renderRulesPromo(mainCount, totalHrs, rules, {editSubtotal:editSubtotal, physSubtotal:physSubtotal});
 
         var svcDisc  = Math.round(svcSubtotal  * capSvc  / 100);
         if(hasDron && dronPrice > 0){
