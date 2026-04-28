@@ -533,6 +533,20 @@
             </div>
         </div>
         <div class="ci-note">~100 fotos digitales editadas por cada hora con fotografía</div>
+        <div class="custom-item custom-select-item">
+            <div class="ci-text"><div class="ci-name">Paquete base editable</div><div class="ci-desc">Carga un paquete y agrega o quita servicios; el descuento se recalcula por lo que quede contratado</div></div>
+            <select id="selBasePackage">
+                <option value="">Empezar desde cero</option>
+                <option value="0">Foto y Video Digital</option>
+                <option value="1">Popular</option>
+                <option value="2">Completo</option>
+                <option value="3">SÃºper Paquete</option>
+                <option value="4">Lucido</option>
+                <option value="5">Premium Accesible</option>
+            </select>
+        </div>
+
+
 
         <!-- SERVICIOS PRINCIPALES -->
         <div class="custom-section-title">② Servicios principales <small style="font-family:'DM Sans';font-size:.65rem;color:var(--gold);font-weight:400">· más servicios = más descuento</small></div>
@@ -557,7 +571,7 @@
         <div class="custom-section-title">④ Entregables físicos <small style="font-family:'DM Sans';font-size:.65rem;color:var(--smoke);font-weight:400">· máx. 25% desc.</small></div>
         <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Fotos impresas 5×7"</div><div class="ci-desc">Base $220 + $7 por foto</div></div><select id="selFotos"><option value="0">Sin impresas (solo digitales)</option><option value="570">50 fotos — $570</option><option value="920">100 fotos — $920</option><option value="1270">150 fotos — $1,270</option><option value="1620">200 fotos — $1,620</option></select></div>
         <label class="custom-item"><input type="checkbox" id="cbGaleria"><div class="ci-text"><div class="ci-name">Galería web privada</div><div class="ci-desc">Tus fotos en la nube para descargar y compartir</div></div><div class="ci-price">$800</div></label>
-        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Ampliación con marco</div><div class="ci-desc">Tu mejor foto en gran formato</div></div><select id="selAmp"><option value="0">Sin ampliación</option><option value="600">Chica 28×36cm — $600</option><option value="1700">Grande 60×80cm — $1,700</option></select></div>
+        <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Ampliación con marco</div><div class="ci-desc">Tu mejor foto en gran formato</div></div><select id="selAmp"><option value="0">Sin ampliación</option><option value="600">Chica 28×36cm — $600</option><option value="900">Mediana 40Ã—50cm â€” $900</option><option value="1200">Grande 50Ã—60cm â€” Chica 28×36cm — $600,200</option><option value="1700">Grande 60×80cm — $1,700</option></select></div>
         <label class="custom-item"><input type="checkbox" id="cbUSB"><div class="ci-text"><div class="ci-name">USB personalizada</div><div class="ci-desc">Grabada con nombre y fecha</div></div><div class="ci-price">$200</div></label>
         <label class="custom-item"><input type="checkbox" id="cbFotolibro"><div class="ci-text"><div class="ci-name">Fotolibro 12×24"</div><div class="ci-desc">10 hojas, 100 fotos + caja + mini 5×10" de regalo</div></div><div class="ci-price">$3,400</div></label>
         <div class="ci-note">Mi historia en fotos (collage de crecimiento) incluido siempre</div>
@@ -628,7 +642,7 @@
 <footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto. · © 2026</p></footer>
 
 <script src="foro7-config.js"></script>
-<script src="foro7-engine.js?v=5"></script>
+<script src="foro7-engine.js?v=6"></script>
 <script>
 /* ========== SPLASH SCREEN ========== */
 (function(){
@@ -835,8 +849,38 @@
     var selCanciones = document.getElementById('selCanciones');
     var selFotos = document.getElementById('selFotos');
     var selAmp = document.getElementById('selAmp');
+    var selBasePackage = document.getElementById('selBasePackage');
 
     function fmt(n){ return '$'+n.toLocaleString('es-MX'); }
+
+    function setChecked(id, value){
+        var el = document.getElementById(id);
+        if(el) el.checked = !!value;
+    }
+    function setSelect(id, value){
+        var el = document.getElementById(id);
+        if(el) el.value = String(value);
+    }
+    function applyPackagePreset(pkgIndex){
+        var p = parseInt(pkgIndex, 10);
+        ['cbFoto','cbVideo','cbDron','cbLive','cbWebInv','cbVidComp','cbVidRes','cbClipProy','cbPelicula','cbReel','cbGaleria','cbUSB','cbFotolibro'].forEach(function(id){ setChecked(id, false); });
+        setSelect('selFotos', 0);
+        setSelect('selAmp', 0);
+        setSelect('selCanciones', 0);
+        setSelect('selDronHours', 0.333333);
+        if(isNaN(p)){ calcBuilder(); return; }
+        setChecked('cbFoto', true);
+        setChecked('cbVideo', true);
+        setChecked('cbGaleria', true);
+        setChecked('cbVidComp', true);
+        setChecked('cbClipProy', true);
+        if(p >= 1){ setSelect('selFotos', 570); setSelect('selAmp', 600); setChecked('cbUSB', true); }
+        if(p >= 2){ setSelect('selFotos', 920); setSelect('selAmp', 900); setChecked('cbVidRes', true); }
+        if(p >= 3){ setSelect('selFotos', 1270); setSelect('selAmp', 1200); setChecked('cbWebInv', true); }
+        if(p >= 4){ setSelect('selAmp', 1700); setChecked('cbPelicula', true); setChecked('cbFotolibro', true); setChecked('cbDron', true); setSelect('selDronHours', 2); }
+        if(p >= 5){ setSelect('selFotos', 1620); setChecked('cbLive', true); setSelect('selDronHours', 3); }
+        calcBuilder();
+    }
 
     /* --- Leer horario del splash --- */
     var builderTotalHours  = 0;   /* d.totalHours del splash — fuente unica */
@@ -897,6 +941,9 @@
         if(mainCount > 0){
             var txt = mainCount + ' servicio' + (mainCount>1?'s':'') + ' -> ' + rules.services + '% desc.';
             if(rules.hours > 0) txt += ' + ' + rules.hours + '% por ' + totalHrs + ' hrs';
+            if(selBasePackage && selBasePackage.value !== ''){
+                txt = 'Base: ' + selBasePackage.options[selBasePackage.selectedIndex].text + ' -> ' + txt + ' (recalculado)';
+            }
             discBadge.textContent = txt;
         } else { discBadge.textContent = 'Selecciona servicios para activar descuentos'; }
 
@@ -991,13 +1038,14 @@
         if(selFotos.closest)     selFotos.closest('.custom-item').classList.toggle('active', fotosPrice > 0);
         if(selAmp.closest)       selAmp.closest('.custom-item').classList.toggle('active', ampPrice > 0);
         if(selCanciones.closest) selCanciones.closest('.custom-item').classList.toggle('active', numCanciones > 0);
+        if(selBasePackage && selBasePackage.closest) selBasePackage.closest('.custom-item').classList.toggle('active', selBasePackage.value !== '');
         if(selDronHours && selDronHours.closest) selDronHours.closest('.custom-item').classList.toggle('active', hasDron);
 
         totalEl.textContent = fmt(total) + ' MXN';
         var hrsInfo = (hasFoto && totalHrs > 0) ? ' · ~' + (totalHrs * 100) + ' fotos digitales' : '';
         if(totalDiscAmount > 0 && subtotal > 0){
-            discountEl.innerHTML = 'Ahorras <strong>' + fmt(totalDiscAmount) + '</strong> con tu descuento' + hrsInfo;
-            savingsEl.textContent = 'Precio de lista: ' + fmt(subtotal);
+            discountEl.innerHTML = 'Ahorras <strong>' + fmt(totalDiscAmount) + '</strong> con tu descuento' + hrsInfo + '<br><span style="font-size:.7rem;color:var(--smoke)">Servicios: ' + capSvc + '% · Video/edición: ' + capEdit + '% · Físicos: ' + capPhys + '%</span>';
+            savingsEl.textContent = 'Precio de lista real: ' + fmt(subtotal) + ' -> descuento recalculado por selección actual';
         } else {
             discountEl.textContent = subtotal > 0 ? 'Agrega servicios principales para activar descuentos' + hrsInfo : '';
             savingsEl.textContent = '';
@@ -1020,7 +1068,10 @@
         return {total:total, subtotal:subtotal, discount:totalDiscAmount, items:items, hrs:totalHrs, serviceHours:{photo:hasFoto?totalHrs:0, video:hasVideo?totalHrs:0, drone:dronHours, live:hasLive?totalHrs:0, web:hasWeb?1:0}, servicePrices:{photo:fotoPrice, video:videoPrice, drone:dronPrice, live:livePrice, web:webPrice}};
     }
 
-    grid.addEventListener('change', calcBuilder);
+    grid.addEventListener('change', function(e){
+        if(e.target && e.target.id === 'selBasePackage') applyPackagePreset(e.target.value);
+        else calcBuilder();
+    });
     calcBuilder();
 
     sendBtn.addEventListener('click', function(){
