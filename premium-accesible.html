@@ -37,6 +37,7 @@
     <span class="pkg-badge">Todo Incluido</span>
     <h1>Premium <small>Accesible</small></h1>
     <div class="pkg-price">Desde $15,000 <small>MXN</small></div>
+    <p style="font-size:.75rem;color:#4ecdc4;margin-top:.3rem">Ahorras hasta 60% vs. contratar por separado</p>
     <p class="pkg-desc">La máxima producción — película, transmisión en vivo, dron completo y fotolibro</p>
 </section>
 
@@ -77,10 +78,13 @@
     <div class="cta-box">
         <h3>La experiencia definitiva</h3>
         <p>Producción cinematográfica completa para un recuerdo inolvidable</p>
-        <a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesa%20el%20paquete%20Premium%20Accesible&utm_source=web&utm_medium=detalle&utm_campaign=paquete_premium_accesible" target="_blank" class="btn-wa">WhatsApp: 477-920-3776</a>
+        <button class="btn-wa" onclick="F7.showQuote(5)" style="border:none;cursor:pointer">Cotizar este paquete</button>
+        <br><a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesa%20el%20paquete%20Premium%20Accesible&utm_source=web&utm_medium=detalle&utm_campaign=paquete_premium_accesible" target="_blank" style="display:inline-block;margin-top:.8rem;font-size:.7rem;color:#25D366;letter-spacing:.1em">O escríbenos por WhatsApp →</a>
         <br><a href="index.html" class="btn-compare">← Comparar todos los paquetes</a>
     </div>
 </div>
 <footer class="footer"><p>Foro 7 Producciones · León, Gto.</p></footer>
+<script src="foro7-engine.js"></script>
+<script>F7.showEventBar(); F7.updateDetailPrice(5);</script>
 </body>
 </html>

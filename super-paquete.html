@@ -38,6 +38,7 @@
     <h1>Súper Paquete</h1>
     <div class="pkg-price">Desde $9,000 <small>MXN</small></div>
     <p class="pkg-note">Precio según horas de cobertura</p>
+    <p style="font-size:.75rem;color:#4ecdc4;margin-top:.3rem">Ahorras hasta 40% vs. contratar por separado</p>
     <p class="pkg-desc">Más impresos, ampliación grande, invitación web y 2 locaciones de sesión</p>
 </section>
 
@@ -72,10 +73,13 @@
     <div class="cta-box">
         <h3>¿Te interesa este paquete?</h3>
         <p>El más elegido por nuestros clientes</p>
-        <a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesa%20el%20S%C3%BAper%20Paquete&utm_source=web&utm_medium=detalle&utm_campaign=paquete_super" target="_blank" class="btn-wa">WhatsApp: 477-920-3776</a>
+        <button class="btn-wa" onclick="F7.showQuote(3)" style="border:none;cursor:pointer">Cotizar este paquete</button>
+        <br><a href="https://wa.me/5214779203776?text=Hola%2C%20me%20interesa%20el%20S%C3%BAper%20Paquete&utm_source=web&utm_medium=detalle&utm_campaign=paquete_super" target="_blank" style="display:inline-block;margin-top:.8rem;font-size:.7rem;color:#25D366;letter-spacing:.1em">O escríbenos por WhatsApp →</a>
         <br><a href="index.html" class="btn-compare">← Comparar todos los paquetes</a>
     </div>
 </div>
 <footer class="footer"><p>Foro 7 Producciones · León, Gto.</p></footer>
+<script src="foro7-engine.js"></script>
+<script>F7.showEventBar(); F7.updateDetailPrice(3);</script>
 </body>
 </html>

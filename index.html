@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paquetes Fotografía y Video — Foro 7 Producciones · León, Gto.</title>
-    <meta name="description" content="20+ años de fotografía y video profesional para XV años, bodas y eventos en León, Gto. Desde $3,500 en foto digital. Dron, invitación web y más. Solo 1 evento por día.">
+    <meta name="description" content="20+ años de fotografía y video profesional para XV años, bodas y eventos en León, Gto. Desde $4,500 en foto+video digital. Dron, invitación web y más. Solo 1 evento por día.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Paquetes de Fotografía y Video — Foro 7 Producciones">
-    <meta property="og:description" content="6 paquetes profesionales para tu evento. Foto desde $3,500, foto+video desde $5,000. Dron, invitación web, transmisión en vivo. León, Gto.">
+    <meta property="og:description" content="6 paquetes profesionales para tu evento. Foto+video digital desde $4,500. Dron, invitación web, transmisión en vivo. León, Gto.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://paquetes.invitados.org/">
     <meta property="og:image" content="https://paquetes.invitados.org/og-image.jpg">
@@ -17,7 +17,7 @@
     <!-- WhatsApp / Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Paquetes Foto y Video — Foro 7">
-    <meta name="twitter:description" content="6 paquetes profesionales. Foto desde $3,500, foto+video desde $5,000. León, Gto.">
+    <meta name="twitter:description" content="6 paquetes profesionales. Foto+video digital desde $4,500. León, Gto.">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 
@@ -40,6 +40,50 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'DM Sans',sans-serif;background:var(--navy);color:#fff;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}
+
+        /* SPLASH SCREEN */
+        .splash{position:fixed;inset:0;z-index:9999;background:var(--navy);display:flex;align-items:center;justify-content:center;transition:opacity .5s}
+        .splash.hide{opacity:0;pointer-events:none}
+        .splash-box{width:100%;max-width:520px;padding:2.5rem 2rem;margin:1rem}
+        .splash-logo{text-align:center;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:.3rem}
+        .splash-logo span{color:#fff;font-weight:400}
+        .splash-sub{text-align:center;font-size:.75rem;color:var(--smoke);margin-bottom:2rem;letter-spacing:.1em}
+        .splash-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;text-align:center;margin-bottom:1.5rem;color:var(--gold)}
+        .sf-row{display:flex;gap:.8rem;margin-bottom:.8rem}
+        .sf-row > *{flex:1}
+        .sf-field{margin-bottom:.8rem}
+        .sf-label{display:block;font-size:.7rem;color:var(--smoke);margin-bottom:.3rem;letter-spacing:.05em}
+        .sf-input{width:100%;padding:.6rem .8rem;background:var(--navy2);border:1px solid var(--border);color:#fff;font-size:.85rem;font-family:'DM Sans',sans-serif;border-radius:2px;transition:border-color .3s}
+        .sf-input:focus{outline:none;border-color:var(--gold)}
+        .sf-input::placeholder{color:rgba(255,255,255,.25)}
+        .sf-segments{margin:1.2rem 0}
+        .sf-seg{display:flex;align-items:center;gap:.8rem;padding:.7rem .8rem;background:var(--card);border:1px solid rgba(255,255,255,.04);border-radius:2px;margin-bottom:.5rem;transition:border-color .3s}
+        .sf-seg.active{border-color:var(--gold);background:rgba(201,168,76,.06)}
+        .sf-seg input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px;cursor:pointer;flex-shrink:0}
+        .sf-seg-info{flex:1}
+        .sf-seg-name{font-size:.85rem;font-weight:500}
+        .sf-seg-desc{font-size:.65rem;color:var(--smoke);margin-top:.1rem}
+        .sf-seg-times{display:flex;gap:.5rem;align-items:center}
+        .sf-seg-times input[type=time]{padding:.3rem .4rem;background:var(--navy);border:1px solid var(--border);color:#fff;font-size:.8rem;font-family:'DM Sans',sans-serif;border-radius:2px;cursor:pointer}
+        .sf-seg-times input[type=time]:focus{outline:none;border-color:var(--gold)}
+        .sf-seg-times span{font-size:.7rem;color:var(--smoke)}
+        .sf-seg-hrs{font-size:.7rem;color:var(--gold);min-width:40px;text-align:right}
+        .sf-total{text-align:center;margin:1rem 0;font-size:.85rem;color:var(--smoke)}
+        .sf-total strong{color:var(--gold);font-size:1.1rem}
+        .sf-btn{display:block;width:100%;padding:1rem;background:var(--gold);color:var(--navy);border:none;font-size:.9rem;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:background .3s;border-radius:2px}
+        .sf-btn:hover{background:#d4b85a}
+        .sf-btn:disabled{opacity:.4;cursor:not-allowed}
+        .sf-skip{display:block;text-align:center;margin-top:.8rem;font-size:.65rem;color:var(--smoke);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:color .3s;background:none;border:none;font-family:'DM Sans',sans-serif}
+        .sf-skip:hover{color:var(--gold)}
+        @media(max-width:500px){.splash-box{padding:1.5rem 1.2rem}.sf-row{flex-direction:column;gap:.5rem}.sf-seg{flex-wrap:wrap}.sf-seg-times{width:100%;margin-top:.3rem}}
+
+        /* EVENT BAR (after splash) */
+        .event-bar{background:var(--navy2);border-bottom:1px solid var(--border);padding:.5rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;font-size:.75rem;flex-wrap:wrap;display:none}
+        .event-bar.show{display:flex}
+        .event-bar span{color:var(--smoke)}
+        .event-bar strong{color:var(--gold)}
+        .event-bar button{background:none;border:1px solid var(--border);color:var(--gold);padding:.2rem .6rem;font-size:.65rem;cursor:pointer;font-family:'DM Sans',sans-serif;border-radius:2px;transition:all .3s}
+        .event-bar button:hover{background:var(--gold);color:var(--navy)}
 
         .nav{position:sticky;top:0;z-index:100;background:rgba(13,27,42,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
         .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--gold)}.nav-logo span{color:#fff;font-weight:400}
@@ -78,6 +122,7 @@
         .pname{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;display:block;color:#fff}
         .pprice{font-size:1.1rem;font-weight:700;color:var(--gold);display:block;margin-top:.15rem}
         .pprice small{font-size:.65rem;color:var(--gold-dim);font-weight:400}
+        .psave{display:block;font-size:.6rem;color:#4ecdc4;font-weight:500;margin-top:.3rem;letter-spacing:.05em}
 
         tbody td{padding:.5rem .6rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);color:var(--smoke);vertical-align:middle}
         tbody td:first-child{text-align:left;color:rgba(255,255,255,.65);font-size:.78rem;padding-left:.8rem}
@@ -90,6 +135,8 @@
         .bd{display:inline-block;padding:.45rem 1.1rem;border:1px solid var(--gold);color:var(--gold);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;transition:all .3s;font-family:'DM Sans',sans-serif}
         .bd:hover{background:var(--gold);color:var(--navy)}
         .bdp{background:var(--gold);color:var(--navy);font-weight:600}.bdp:hover{background:#d4b85a}
+        .bd-quote{cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:.4rem}
+        .bd-link{font-size:.55rem;color:var(--smoke);letter-spacing:.1em;text-transform:uppercase;transition:color .3s}.bd-link:hover{color:var(--gold)}
 
         /* MOBILE CARDS (alternativa a tabla) */
         .mobile-cards{display:none;padding:0 1rem}
@@ -229,6 +276,61 @@
 </head>
 <body>
 
+<!-- SPLASH SCREEN -->
+<div class="splash" id="splash">
+    <div class="splash-box">
+        <div class="splash-logo">FORO <span>7</span></div>
+        <div class="splash-sub">Fotografía · Video · Producciones · León, Gto.</div>
+        <div class="splash-title">Cuéntanos de tu evento</div>
+
+        <div class="sf-row">
+            <div class="sf-field"><label class="sf-label">Tu nombre</label><input type="text" class="sf-input" id="spName" placeholder="Nombre"></div>
+            <div class="sf-field"><label class="sf-label">Teléfono</label><input type="tel" class="sf-input" id="spPhone" placeholder="477 000 0000"></div>
+        </div>
+
+        <label class="sf-label" style="margin-bottom:.6rem">¿Qué momentos quieres cubrir?</label>
+        <div class="sf-segments" id="spSegments">
+            <div class="sf-seg" data-seg="sesion">
+                <input type="checkbox" id="spSesion">
+                <div class="sf-seg-info"><div class="sf-seg-name">Sesión previa</div><div class="sf-seg-desc">En locación · Antes del evento</div></div>
+                <div class="sf-seg-times"><input type="time" id="spSesionStart" value="10:00"> <span>a</span> <input type="time" id="spSesionEnd" value="12:00"></div>
+                <div class="sf-seg-hrs" id="spSesionHrs">2 hrs</div>
+            </div>
+            <div class="sf-seg" data-seg="casa">
+                <input type="checkbox" id="spCasa">
+                <div class="sf-seg-info"><div class="sf-seg-name">Casa / arreglo</div><div class="sf-seg-desc">Preparativos antes de misa</div></div>
+                <div class="sf-seg-times"><input type="time" id="spCasaStart" value="14:00"> <span>a</span> <input type="time" id="spCasaEnd" value="15:00"></div>
+                <div class="sf-seg-hrs" id="spCasaHrs">1 hr</div>
+            </div>
+            <div class="sf-seg" data-seg="misa">
+                <input type="checkbox" id="spMisa" checked>
+                <div class="sf-seg-info"><div class="sf-seg-name">Ceremonia / misa</div><div class="sf-seg-desc">Iglesia o civil</div></div>
+                <div class="sf-seg-times"><input type="time" id="spMisaStart" value="16:00"> <span>a</span> <input type="time" id="spMisaEnd" value="17:00"></div>
+                <div class="sf-seg-hrs" id="spMisaHrs">1 hr</div>
+            </div>
+            <div class="sf-seg" data-seg="fiesta">
+                <input type="checkbox" id="spFiesta" checked>
+                <div class="sf-seg-info"><div class="sf-seg-name">Fiesta / recepción</div><div class="sf-seg-desc">Salón o jardín</div></div>
+                <div class="sf-seg-times"><input type="time" id="spFiestaStart" value="18:00"> <span>a</span> <input type="time" id="spFiestaEnd" value="23:00"></div>
+                <div class="sf-seg-hrs" id="spFiestaHrs">5 hrs</div>
+            </div>
+        </div>
+
+        <div class="sf-total" id="spTotal">Total: <strong>6 horas</strong> de cobertura foto + video</div>
+
+        <button class="sf-btn" id="spEnter">Ver paquetes con precios reales</button>
+        <button class="sf-skip" id="spSkip">Ver sin personalizar</button>
+    </div>
+</div>
+
+<!-- EVENT BAR (resumen editable) -->
+<div class="event-bar" id="eventBar">
+    <span id="ebName"></span>
+    <span id="ebHours"></span>
+    <span id="ebSegments"></span>
+    <button id="ebEdit">Modificar horario</button>
+</div>
+
 <nav class="nav">
     <div class="nav-logo">FORO <span>7</span></div>
     <div class="nav-links">
@@ -244,7 +346,7 @@
     <span class="hero-tag">Foro 7 Producciones · León, Gto.</span>
     <h1>Tu evento merece su propia <em>película</em></h1>
     <p>Edición musicalizada con canciones personalizadas, video profesional y fotos editadas. Dron, invitación web, transmisión en vivo y más. 6 paquetes o arma el tuyo.</p>
-    <div style="margin-top:1.2rem;font-size:1.1rem"><strong style="color:var(--gold)">Desde $3,500 MXN</strong> <span style="color:var(--smoke);font-size:.8rem">en fotografía digital · Foto + video desde $5,000</span></div>
+    <div style="margin-top:1.2rem;font-size:1.1rem"><strong style="color:var(--gold)">6 paquetes con precios calculados</strong> <span style="color:var(--smoke);font-size:.8rem">según las horas reales de tu evento</span></div>
     <div style="margin-top:.6rem;font-size:.7rem;color:var(--gold-dim);letter-spacing:.1em">Solo cubrimos 1 evento por día — Reserva tu fecha</div>
 </section>
 
@@ -272,17 +374,17 @@
     <table>
         <thead><tr>
             <th></th>
-            <th><span class="pname">Foto Digital</span><span class="pprice">Desde $3,500 <small>MXN</small></span></th>
-            <th><span class="pname">Popular</span><span class="pprice">Desde $5,000 <small>MXN</small></span></th>
-            <th><span class="pname">Completo</span><span class="pprice">Desde $7,000 <small>MXN</small></span></th>
-            <th class="pop"><span class="pname">Súper Paquete</span><span class="pprice">Desde $9,000 <small>MXN</small></span></th>
-            <th><span class="pname">Lucido</span><span class="pprice">Desde $12,000 <small>MXN</small></span></th>
-            <th><span class="pname">Premium Accesible</span><span class="pprice">Desde $15,000 <small>MXN</small></span></th>
+            <th><span class="pname">Foto y Video Digital</span><span class="pprice" id="tp0">—</span><span class="psave" id="ts0"></span></th>
+            <th><span class="pname">Popular</span><span class="pprice" id="tp1">—</span><span class="psave" id="ts1"></span></th>
+            <th><span class="pname">Completo</span><span class="pprice" id="tp2">—</span><span class="psave" id="ts2"></span></th>
+            <th class="pop"><span class="pname">Súper Paquete</span><span class="pprice" id="tp3">—</span><span class="psave" id="ts3"></span></th>
+            <th><span class="pname">Lucido</span><span class="pprice" id="tp4">—</span><span class="psave" id="ts4"></span></th>
+            <th><span class="pname">Premium Accesible</span><span class="pprice" id="tp5">—</span><span class="psave" id="ts5"></span></th>
         </tr></thead>
         <tbody>
             <tr class="cat"><td colspan="7">Cobertura</td></tr>
-            <tr><td>Servicio principal</td><td>Solo foto</td><td>Foto + Video</td><td>Foto + Video</td><td class="cpop">Foto + Video</td><td>Foto + Video</td><td>Foto + Video</td></tr>
-            <tr><td>Precio depende de horas</td><td>$600/hr</td><td>$900/hr</td><td>$900/hr</td><td class="cpop">$900/hr</td><td>$900/hr</td><td>$900/hr</td></tr>
+            <tr><td>Servicio principal</td><td>Foto + Video</td><td>Foto + Video</td><td>Foto + Video</td><td class="cpop">Foto + Video</td><td>Foto + Video</td><td>Foto + Video</td></tr>
+            <tr><td>Precio depende de horas</td><td>$900/hr</td><td>$900/hr</td><td>$900/hr</td><td class="cpop">$900/hr</td><td>$900/hr</td><td>$900/hr</td></tr>
             <tr><td>Sesión previa — locaciones</td><td>1 locación</td><td>1 locación</td><td>1 locación</td><td class="cpop">2 locaciones</td><td>2 locaciones</td><td>3 locaciones</td></tr>
             <tr><td>Casa / arreglo</td><td class="no">opcional</td><td class="no">opcional</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
             <tr><td>Ceremonia / misa</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
@@ -290,20 +392,20 @@
             <tr class="cat"><td colspan="7">Fotografía</td></tr>
             <tr><td>Fotos digitales (~100/hr)</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
             <tr><td>Mi historia en fotos (collage)</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
-            <tr><td>Fotos impresas 5×7"</td><td class="no">— digital</td><td>50</td><td>100</td><td class="cpop">150</td><td>150</td><td>200</td></tr>
+            <tr><td>Fotos impresas 5×7"</td><td class="no">—</td><td>50</td><td>100</td><td class="cpop">150</td><td>150</td><td>200</td></tr>
             <tr><td>Dron</td><td class="no">—</td><td class="no">opcional</td><td class="no">opcional</td><td class="cpop no">opcional</td><td class="ck">Incluido</td><td>Completo</td></tr>
 
             <tr class="cat"><td colspan="7">Video y música</td></tr>
-            <tr><td>Video completo</td><td class="no">—</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
-            <tr><td>Videoclips de sesión</td><td class="no">—</td><td>1</td><td>2</td><td class="cpop">3</td><td>4</td><td>5+</td></tr>
+            <tr><td>Video completo</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Videoclips de sesión</td><td>1</td><td>1</td><td>2</td><td class="cpop">3</td><td>4</td><td>5+</td></tr>
             <tr><td>Video resumen</td><td class="no">—</td><td class="no">—</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
-            <tr><td>Clip proyección en salón</td><td class="no">—</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+            <tr><td>Clip proyección en salón</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
             <tr><td>Película cinematográfica</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td>30–50 min</td><td>15–25 min</td></tr>
 
             <tr class="cat"><td colspan="7">Entregables</td></tr>
             <tr><td>Ampliación con marco</td><td class="no">—</td><td>Chica 28×36cm</td><td>40×50cm</td><td class="cpop">50×60cm</td><td>60×80cm</td><td>2 × 60×80cm</td></tr>
             <tr><td>Fotolibro 12×24" + caja + mini</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td class="ck">✓</td><td class="ck">✓</td></tr>
-            <tr><td>USB + galería web</td><td>Galería web</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td>Premium + respaldo</td></tr>
+            <tr><td>USB + galería web</td><td>Galería + YouTube</td><td class="ck">✓</td><td class="ck">✓</td><td class="cpop ck">✓</td><td class="ck">✓</td><td>Premium + respaldo</td></tr>
 
             <tr class="cat"><td colspan="7">Extras</td></tr>
             <tr><td>Transmisión en vivo</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="cpop no">—</td><td class="no">—</td><td class="ck">✓</td></tr>
@@ -311,12 +413,12 @@
 
             <tr class="lrow">
                 <td></td>
-                <td><a href="foto-digital.html" class="bd">Ver detalle</a></td>
-                <td><a href="popular.html" class="bd">Ver detalle</a></td>
-                <td><a href="completo.html" class="bd">Ver detalle</a></td>
-                <td class="cpop"><a href="super-paquete.html" class="bd bdp">Ver detalle</a></td>
-                <td><a href="lucido.html" class="bd">Ver detalle</a></td>
-                <td><a href="premium-accesible.html" class="bd">Ver detalle</a></td>
+                <td><button class="bd bd-quote" onclick="F7.showQuote(0)">Cotizar</button><br><a href="foto-digital.html" class="bd-link">Ver detalle →</a></td>
+                <td><button class="bd bd-quote" onclick="F7.showQuote(1)">Cotizar</button><br><a href="popular.html" class="bd-link">Ver detalle →</a></td>
+                <td><button class="bd bd-quote" onclick="F7.showQuote(2)">Cotizar</button><br><a href="completo.html" class="bd-link">Ver detalle →</a></td>
+                <td class="cpop"><button class="bd bdp bd-quote" onclick="F7.showQuote(3)">Cotizar</button><br><a href="super-paquete.html" class="bd-link">Ver detalle →</a></td>
+                <td><button class="bd bd-quote" onclick="F7.showQuote(4)">Cotizar</button><br><a href="lucido.html" class="bd-link">Ver detalle →</a></td>
+                <td><button class="bd bd-quote" onclick="F7.showQuote(5)">Cotizar</button><br><a href="premium-accesible.html" class="bd-link">Ver detalle →</a></td>
             </tr>
         </tbody>
     </table>
@@ -517,6 +619,151 @@
 
 <footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto. · © 2026</p></footer>
 
+<script src="foro7-engine.js"></script>
+<script>
+/* ========== SPLASH SCREEN ========== */
+(function(){
+    var eventData = {name:'',phone:'',totalHours:0,sessionHours:0,segments:{}};
+
+    function timeToMin(t){ var p=t.split(':'); return parseInt(p[0])*60+parseInt(p[1]); }
+    function calcSegHours(startId, endId){
+        var s=document.getElementById(startId), e=document.getElementById(endId);
+        if(!s||!e) return 0;
+        var diff = timeToMin(e.value) - timeToMin(s.value);
+        if(diff < 0) diff += 1440;
+        return Math.max(0, Math.round(diff/30)*0.5);
+    }
+
+    function updateSplashTotals(){
+        var segs = ['Sesion','Casa','Misa','Fiesta'];
+        var total = 0;
+        segs.forEach(function(s){
+            var cb = document.getElementById('sp'+s);
+            var hrs = calcSegHours('sp'+s+'Start','sp'+s+'End');
+            var label = document.getElementById('sp'+s+'Hrs');
+            var seg = cb.closest('.sf-seg');
+            if(label) label.textContent = hrs===1 ? '1 hr' : hrs+' hrs';
+            if(cb.checked){ total += hrs; seg.classList.add('active'); }
+            else { seg.classList.remove('active'); }
+        });
+        eventData.sessionHours = document.getElementById('spSesion').checked ? calcSegHours('spSesionStart','spSesionEnd') : 0;
+        eventData.totalHours = total;
+        document.getElementById('spTotal').innerHTML = 'Total: <strong>'+total+' horas</strong> de cobertura foto + video';
+        updateAllPrices();
+    }
+
+    function updateAllPrices(){
+        var h = eventData.totalHours, sh = eventData.sessionHours;
+        for(var i=0;i<6;i++){
+            var r = F7.calcPrice(i, h, sh);
+            var priceEl = document.getElementById('tp'+i);
+            var saveEl = document.getElementById('ts'+i);
+            if(h > 0){
+                priceEl.innerHTML = F7.fmt(r.price)+' <small>MXN</small>';
+                saveEl.textContent = 'Ahorras '+F7.fmt(r.savings)+' ('+r.savingsPct+'%)';
+            } else {
+                priceEl.innerHTML = '—';
+                saveEl.textContent = '';
+            }
+        }
+        // Mobile cards
+        document.querySelectorAll('.mcard').forEach(function(card, i){
+            var pe = card.querySelector('.mcard-price');
+            if(pe && h > 0) pe.textContent = F7.fmt(F7.calcPrice(i, h, sh).price);
+        });
+    }
+
+    var splash = document.getElementById('splash');
+    var segments = document.getElementById('spSegments');
+    if(segments){
+        segments.addEventListener('change', updateSplashTotals);
+        segments.addEventListener('input', updateSplashTotals);
+    }
+
+    // Check if returning user has data
+    var saved = F7.getData();
+    if(saved && saved.totalHours > 0){
+        // Already has data — skip splash, show prices
+        eventData = saved;
+        splash.classList.add('hide');
+        setTimeout(function(){ splash.style.display='none'; }, 10);
+        document.getElementById('eventBar').classList.add('show');
+        var nameEl = document.getElementById('ebName');
+        if(saved.name) nameEl.innerHTML = '<strong>'+saved.name+'</strong>';
+        document.getElementById('ebHours').innerHTML = '<strong>'+saved.totalHours+' hrs</strong> cobertura';
+        var sn = [];
+        if(saved.segments){
+            if(saved.segments.sesion && saved.segments.sesion.active) sn.push('Sesión');
+            if(saved.segments.casa && saved.segments.casa.active) sn.push('Casa');
+            if(saved.segments.misa && saved.segments.misa.active) sn.push('Misa');
+            if(saved.segments.fiesta && saved.segments.fiesta.active) sn.push('Fiesta');
+        }
+        document.getElementById('ebSegments').textContent = sn.join(' + ');
+        updateAllPrices();
+
+        // Check pending quote
+        var pendingQ = localStorage.getItem('f7_pending_quote');
+        if(pendingQ !== null){
+            localStorage.removeItem('f7_pending_quote');
+            setTimeout(function(){ F7.showQuote(parseInt(pendingQ)); }, 500);
+        }
+    }
+
+    document.getElementById('spEnter').addEventListener('click', function(){
+        eventData.name = document.getElementById('spName').value.trim();
+        eventData.phone = document.getElementById('spPhone').value.trim();
+        ['Sesion','Casa','Misa','Fiesta'].forEach(function(s){
+            var cb = document.getElementById('sp'+s);
+            eventData.segments[s.toLowerCase()] = {
+                active: cb.checked,
+                start: document.getElementById('sp'+s+'Start').value,
+                end: document.getElementById('sp'+s+'End').value,
+                hours: calcSegHours('sp'+s+'Start','sp'+s+'End')
+            };
+        });
+
+        // Save to localStorage
+        F7.saveData(eventData);
+
+        splash.classList.add('hide');
+        setTimeout(function(){ splash.style.display='none'; }, 500);
+
+        var bar = document.getElementById('eventBar');
+        bar.classList.add('show');
+        if(eventData.name) document.getElementById('ebName').innerHTML = '<strong>'+eventData.name+'</strong>';
+        document.getElementById('ebHours').innerHTML = '<strong>'+eventData.totalHours+' hrs</strong> cobertura';
+        var segNames = [];
+        if(eventData.segments.sesion && eventData.segments.sesion.active) segNames.push('Sesión');
+        if(eventData.segments.casa && eventData.segments.casa.active) segNames.push('Casa');
+        if(eventData.segments.misa && eventData.segments.misa.active) segNames.push('Misa');
+        if(eventData.segments.fiesta && eventData.segments.fiesta.active) segNames.push('Fiesta');
+        document.getElementById('ebSegments').textContent = segNames.join(' + ');
+
+        updateAllPrices();
+
+        if(typeof fbq==='function') fbq('track','Lead',{content_name:'splash_form'});
+        if(typeof gtag==='function') gtag('event','generate_lead',{event_category:'splash'});
+    });
+
+    document.getElementById('spSkip').addEventListener('click', function(){
+        splash.classList.add('hide');
+        setTimeout(function(){ splash.style.display='none'; }, 500);
+        eventData.totalHours = 6;
+        eventData.sessionHours = 0;
+        F7.saveData(eventData);
+        updateAllPrices();
+    });
+
+    document.getElementById('ebEdit').addEventListener('click', function(){
+        splash.style.display='flex';
+        splash.classList.remove('hide');
+        document.getElementById('eventBar').classList.remove('show');
+    });
+
+    updateSplashTotals();
+})();
+</script>
+
 <script>
 (function(){
     /* CUSTOM BUILDER — Motor de precios basado en costos reales */
@@ -532,14 +779,12 @@
     var selFotos = document.getElementById('selFotos');
     var selAmp = document.getElementById('selAmp');
 
-    var paquetes = [
-        {name:'Foto Digital',price:3500,href:'foto-digital.html'},
-        {name:'Popular',price:5000,href:'popular.html'},
-        {name:'Completo',price:7000,href:'completo.html'},
-        {name:'Súper Paquete',price:9000,href:'super-paquete.html'},
-        {name:'Lucido',price:12000,href:'lucido.html'},
-        {name:'Premium Accesible',price:15000,href:'premium-accesible.html'}
-    ];
+    var paquetes = F7.packages.map(function(p,i){
+        var d = F7.getData();
+        var h = (d && d.totalHours) || 6;
+        var sh = (d && d.sessionHours) || 0;
+        return {name:p.name, price:F7.calcPrice(i,h,sh).price, href:p.file};
+    });
 
     function fmt(n){ return '$'+n.toLocaleString('es-MX'); }
 
@@ -703,6 +948,14 @@
     }
 
     grid.addEventListener('change', calcBuilder);
+    /* Sync hours from splash if available */
+    if(window.eventData && window.eventData.totalHours > 0){
+        var bestMatch = window.eventData.totalHours;
+        var opts = selHoras.options;
+        for(var o=0;o<opts.length;o++){
+            if(parseInt(opts[o].value) === Math.round(bestMatch)){ selHoras.selectedIndex = o; break; }
+        }
+    }
     calcBuilder();
 
     sendBtn.addEventListener('click', function(){
@@ -755,8 +1008,8 @@
 
     /* MOBILE CARDS GENERATOR */
     var packages = [
-        {name:'Foto Digital',price:'Desde $3,500',href:'foto-digital.html',badge:'Solo Fotografía',utm:'foto_digital',features:[
-            ['Servicio','Solo foto $600/hr'],['Sesión','1 locación'],['Mi historia en fotos','✓'],['Fotos digitales','~100/hr'],['Fotos impresas','— digital'],['Video','—'],['Dron','—'],['Entrega','Galería web']
+        {name:'Foto y Video Digital',price:'Desde $4,500',href:'foto-digital.html',badge:'100% Digital',utm:'foto_digital',features:[
+            ['Servicio','Foto+Video $900/hr'],['Sesión','1 locación'],['Mi historia en fotos','✓'],['Fotos digitales','~100/hr'],['Video completo','✓'],['Videoclip sesión','1'],['Clip proyección','✓'],['YouTube','✓'],['Fotos impresas','—'],['Dron','—'],['Entrega','Galería + YouTube']
         ]},
         {name:'Popular',price:'Desde $5,000',href:'popular.html',badge:'',utm:'popular',features:[
             ['Servicio','Foto+Video $900/hr'],['Sesión','1 locación'],['Mi historia en fotos','✓'],['Fotos digitales','~100/hr'],['Fotos impresas','50'],['Videoclips sesión','1'],['Clip proyección','✓'],['Video completo','✓'],['Dron','opcional'],['Ampliación','28×36cm'],['USB + galería','✓']
