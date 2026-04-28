@@ -99,8 +99,7 @@ F7.packages = [
 /* ─── Desglose por paquete ─── */
 F7.getItems = function(pkgIndex, hours, sessionHrs){
     var items = [];
-    var h = hours, sh = sessionHrs;
-    var clipProy = 1000 + (sh > 0 ? sh * 250 : 0);
+    var h = hours;
 
     // Todos los paquetes
     items.push({name:'Cobertura foto+video ' + h + ' hrs', price:h*900});
@@ -110,29 +109,25 @@ F7.getItems = function(pkgIndex, hours, sessionHrs){
 
     switch(pkgIndex){
         case 0: // Foto y Video Digital
-            items.push({name:'1 videoclip de sesión', price:700});
-            items.push({name:'Clip para proyección en salón', price:clipProy});
+            items.push({name:'1 videoclip de sesión previa para proyección', price:700});
             break;
         case 1: // Popular
-            items.push({name:'1 videoclip de sesión', price:700});
-            items.push({name:'Clip para proyección en salón', price:clipProy});
+            items.push({name:'1 videoclip de sesión previa para proyección', price:700});
             items.push({name:'50 fotos impresas 5×7"', price:570});
             items.push({name:'Ampliación 28×36cm con marco', price:600});
             items.push({name:'USB personalizada', price:200});
             break;
         case 2: // Completo
-            items.push({name:'2 videoclips de sesión', price:1400});
+            items.push({name:'2 videoclips de sesión previa', price:1400});
             items.push({name:'Video resumen', price:1200+h*150});
-            items.push({name:'Clip para proyección en salón', price:clipProy});
             items.push({name:'Visita a casa antes de misa', price:0});
             items.push({name:'100 fotos impresas 5×7"', price:920});
             items.push({name:'Ampliacion 40x50cm con marco', price:900});
             items.push({name:'USB personalizada', price:200});
             break;
         case 3: // Súper Paquete
-            items.push({name:'3 videoclips de sesión', price:2100});
+            items.push({name:'3 videoclips de sesión previa', price:2100});
             items.push({name:'Video resumen', price:1200+h*150});
-            items.push({name:'Clip para proyección en salón', price:clipProy});
             items.push({name:'Visita a casa antes de misa', price:0});
             items.push({name:'Sesión en 2 locaciones', price:0});
             items.push({name:'150 fotos impresas 5×7"', price:1270});
@@ -143,9 +138,8 @@ F7.getItems = function(pkgIndex, hours, sessionHrs){
             break;
         case 4: // Lucido
             items.push({name:'Película cinematográfica (30–50 min)', price:3000+h*400});
-            items.push({name:'4 videoclips de sesión', price:2800});
+            items.push({name:'4 videoclips de sesión previa', price:2800});
             items.push({name:'Video resumen', price:1200+h*150});
-            items.push({name:'Clip para proyección en salón', price:clipProy});
             items.push({name:'Visita a casa antes de misa', price:0});
             items.push({name:'Sesión en 2 locaciones', price:0});
             items.push({name:'Dron 4K completo', price:2500});
@@ -157,9 +151,8 @@ F7.getItems = function(pkgIndex, hours, sessionHrs){
             break;
         case 5: // Premium Accesible
             items.push({name:'Película cinematográfica (15–25 min)', price:3000+h*400});
-            items.push({name:'5+ videoclips de sesión', price:3500});
+            items.push({name:'5+ videoclips de sesión previa', price:3500});
             items.push({name:'Video resumen', price:1200+h*150});
-            items.push({name:'Clip para proyección en salón', price:clipProy});
             items.push({name:'Visita a casa antes de misa', price:0});
             items.push({name:'Sesión en 3 locaciones', price:0});
             items.push({name:'Dron 4K completo todo el evento', price:2500});
