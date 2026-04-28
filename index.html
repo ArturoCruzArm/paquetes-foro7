@@ -556,6 +556,7 @@
         <label class="custom-item"><input type="checkbox" id="cbLive" data-main="1"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">YouTube + Facebook · Para familia a distancia</div></div><div class="ci-price" id="pLive">$900/hr</div></label>
         <label class="custom-item"><input type="checkbox" id="cbWebInv" data-main="1"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Sitio propio con RSVP, contrato, logística e invitados</div></div><div class="ci-price">$2,000</div></label>
         <div id="discountBadge" class="ci-note" style="color:var(--gold);font-weight:500"></div>
+        <div id="discountRulesPromo" class="ci-note" style="color:var(--smoke);font-style:normal;line-height:1.5"></div>
 
         <!-- PRODUCCIÓN DE VIDEO -->
         <div class="custom-section-title">③ Producción de video</div>
@@ -642,7 +643,7 @@
 <footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto. · © 2026</p></footer>
 
 <script src="foro7-config.js"></script>
-<script src="foro7-engine.js?v=6"></script>
+<script src="foro7-engine.js?v=7"></script>
 <script>
 /* ========== SPLASH SCREEN ========== */
 (function(){
@@ -845,6 +846,7 @@
     var savingsEl = document.getElementById('customSavings');
     var suggestionEl = document.getElementById('customSuggestion');
     var discBadge = document.getElementById('discountBadge');
+    var rulesPromo = document.getElementById('discountRulesPromo');
     var sendBtn = document.getElementById('customSend');
     var selCanciones = document.getElementById('selCanciones');
     var selFotos = document.getElementById('selFotos');
@@ -852,6 +854,11 @@
     var selBasePackage = document.getElementById('selBasePackage');
 
     function fmt(n){ return '$'+n.toLocaleString('es-MX'); }
+    function renderRulesPromo(){
+        if(!rulesPromo || !F7.getDiscountRulesSummary) return;
+        var source = F7.discountConfig && F7.discountConfig.source === 'bd' ? 'Reglas vigentes desde BD' : 'Reglas vigentes';
+        rulesPromo.innerHTML = '<strong>' + source + ':</strong> ' + F7.getDiscountRulesSummary().join(' · ');
+    }
 
     function setChecked(id, value){
         var el = document.getElementById(id);
@@ -913,7 +920,9 @@
     }
 
     applySchedule(F7.getData());
+    renderRulesPromo();
     document.addEventListener('f7schedule', function(e){ applySchedule(e.detail); calcBuilder(); });
+    document.addEventListener('f7discounts', function(){ renderRulesPromo(); calcBuilder(); });
 
 
     function fmtServiceTime(hours){

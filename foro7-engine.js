@@ -169,18 +169,43 @@ F7.getItems = function(pkgIndex, hours, sessionHrs){
 };
 
 /* --- Reglas de descuento y pisos --- */
+F7.discountConfig = {
+    source:'local',
+    perService:10,
+    hourMap:{3:5,4:10,5:15,6:20},
+    generalCap:60,
+    serviceCap:45,
+    editCap:35,
+    physicalCap:25
+};
+
 F7.discountRules = function(mainCount, hours){
-    var svc = Math.max(0, mainCount) * 10;
-    var hrs = hours >= 6 ? 20 : hours >= 5 ? 15 : hours >= 4 ? 10 : hours >= 3 ? 5 : 0;
-    var combined = Math.min(svc + hrs, 60);
+    var cfg = F7.discountConfig || {};
+    var svc = Math.max(0, mainCount) * (cfg.perService || 10);
+    var hrs = 0;
+    var hourMap = cfg.hourMap || {};
+    Object.keys(hourMap).map(function(k){ return parseFloat(k); }).sort(function(a,b){ return a-b; }).forEach(function(k){
+        if(hours >= k) hrs = parseFloat(hourMap[k]) || 0;
+    });
+    var combined = Math.min(svc + hrs, cfg.generalCap || 60);
     return {
         services: svc,
         hours: hrs,
         combined: combined,
-        serviceCap: Math.min(combined, 45),
-        editCap: Math.min(combined, 35),
-        physicalCap: Math.min(combined, 25)
+        serviceCap: Math.min(combined, cfg.serviceCap || 45),
+        editCap: Math.min(combined, cfg.editCap || 35),
+        physicalCap: Math.min(combined, cfg.physicalCap || 25),
+        source: cfg.source || 'local'
     };
+};
+
+F7.getDiscountRulesSummary = function(){
+    var c = F7.discountConfig || {};
+    return [
+        (c.perService || 10) + '% por cada servicio principal',
+        'Bono por horas: 3h=' + (c.hourMap[3] || 0) + '%, 4h=' + (c.hourMap[4] || 0) + '%, 5h=' + (c.hourMap[5] || 0) + '%, 6h+=' + (c.hourMap[6] || 0) + '%',
+        'Topes: servicios ' + (c.serviceCap || 45) + '%, video/edición ' + (c.editCap || 35) + '%, físicos ' + (c.physicalCap || 25) + '%'
+    ];
 };
 
 F7.packageStep = [0, 300, 900, 1200, 1500, 1800];
@@ -609,6 +634,43 @@ F7.sb = function(path, options){
     return fetch(F7.supabaseUrl + '/rest/v1/' + path, options);
 };
 
+F7.applyDiscountRuleRows = function(rows){
+    if(!rows || !rows.length) return false;
+    var cfg = {
+        source:'bd',
+        perService:F7.discountConfig.perService,
+        hourMap:Object.assign({}, F7.discountConfig.hourMap),
+        generalCap:F7.discountConfig.generalCap,
+        serviceCap:F7.discountConfig.serviceCap,
+        editCap:F7.discountConfig.editCap,
+        physicalCap:F7.discountConfig.physicalCap
+    };
+    rows.forEach(function(r){
+        var cond = r.condition_json || {};
+        if(typeof cond === 'string'){
+            try { cond = JSON.parse(cond); } catch(e){ cond = {}; }
+        }
+        if(r.rule_type === 'percent_per_service') cfg.perService = parseFloat(cond.per_service || r.percent || cfg.perService);
+        if(r.rule_type === 'percent_by_hours') cfg.hourMap = cond || cfg.hourMap;
+        if(r.slug === 'cap_general_60') cfg.generalCap = parseFloat(r.cap_percent || cfg.generalCap);
+        if(r.slug === 'cap_services_45') cfg.serviceCap = parseFloat(r.cap_percent || cfg.serviceCap);
+        if(r.slug === 'cap_products_25') cfg.physicalCap = parseFloat(r.cap_percent || cfg.physicalCap);
+        if(r.slug === 'cap_video_edit_35') cfg.editCap = parseFloat(r.cap_percent || cfg.editCap);
+    });
+    F7.discountConfig = cfg;
+    F7.discountRuleRows = rows;
+    document.dispatchEvent(new CustomEvent('f7discounts', {detail:{config:cfg, rows:rows}}));
+    return true;
+};
+
+F7.loadDiscountRules = function(){
+    if(!F7.supabaseKey) return Promise.resolve(false);
+    return F7.sb('discount_rules?active=eq.true&select=slug,name,scope,rule_type,condition_json,percent,cap_percent', {method:'GET'})
+        .then(function(res){ return res.ok ? res.json() : []; })
+        .then(function(rows){ return F7.applyDiscountRuleRows(rows); })
+        .catch(function(){ return false; });
+};
+
 F7.catalog = {
     services:{photo:'photo_hour', video:'video_hour', drone:'drone_hour', droneEvent:'drone_event', live:'live_hour', web:'web_invitation_full'},
     products:{prints:'prints_5x7', gallery:'web_gallery', frame11:'frame_11x14', frame24:'frame_24x32', usb:'usb_basic', photobook:'photobook_combo', videoComplete:'video_complete', videoSummary:'video_summary', projectionClip:'projection_clip', movie:'cinematic_movie', reel:'reel_vertical', song:'custom_song'},
@@ -743,10 +805,13 @@ F7.syncFromSupabase = function(){
 };
 
 /* Ejecutar sync al cargar, sin bloquear */
+function f7BootSync(){
+    F7.loadDiscountRules().then(function(){ setTimeout(F7.syncFromSupabase, 800); });
+}
 if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(F7.syncFromSupabase, 800); });
+    document.addEventListener('DOMContentLoaded', f7BootSync);
 } else {
-    setTimeout(F7.syncFromSupabase, 800);
+    f7BootSync();
 }
 
 window.F7 = F7;

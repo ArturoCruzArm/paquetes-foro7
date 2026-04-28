@@ -286,9 +286,10 @@ insert into products(group_id, slug, name, unit, base_price, price_per_unit, inc
 on conflict (slug) do update set name = excluded.name, base_price = excluded.base_price, price_per_unit = excluded.price_per_unit;
 
 insert into discount_rules(slug, name, scope, rule_type, condition_json, percent, cap_percent) values
-('primary_services_10_each', '10% por cada servicio principal', 'services', 'percent_per_service', '{"per_service":10}', 10, 50),
+('primary_services_10_each', '10% por cada servicio principal', 'services', 'percent_per_service', '{"per_service":10}', 10, null),
 ('hours_3_to_6', 'Descuento por horas contratadas', 'hours', 'percent_by_hours', '{"3":5,"4":10,"5":15,"6":20}', 0, 20),
 ('cap_general_60', 'Tope general 60%', 'package', 'cap', '{}', 0, 60),
+('cap_services_45', 'Tope servicios principales 45%', 'services', 'cap', '{}', 0, 45),
 ('cap_products_25', 'Tope fisicos 25%', 'products', 'cap', '{}', 0, 25),
 ('cap_video_edit_35', 'Tope edicion 35%', 'products', 'cap', '{"group":"video_edits"}', 0, 35)
 on conflict (slug) do update set name = excluded.name, condition_json = excluded.condition_json, cap_percent = excluded.cap_percent;
@@ -320,6 +321,11 @@ alter table quote_products enable row level security;
 alter table quote_discounts enable row level security;
 alter table quote_totals enable row level security;
 alter table quote_decisions enable row level security;
+
+drop policy if exists discount_rules_public_read on discount_rules;
+create policy discount_rules_public_read on discount_rules
+for select to anon, authenticated
+using (active = true);
 
 drop policy if exists quote_sessions_insert_own on quote_sessions;
 create policy quote_sessions_insert_own on quote_sessions
