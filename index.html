@@ -530,8 +530,8 @@
         <div class="custom-section-title">② Servicios principales <small style="font-family:'DM Sans';font-size:.65rem;color:var(--gold);font-weight:400">· más servicios = más descuento</small></div>
         <label class="custom-item"><input type="checkbox" id="cbFoto" data-main="1"><div class="ci-text"><div class="ci-name">Fotografía profesional</div><div class="ci-desc">$600/hr · Combo foto+video: $900/hr</div></div><div class="ci-price" id="pFoto">$3,000</div></label>
         <label class="custom-item"><input type="checkbox" id="cbVideo" data-main="1"><div class="ci-text"><div class="ci-name">Video profesional</div><div class="ci-desc">$600/hr · Combo foto+video: $900/hr (ahorras $300/hr)</div></div><div class="ci-price" id="pVideo">$3,000</div></label>
-        <label class="custom-item"><input type="checkbox" id="cbDron" data-main="1"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas integradas en tus videos</div></div><div class="ci-price">$1,500</div></label>
-        <label class="custom-item"><input type="checkbox" id="cbLive" data-main="1"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">YouTube + Facebook · Para familia a distancia</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbDron" data-main="1"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas integradas en tus videos</div></div><div class="ci-price">$900/hr</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbLive" data-main="1"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">YouTube + Facebook · Para familia a distancia</div></div><div class="ci-price" id="pLive">$900/hr</div></label>
         <label class="custom-item"><input type="checkbox" id="cbWebInv" data-main="1"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Sitio propio con RSVP, contrato, logística e invitados</div></div><div class="ci-price">$2,000</div></label>
         <div id="discountBadge" class="ci-note" style="color:var(--gold);font-weight:500"></div>
 
@@ -551,7 +551,7 @@
         <label class="custom-item"><input type="checkbox" id="cbGaleria"><div class="ci-text"><div class="ci-name">Galería web privada</div><div class="ci-desc">Tus fotos en la nube para descargar y compartir</div></div><div class="ci-price">$800</div></label>
         <div class="custom-item custom-select-item"><div class="ci-text"><div class="ci-name">Ampliación con marco</div><div class="ci-desc">Tu mejor foto en gran formato</div></div><select id="selAmp"><option value="0">Sin ampliación</option><option value="600">Chica 28×36cm — $600</option><option value="1700">Grande 60×80cm — $1,700</option></select></div>
         <label class="custom-item"><input type="checkbox" id="cbUSB"><div class="ci-text"><div class="ci-name">USB personalizada</div><div class="ci-desc">Grabada con nombre y fecha</div></div><div class="ci-price">$200</div></label>
-        <label class="custom-item"><input type="checkbox" id="cbFotolibro"><div class="ci-text"><div class="ci-name">Fotolibro 12×24"</div><div class="ci-desc">10 hojas, 100 fotos + caja + mini 5×10" de regalo</div></div><div class="ci-price">$2,400</div></label>
+        <label class="custom-item"><input type="checkbox" id="cbFotolibro"><div class="ci-text"><div class="ci-name">Fotolibro 12×24"</div><div class="ci-desc">10 hojas, 100 fotos + caja + mini 5×10" de regalo</div></div><div class="ci-price">$3,400</div></label>
         <div class="ci-note">Mi historia en fotos (collage de crecimiento) incluido siempre</div>
     </div>
 
@@ -619,6 +619,7 @@
 
 <footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto. · © 2026</p></footer>
 
+<script src="foro7-config.js"></script>
 <script src="foro7-engine.js"></script>
 <script>
 /* ========== SPLASH SCREEN ========== */
@@ -652,6 +653,69 @@
         updateAllPrices();
     }
 
+
+    function hydrateSplashForm(data){
+        if(!data) return;
+        if(data.name) document.getElementById('spName').value = data.name;
+        if(data.phone) document.getElementById('spPhone').value = data.phone;
+        var map = {sesion:'Sesion', casa:'Casa', misa:'Misa', fiesta:'Fiesta'};
+        if(data.segments){
+            Object.keys(map).forEach(function(k){
+                var seg = data.segments[k];
+                if(!seg) return;
+                var key = map[k];
+                var cb = document.getElementById('sp' + key);
+                var start = document.getElementById('sp' + key + 'Start');
+                var end = document.getElementById('sp' + key + 'End');
+                if(cb) cb.checked = !!seg.active;
+                if(start && seg.start) start.value = seg.start;
+                if(end && seg.end) end.value = seg.end;
+            });
+        }
+        updateSplashTotals();
+    }
+
+    function updateEventBar(data){
+        if(!data) return;
+        var nameEl = document.getElementById('ebName');
+        nameEl.innerHTML = data.name ? '<strong>'+data.name+'</strong>' : '';
+        document.getElementById('ebHours').innerHTML = '<strong>'+data.totalHours+' hrs</strong> cobertura';
+        var sn = [];
+        if(data.segments){
+            if(data.segments.sesion && data.segments.sesion.active) sn.push('Sesi?n');
+            if(data.segments.casa && data.segments.casa.active) sn.push('Casa');
+            if(data.segments.misa && data.segments.misa.active) sn.push('Misa');
+            if(data.segments.fiesta && data.segments.fiesta.active) sn.push('Fiesta');
+        }
+        document.getElementById('ebSegments').textContent = sn.join(' + ');
+    }
+
+    F7.captureCurrentEventData = function(base){
+        var data = base || eventData || {name:'',phone:'',totalHours:0,sessionHours:0,segments:{}};
+        data.name = document.getElementById('spName').value.trim();
+        data.phone = document.getElementById('spPhone').value.trim();
+        data.segments = data.segments || {};
+        ['Sesion','Casa','Misa','Fiesta'].forEach(function(s){
+            var cb = document.getElementById('sp'+s);
+            if(!cb) return;
+            data.segments[s.toLowerCase()] = {
+                active: cb.checked,
+                start: document.getElementById('sp'+s+'Start').value,
+                end: document.getElementById('sp'+s+'End').value,
+                hours: calcSegHours('sp'+s+'Start','sp'+s+'End')
+            };
+        });
+        data.sessionHours = document.getElementById('spSesion').checked ? calcSegHours('spSesionStart','spSesionEnd') : 0;
+        data.totalHours = ['Sesion','Casa','Misa','Fiesta'].reduce(function(sum,s){
+            var cb = document.getElementById('sp'+s);
+            return sum + (cb && cb.checked ? calcSegHours('sp'+s+'Start','sp'+s+'End') : 0);
+        }, 0);
+        eventData = data;
+        updateAllPrices();
+        updateEventBar(data);
+        return data;
+    };
+
     function updateAllPrices(){
         var h = eventData.totalHours, sh = eventData.sessionHours;
         for(var i=0;i<6;i++){
@@ -676,29 +740,25 @@
     var splash = document.getElementById('splash');
     var segments = document.getElementById('spSegments');
     if(segments){
-        segments.addEventListener('change', updateSplashTotals);
+        segments.addEventListener('change', function(){ updateSplashTotals(); F7.saveData(F7.captureCurrentEventData(eventData)); });
         segments.addEventListener('input', updateSplashTotals);
     }
+    ['spName','spPhone'].forEach(function(id){
+        var input = document.getElementById(id);
+        input.addEventListener('change', function(){ F7.saveData(F7.captureCurrentEventData(eventData)); updateEventBar(eventData); });
+        input.addEventListener('blur', function(){ F7.saveData(F7.captureCurrentEventData(eventData)); updateEventBar(eventData); });
+    });
 
     // Check if returning user has data
     var saved = F7.getData();
     if(saved && saved.totalHours > 0){
         // Already has data — skip splash, show prices
         eventData = saved;
+        hydrateSplashForm(saved);
         splash.classList.add('hide');
         setTimeout(function(){ splash.style.display='none'; }, 10);
         document.getElementById('eventBar').classList.add('show');
-        var nameEl = document.getElementById('ebName');
-        if(saved.name) nameEl.innerHTML = '<strong>'+saved.name+'</strong>';
-        document.getElementById('ebHours').innerHTML = '<strong>'+saved.totalHours+' hrs</strong> cobertura';
-        var sn = [];
-        if(saved.segments){
-            if(saved.segments.sesion && saved.segments.sesion.active) sn.push('Sesión');
-            if(saved.segments.casa && saved.segments.casa.active) sn.push('Casa');
-            if(saved.segments.misa && saved.segments.misa.active) sn.push('Misa');
-            if(saved.segments.fiesta && saved.segments.fiesta.active) sn.push('Fiesta');
-        }
-        document.getElementById('ebSegments').textContent = sn.join(' + ');
+        updateEventBar(saved);
         updateAllPrices();
 
         // Check pending quote
@@ -710,17 +770,7 @@
     }
 
     document.getElementById('spEnter').addEventListener('click', function(){
-        eventData.name = document.getElementById('spName').value.trim();
-        eventData.phone = document.getElementById('spPhone').value.trim();
-        ['Sesion','Casa','Misa','Fiesta'].forEach(function(s){
-            var cb = document.getElementById('sp'+s);
-            eventData.segments[s.toLowerCase()] = {
-                active: cb.checked,
-                start: document.getElementById('sp'+s+'Start').value,
-                end: document.getElementById('sp'+s+'End').value,
-                hours: calcSegHours('sp'+s+'Start','sp'+s+'End')
-            };
-        });
+        eventData = F7.captureCurrentEventData(eventData);
 
         // Save to localStorage
         F7.saveData(eventData);
@@ -730,14 +780,7 @@
 
         var bar = document.getElementById('eventBar');
         bar.classList.add('show');
-        if(eventData.name) document.getElementById('ebName').innerHTML = '<strong>'+eventData.name+'</strong>';
-        document.getElementById('ebHours').innerHTML = '<strong>'+eventData.totalHours+' hrs</strong> cobertura';
-        var segNames = [];
-        if(eventData.segments.sesion && eventData.segments.sesion.active) segNames.push('Sesión');
-        if(eventData.segments.casa && eventData.segments.casa.active) segNames.push('Casa');
-        if(eventData.segments.misa && eventData.segments.misa.active) segNames.push('Misa');
-        if(eventData.segments.fiesta && eventData.segments.fiesta.active) segNames.push('Fiesta');
-        document.getElementById('ebSegments').textContent = segNames.join(' + ');
+        updateEventBar(eventData);
 
         updateAllPrices();
 
@@ -748,6 +791,8 @@
     document.getElementById('spSkip').addEventListener('click', function(){
         splash.classList.add('hide');
         setTimeout(function(){ splash.style.display='none'; }, 500);
+        eventData.name = document.getElementById('spName').value.trim() || eventData.name;
+        eventData.phone = document.getElementById('spPhone').value.trim() || eventData.phone;
         eventData.totalHours = 6;
         eventData.sessionHours = 0;
         F7.saveData(eventData);
@@ -755,6 +800,7 @@
     });
 
     document.getElementById('ebEdit').addEventListener('click', function(){
+        hydrateSplashForm(eventData);
         splash.style.display='flex';
         splash.classList.remove('hide');
         document.getElementById('eventBar').classList.remove('show');
@@ -779,13 +825,6 @@
     var selFotos = document.getElementById('selFotos');
     var selAmp = document.getElementById('selAmp');
 
-    var paquetes = F7.packages.map(function(p,i){
-        var d = F7.getData();
-        var h = (d && d.totalHours) || 6;
-        var sh = (d && d.sessionHours) || 0;
-        return {name:p.name, price:F7.calcPrice(i,h,sh).price, href:p.file};
-    });
-
     function fmt(n){ return '$'+n.toLocaleString('es-MX'); }
 
     function calcBuilder(){
@@ -796,20 +835,22 @@
         var hasDron = document.getElementById('cbDron').checked;
         var hasLive = document.getElementById('cbLive').checked;
         var hasWeb = document.getElementById('cbWebInv').checked;
+        var sessionHrs = hasSesion ? 2 : 0;
+        var totalHrs = hrs + sessionHrs;
+        var videoCalcHrs = hrs + ((hasSesion && hasVideo) ? sessionHrs : 0);
         var items = [];
 
         /* Servicios principales (determinan descuento) */
         var mainCount = (hasFoto?1:0)+(hasVideo?1:0)+(hasDron?1:0)+(hasLive?1:0)+(hasWeb?1:0);
 
-        /* Descuento por servicios: 10% por cada servicio principal */
-        var discSvc = mainCount * 10;
-        /* Descuento por horas: 3h=5%, 4h=10%, 5h=15%, 6+=20% */
-        var discHrs = hrs>=6?20:hrs>=5?15:hrs>=4?10:hrs>=3?5:0;
-        var discCombined = Math.min(discSvc + discHrs, 60);
-        /* Topes por categoría (máximo combinado 60%) */
-        var capSvc = Math.min(discCombined, 45);
-        var capEdit = Math.min(discCombined, 35);
-        var capPhys = Math.min(discCombined, 25);
+        /* Descuento compartido con el motor principal */
+        var rules = F7.discountRules(mainCount, hrs);
+        var discSvc = rules.services;
+        var discHrs = rules.hours;
+        var discCombined = rules.combined;
+        var capSvc = rules.serviceCap;
+        var capEdit = rules.editCap;
+        var capPhys = rules.physicalCap;
 
         /* Badge de descuento */
         if(mainCount > 0){
@@ -835,15 +876,17 @@
         /* Actualizar etiquetas dinámicas de precio */
         document.getElementById('pFoto').textContent = fmt(hasFoto && hasVideo ? Math.round(900*hrs/2) : 600*hrs);
         document.getElementById('pVideo').textContent = fmt(hasFoto && hasVideo ? 900*hrs - Math.round(900*hrs/2) : 600*hrs);
+        var pLive = document.getElementById('pLive');
+        if(pLive) pLive.textContent = fmt(900*hrs);
 
         var sesionPrice = hasSesion ? 1500 : 0;
         if(hasSesion) items.push('Sesión previa ($1,500)');
 
-        var dronPrice = hasDron ? 1500 : 0;
-        if(hasDron) items.push('Dron ($1,500)');
+        var dronPrice = hasDron ? 2500 : 0;
+        if(hasDron) items.push('Dron completo ($2,500)');
 
-        var livePrice = hasLive ? 2500 : 0;
-        if(hasLive) items.push('Transmisión en vivo ($2,500)');
+        var livePrice = hasLive ? 900 * hrs : 0;
+        if(hasLive) items.push('Transmisión en vivo ' + hrs + 'hrs (' + fmt(livePrice) + ')');
 
         var webPrice = hasWeb ? 2000 : 0;
         if(hasWeb) items.push('Invitación web ($2,000)');
@@ -851,10 +894,10 @@
         var svcSubtotal = fotoPrice + videoPrice + sesionPrice + dronPrice + livePrice + webPrice;
 
         /* --- Productos de video (dependen de horas) --- */
-        var vidCompP = 1200 + 250*hrs;
-        var vidResP = 1200 + 150*hrs;
-        var clipProyP = 1000 + (hasSesion ? 500 : 0);
-        var peliculaP = 3000 + 400*hrs;
+        var vidCompP = 1200 + 250*videoCalcHrs;
+        var vidResP = 1200 + 150*videoCalcHrs;
+        var clipProyP = 1000 + (hasSesion ? sessionHrs * 250 : 0);
+        var peliculaP = 3000 + 400*videoCalcHrs;
 
         document.getElementById('pVidComp').textContent = fmt(vidCompP);
         document.getElementById('pVidRes').textContent = fmt(vidResP);
@@ -884,7 +927,7 @@
         var galeriaPrice = document.getElementById('cbGaleria').checked ? 800 : 0;
         var ampPrice = parseInt(selAmp.value) || 0;
         var usbPrice = document.getElementById('cbUSB').checked ? 200 : 0;
-        var fotolibroPrice = document.getElementById('cbFotolibro').checked ? 2400 : 0;
+        var fotolibroPrice = document.getElementById('cbFotolibro').checked ? 3400 : 0;
 
         if(fotosPrice > 0){
             var nf = fotosPrice===570?50:fotosPrice===920?100:fotosPrice===1270?150:200;
@@ -893,7 +936,7 @@
         if(galeriaPrice) items.push('Galería web ($800)');
         if(ampPrice) items.push('Ampliación (' + fmt(ampPrice) + ')');
         if(usbPrice) items.push('USB ($200)');
-        if(fotolibroPrice) items.push('Fotolibro 12×24" ($2,400)');
+        if(fotolibroPrice) items.push('Fotolibro 12x24" ($3,400)');
 
         var physSubtotal = fotosPrice + galeriaPrice + ampPrice + usbPrice + fotolibroPrice;
 
@@ -919,7 +962,6 @@
         /* --- Mostrar totales --- */
         totalEl.textContent = fmt(total) + ' MXN';
 
-        var totalHrs = hrs + (hasSesion ? 2 : 0);
         var hrsInfo = (hasFoto && totalHrs > 0) ? ' · ~' + (totalHrs * 100) + ' fotos digitales' : '';
 
         if(totalDiscAmount > 0 && subtotal > 0){
@@ -933,11 +975,12 @@
         /* --- Sugerencia de paquete --- */
         suggestionEl.style.display = 'none';
         if(total > 0){
-            for(var i = paquetes.length - 1; i >= 0; i--){
-                var pkg = paquetes[i];
-                if(pkg.price <= total && (total - pkg.price) >= 500){
-                    var ahorro = total - pkg.price;
-                    suggestionEl.innerHTML = '💡 <strong>Te conviene el paquete ' + pkg.name + '</strong> por ' + fmt(pkg.price) + ' MXN — incluye más servicios y <strong>ahorras ' + fmt(ahorro) + '</strong>. <a href="' + pkg.href + '" style="color:var(--gold);text-decoration:underline">Ver detalle →</a>';
+            for(var i = F7.packages.length - 1; i >= 0; i--){
+                var pkg = F7.packages[i];
+                var pkgPrice = F7.calcPrice(i, Math.max(totalHrs, hrs), sessionHrs).price;
+                if(pkgPrice <= total && (total - pkgPrice) >= 500){
+                    var ahorro = total - pkgPrice;
+                    suggestionEl.innerHTML = 'ðŸ’¡ <strong>Te conviene el paquete ' + pkg.name + '</strong> por ' + fmt(pkgPrice) + ' MXN â€” incluye mÃ¡s servicios y <strong>ahorras ' + fmt(ahorro) + '</strong>. <a href="' + pkg.file + '" style="color:var(--gold);text-decoration:underline">Ver detalle â†’</a>';
                     suggestionEl.style.display = 'block';
                     break;
                 }
@@ -965,6 +1008,8 @@
         if(info.discount > 0) msg += '\n\nDescuento aplicado: -' + fmt(info.discount);
         msg += '\n\nTotal estimado: ' + fmt(info.total) + ' MXN';
         if(info.hrs > 0) msg += '\nCobertura: ~' + info.hrs + ' horas';
+        F7.saveToSupabase(F7.getData() || window.eventData || {}, undefined, info);
+        F7.trackDecision('custom_quote_whatsapp_clicked', {total:info.total, subtotal:info.subtotal, discount:info.discount, hours:info.hrs, items:info.items});
         window.open('https://wa.me/5214779203776?text='+encodeURIComponent(msg)+'&utm_source=web&utm_medium=builder&utm_campaign=paquete_custom','_blank');
         if(typeof fbq==='function') fbq('track','Lead',{value:info.total,currency:'MXN'});
         if(typeof gtag==='function') gtag('event','generate_lead',{value:info.total,currency:'MXN'});
@@ -1034,7 +1079,9 @@
             card.className = 'mcard' + (pkg.badge==='★ Recomendado'?' popular':'') + (i===2?' open':'');
             var badgeHtml = pkg.badge ? '<div class="mcard-badge">'+pkg.badge+'</div>' : '';
             var rows = pkg.features.map(function(f){ return '<div class="mcard-row"><span>'+f[0]+'</span><span>'+f[1]+'</span></div>'; }).join('');
-            card.innerHTML = '<div class="mcard-head"><div class="mcard-head-left">'+badgeHtml+'<div class="mcard-name">'+pkg.name+'</div></div><div style="display:flex;align-items:center;gap:1rem"><div class="mcard-price">'+pkg.price+'</div><span class="mcard-toggle">▼</span></div></div><div class="mcard-body">'+rows+'<a href="'+pkg.href+'" class="bd mcard-cta'+(i===2?' bdp':'')+'">Ver detalle completo</a></div>';
+            var saved = F7.getFreshData ? F7.getFreshData() : F7.getData();
+            var visiblePrice = (saved && saved.totalHours > 0) ? F7.fmt(F7.calcPrice(i, saved.totalHours, saved.sessionHours||0).price) : pkg.price;
+            card.innerHTML = '<div class="mcard-head"><div class="mcard-head-left">'+badgeHtml+'<div class="mcard-name">'+pkg.name+'</div></div><div style="display:flex;align-items:center;gap:1rem"><div class="mcard-price">'+visiblePrice+'</div><span class="mcard-toggle">▼</span></div></div><div class="mcard-body">'+rows+'<a href="'+pkg.href+'" class="bd mcard-cta'+(i===2?' bdp':'')+'">Ver detalle completo</a></div>';
             card.querySelector('.mcard-head').addEventListener('click', function(){ card.classList.toggle('open'); });
             mc.appendChild(card);
         });
