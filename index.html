@@ -538,7 +538,7 @@
         <div class="custom-section-title">② Servicios principales <small style="font-family:'DM Sans';font-size:.65rem;color:var(--gold);font-weight:400">· más servicios = más descuento</small></div>
         <label class="custom-item"><input type="checkbox" id="cbFoto" data-main="1"><div class="ci-text"><div class="ci-name">Fotografía profesional</div><div class="ci-desc">$600/hr · Combo foto+video: $900/hr</div></div><div class="ci-price" id="pFoto">$3,000</div></label>
         <label class="custom-item"><input type="checkbox" id="cbVideo" data-main="1"><div class="ci-text"><div class="ci-name">Video profesional</div><div class="ci-desc">$600/hr · Combo foto+video: $900/hr (ahorras $300/hr)</div></div><div class="ci-price" id="pVideo">$3,000</div></label>
-        <label class="custom-item"><input type="checkbox" id="cbDron" data-main="1"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">Perspectivas aéreas integradas en tus videos · Precio fijo todo el evento</div></div><div class="ci-price">$2,500</div></label>
+        <label class="custom-item custom-select-item"><input type="checkbox" id="cbDron" data-main="1"><div class="ci-text"><div class="ci-name">Tomas con dron 4K</div><div class="ci-desc">$1,200/hr · elige solo el tiempo real de vuelo/cobertura</div></div><select id="selDronHours" aria-label="Tiempo de dron"><option value="0.333333" selected>20 min — $400</option><option value="0.666667">40 min — $800</option><option value="1">1 hr — $1,200</option><option value="1.5">1.5 hrs — $1,800</option><option value="2">2 hrs — $2,400</option><option value="3">3 hrs — $3,600</option></select><div class="ci-price" id="pDron">$400</div></label>
         <label class="custom-item"><input type="checkbox" id="cbLive" data-main="1"><div class="ci-text"><div class="ci-name">Transmisión en vivo</div><div class="ci-desc">YouTube + Facebook · Para familia a distancia</div></div><div class="ci-price" id="pLive">$900/hr</div></label>
         <label class="custom-item"><input type="checkbox" id="cbWebInv" data-main="1"><div class="ci-text"><div class="ci-name">Invitación web completa</div><div class="ci-desc">Sitio propio con RSVP, contrato, logística e invitados</div></div><div class="ci-price">$2,000</div></label>
         <div id="discountBadge" class="ci-note" style="color:var(--gold);font-weight:500"></div>
@@ -872,6 +872,14 @@
     document.addEventListener('f7schedule', function(e){ applySchedule(e.detail); calcBuilder(); });
 
 
+    function fmtServiceTime(hours){
+        var minutes = Math.round((hours || 0) * 60);
+        if(minutes < 60) return minutes + ' min';
+        var hrs = Math.floor(minutes / 60);
+        var mins = minutes % 60;
+        return hrs + ' hr' + (hrs === 1 ? '' : 's') + (mins ? ' ' + mins + ' min' : '');
+    }
+
     function calcBuilder(){
         /* totalHrs = splash totalHours directamente, sin reconstruir */
         var totalHrs = builderTotalHours;
@@ -908,8 +916,12 @@
         var pLive = document.getElementById('pLive');
         if(pLive) pLive.textContent = fmt(900*totalHrs);
 
-        var dronPrice = hasDron ? 2500 : 0;
-        if(hasDron) items.push({name:'Dron 4K completo (precio fijo)', price:dronPrice});
+        var selDronHours = document.getElementById('selDronHours');
+        var dronHours = hasDron ? (parseFloat(selDronHours && selDronHours.value) || 0.333333) : 0;
+        var dronPrice = hasDron ? Math.round(dronHours * 1200) : 0;
+        var pDron = document.getElementById('pDron');
+        if(pDron) pDron.textContent = fmt(Math.round((parseFloat(selDronHours && selDronHours.value) || 0.333333) * 1200));
+        if(hasDron) items.push({name:'Dron 4K ' + fmtServiceTime(dronHours), price:dronPrice});
         var livePrice = hasLive ? 900 * totalHrs : 0;
         if(hasLive) items.push({name:'Transmision en vivo ' + hrLabel, price:livePrice});
         var webPrice = hasWeb ? 2000 : 0;
@@ -954,6 +966,18 @@
         var physSubtotal = fotosPrice + galeriaPrice + ampPrice + usbPrice + fotolibroPrice;
 
         var svcDisc  = Math.round(svcSubtotal  * capSvc  / 100);
+        if(hasDron && dronPrice > 0){
+            var rulesNoDron = F7.discountRules(Math.max(0, mainCount - 1), totalHrs);
+            var capNoDron = rulesNoDron.serviceCap;
+            var subtotalNoDron = Math.max(0, svcSubtotal - dronPrice);
+            var totalNoDron = subtotalNoDron - Math.round(subtotalNoDron * capNoDron / 100);
+            var minimumDronContribution = Math.max(200, Math.round(dronPrice * 0.5));
+            var serviceTotal = svcSubtotal - svcDisc;
+            var minimumServiceTotal = totalNoDron + minimumDronContribution;
+            if(serviceTotal < minimumServiceTotal){
+                svcDisc = Math.max(0, svcSubtotal - minimumServiceTotal);
+            }
+        }
         var editDisc = Math.round(editSubtotal  * capEdit / 100);
         var physDisc = Math.round(physSubtotal  * capPhys / 100);
         var totalDiscAmount = svcDisc + editDisc + physDisc;
@@ -967,6 +991,7 @@
         if(selFotos.closest)     selFotos.closest('.custom-item').classList.toggle('active', fotosPrice > 0);
         if(selAmp.closest)       selAmp.closest('.custom-item').classList.toggle('active', ampPrice > 0);
         if(selCanciones.closest) selCanciones.closest('.custom-item').classList.toggle('active', numCanciones > 0);
+        if(selDronHours && selDronHours.closest) selDronHours.closest('.custom-item').classList.toggle('active', hasDron);
 
         totalEl.textContent = fmt(total) + ' MXN';
         var hrsInfo = (hasFoto && totalHrs > 0) ? ' · ~' + (totalHrs * 100) + ' fotos digitales' : '';
@@ -992,7 +1017,7 @@
             }
         }
 
-        return {total:total, subtotal:subtotal, discount:totalDiscAmount, items:items, hrs:totalHrs};
+        return {total:total, subtotal:subtotal, discount:totalDiscAmount, items:items, hrs:totalHrs, serviceHours:{photo:hasFoto?totalHrs:0, video:hasVideo?totalHrs:0, drone:dronHours, live:hasLive?totalHrs:0, web:hasWeb?1:0}, servicePrices:{photo:fotoPrice, video:videoPrice, drone:dronPrice, live:livePrice, web:webPrice}};
     }
 
     grid.addEventListener('change', calcBuilder);

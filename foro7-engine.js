@@ -617,7 +617,7 @@ F7.sb = function(path, options){
 };
 
 F7.catalog = {
-    services:{photo:'photo_hour', video:'video_hour', drone:'drone_event', live:'live_hour', web:'web_invitation_full'},
+    services:{photo:'photo_hour', video:'video_hour', drone:'drone_hour', droneEvent:'drone_event', live:'live_hour', web:'web_invitation_full'},
     products:{prints:'prints_5x7', gallery:'web_gallery', frame11:'frame_11x14', frame24:'frame_24x32', usb:'usb_basic', photobook:'photobook_combo', videoComplete:'video_complete', videoSummary:'video_summary', projectionClip:'projection_clip', movie:'cinematic_movie', reel:'reel_vertical', song:'custom_song'},
     packages:{0:'esencial',1:'basico',2:'clasico',3:'plus',4:'premium',5:'master'},
     segments:{sesion:'session',casa:'home',misa:'ceremony',fiesta:'party'}
@@ -683,6 +683,14 @@ F7.syncQuoteBreakdown = function(quote, data, pkgIndex, customInfo){
         services.push({service_slug:'video_hour', hours:totalHours, unit_price:600, subtotal:600*totalHours});
         if(pkgIndex >= 3) services.push({service_slug:'drone_event', hours:1, unit_price:2500, subtotal:2500});
         if(pkgIndex >= 5) services.push({service_slug:'live_hour', hours:totalHours, unit_price:900, subtotal:900*totalHours});
+    } else if(customInfo && customInfo.serviceHours){
+        var sh = customInfo.serviceHours || {};
+        var sp = customInfo.servicePrices || {};
+        if(sh.photo > 0) services.push({service_slug:'photo_hour', hours:sh.photo, unit_price:600, subtotal:sp.photo || 600*sh.photo});
+        if(sh.video > 0) services.push({service_slug:'video_hour', hours:sh.video, unit_price:600, subtotal:sp.video || 600*sh.video});
+        if(sh.drone > 0) services.push({service_slug:'drone_hour', hours:sh.drone, unit_price:1200, subtotal:sp.drone || Math.round(1200*sh.drone)});
+        if(sh.live > 0) services.push({service_slug:'live_hour', hours:sh.live, unit_price:900, subtotal:sp.live || 900*sh.live});
+        if(sh.web > 0) services.push({service_slug:'web_invitation_full', hours:1, unit_price:2000, subtotal:sp.web || 2000});
     }
 
     var servicePromise = F7.resolveCatalogIds('services', 'service_slug', services.map(function(s){ return {quote_id:quote.id, service_slug:s.service_slug, service_id:null, segment_id:null, hours:s.hours, unit_price:s.unit_price, subtotal:s.subtotal}; }), 'service_id').then(function(rows){
