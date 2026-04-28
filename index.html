@@ -532,7 +532,6 @@
                 <button onclick="F7.openSplash ? F7.openSplash() : window.scrollTo({top:0,behavior:'smooth'})" style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:transparent;border:1px solid rgba(201,168,76,.4);padding:.2rem .6rem;cursor:pointer;white-space:nowrap">Editar horario</button>
             </div>
         </div>
-        <label class="custom-item"><input type="checkbox" id="cbSesion"><div class="ci-text"><div class="ci-name">Sesión previa en locación</div><div class="ci-desc" id="sesionDesc">~2 hrs adicionales · Tú eliges el lugar</div></div><div class="ci-price" id="pSesion" style="font-size:.7rem;color:var(--gold)">se suma a tu tarifa/hr</div></label>
         <div class="ci-note">~100 fotos digitales editadas por cada hora con fotografía</div>
 
         <!-- SERVICIOS PRINCIPALES -->
@@ -884,16 +883,14 @@
 
 
     function calcBuilder(){
-        var hrs = builderEventHours;
-        var hasSesion = document.getElementById('cbSesion').checked;
-        var hasFoto   = document.getElementById('cbFoto').checked;
-        var hasVideo  = document.getElementById('cbVideo').checked;
-        var hasDron   = document.getElementById('cbDron').checked;
-        var hasLive   = document.getElementById('cbLive').checked;
-        var hasWeb    = document.getElementById('cbWebInv').checked;
-        var sessionHrs = hasSesion ? builderSesionHours : 0;
-        var totalHrs   = hrs + sessionHrs;   /* todos los servicios usan totalHrs */
-        var items = []; /* {name, price} */
+        /* totalHrs del splash directamente, ya incluye sesion, casa, misa, fiesta */
+        var totalHrs = builderEventHours + builderSesionHours;
+        var hasFoto  = document.getElementById('cbFoto').checked;
+        var hasVideo = document.getElementById('cbVideo').checked;
+        var hasDron  = document.getElementById('cbDron').checked;
+        var hasLive  = document.getElementById('cbLive').checked;
+        var hasWeb   = document.getElementById('cbWebInv').checked;
+        var items = [];
 
         var mainCount = (hasFoto?1:0)+(hasVideo?1:0)+(hasDron?1:0)+(hasLive?1:0)+(hasWeb?1:0);
         var rules = F7.discountRules(mainCount, totalHrs);
@@ -905,9 +902,8 @@
             discBadge.textContent = txt;
         } else { discBadge.textContent = 'Selecciona servicios para activar descuentos'; }
 
-        /* Cobertura: totalHrs incluye sesion */
         var fotoPrice = 0, videoPrice = 0;
-        var hrLabel = totalHrs + (sessionHrs > 0 ? ' hrs (' + hrs + ' evento + ' + sessionHrs + ' sesion)' : ' hrs');
+        var hrLabel = totalHrs + ' hrs';
         if(hasFoto && hasVideo){
             var comboTotal = 900 * totalHrs;
             fotoPrice = Math.round(comboTotal / 2);
@@ -917,39 +913,22 @@
             if(hasFoto){ fotoPrice = 600 * totalHrs; items.push({name:'Fotografia ' + hrLabel, price:fotoPrice}); }
             if(hasVideo){ videoPrice = 600 * totalHrs; items.push({name:'Video ' + hrLabel, price:videoPrice}); }
         }
-        /* Actualizar etiquetas de precio de los servicios */
         document.getElementById('pFoto').textContent  = fmt(hasFoto && hasVideo ? Math.round(900*totalHrs/2) : 600*totalHrs);
         document.getElementById('pVideo').textContent = fmt(hasFoto && hasVideo ? 900*totalHrs - Math.round(900*totalHrs/2) : 600*totalHrs);
         var pLive = document.getElementById('pLive');
         if(pLive) pLive.textContent = fmt(900*totalHrs);
 
-        /* Sesion: costo = horas extra al mismo rate de servicios seleccionados */
-        var sesRate = (hasFoto && hasVideo) ? 900 : (hasFoto || hasVideo) ? 600 : 0;
-        var pSesionEl = document.getElementById('pSesion');
-        if(pSesionEl && hasSesion){
-            if(sesRate > 0)
-                pSesionEl.textContent = fmt(sesRate * sessionHrs) + ' (' + sessionHrs + 'h x $' + sesRate + '/hr)';
-            else
-                pSesionEl.textContent = sessionHrs + ' hrs adicionales';
-        }
-
-        /* Dron */
         var dronPrice = hasDron ? 2500 : 0;
-        if(hasDron) items.push({name:'Dron 4K completo', price:dronPrice});
-
-        /* Live: cubre totalHrs */
+        if(hasDron) items.push({name:'Dron 4K completo (precio fijo)', price:dronPrice});
         var livePrice = hasLive ? 900 * totalHrs : 0;
-        if(hasLive) items.push({name:'Transmision en vivo ' + totalHrs + ' hrs', price:livePrice});
-
+        if(hasLive) items.push({name:'Transmision en vivo ' + hrLabel, price:livePrice});
         var webPrice = hasWeb ? 2000 : 0;
         if(hasWeb) items.push({name:'Invitacion web completa', price:webPrice});
-
         var svcSubtotal = fotoPrice + videoPrice + dronPrice + livePrice + webPrice;
 
-        /* Video: produccion basada en totalHrs */
         var vidCompP  = 1200 + 250*totalHrs;
         var vidResP   = 1200 + 150*totalHrs;
-        var clipProyP = 1000 + (hasSesion ? sessionHrs * 250 : 0);
+        var clipProyP = 1000 + builderSesionHours * 250;
         var peliculaP = 3000 + 400*totalHrs;
         document.getElementById('pVidComp').textContent  = fmt(vidCompP);
         document.getElementById('pVidRes').textContent   = fmt(vidResP);
@@ -970,24 +949,20 @@
         var numCanciones = parseInt(selCanciones.value) || 0;
         var cancionesPrice = numCanciones * 700;
         if(cancionesPrice > 0) items.push({name:numCanciones + ' cancion' + (numCanciones>1?'es adicionales':' adicional'), price:cancionesPrice});
-
         var editSubtotal = vidCompPrice + vidResPrice + clipProyPrice + peliculaPrice + reelPrice + cancionesPrice;
 
-        /* Entregables físicos */
-        var fotosPrice   = parseInt(selFotos.value) || 0;
-        var galeriaPrice = document.getElementById('cbGaleria').checked  ? 800  : 0;
-        var ampPrice     = parseInt(selAmp.value) || 0;
-        var usbPrice     = document.getElementById('cbUSB').checked      ? 200  : 0;
+        var fotosPrice     = parseInt(selFotos.value) || 0;
+        var galeriaPrice   = document.getElementById('cbGaleria').checked   ? 800  : 0;
+        var ampPrice       = parseInt(selAmp.value) || 0;
+        var usbPrice       = document.getElementById('cbUSB').checked       ? 200  : 0;
         var fotolibroPrice = document.getElementById('cbFotolibro').checked ? 3400 : 0;
-        if(fotosPrice > 0){ var nf=fotosPrice===570?50:fotosPrice===920?100:fotosPrice===1270?150:200; items.push({name:nf+' fotos impresas 5×7"', price:fotosPrice}); }
-        if(galeriaPrice) items.push({name:'Galería web privada', price:galeriaPrice});
-        if(ampPrice)     items.push({name:'Ampliación con marco', price:ampPrice});
-        if(usbPrice)     items.push({name:'USB personalizada', price:usbPrice});
-        if(fotolibroPrice) items.push({name:'Fotolibro 12×24" + caja + mini', price:fotolibroPrice});
-
+        if(fotosPrice > 0){ var nf=fotosPrice===570?50:fotosPrice===920?100:fotosPrice===1270?150:200; items.push({name:nf+' fotos impresas 5x7"', price:fotosPrice}); }
+        if(galeriaPrice)   items.push({name:'Galeria web privada', price:galeriaPrice});
+        if(ampPrice)       items.push({name:'Ampliacion con marco', price:ampPrice});
+        if(usbPrice)       items.push({name:'USB personalizada', price:usbPrice});
+        if(fotolibroPrice) items.push({name:'Fotolibro 12x24" + caja + mini', price:fotolibroPrice});
         var physSubtotal = fotosPrice + galeriaPrice + ampPrice + usbPrice + fotolibroPrice;
 
-        /* Descuentos por categoría */
         var svcDisc  = Math.round(svcSubtotal  * capSvc  / 100);
         var editDisc = Math.round(editSubtotal  * capEdit / 100);
         var physDisc = Math.round(physSubtotal  * capPhys / 100);
@@ -995,35 +970,32 @@
         var subtotal = svcSubtotal + editSubtotal + physSubtotal;
         var total = subtotal - totalDiscAmount;
 
-        /* Estados visuales */
         grid.querySelectorAll('.custom-item').forEach(function(item){
             var inp = item.querySelector('input[type="checkbox"]');
             if(inp) item.classList.toggle('active', inp.checked);
         });
-        if(selFotos.closest) selFotos.closest('.custom-item').classList.toggle('active', fotosPrice > 0);
-        if(selAmp.closest)   selAmp.closest('.custom-item').classList.toggle('active', ampPrice > 0);
+        if(selFotos.closest)     selFotos.closest('.custom-item').classList.toggle('active', fotosPrice > 0);
+        if(selAmp.closest)       selAmp.closest('.custom-item').classList.toggle('active', ampPrice > 0);
         if(selCanciones.closest) selCanciones.closest('.custom-item').classList.toggle('active', numCanciones > 0);
 
-        /* Totales */
         totalEl.textContent = fmt(total) + ' MXN';
         var hrsInfo = (hasFoto && totalHrs > 0) ? ' · ~' + (totalHrs * 100) + ' fotos digitales' : '';
         if(totalDiscAmount > 0 && subtotal > 0){
             discountEl.innerHTML = 'Ahorras <strong>' + fmt(totalDiscAmount) + '</strong> con tu descuento' + hrsInfo;
             savingsEl.textContent = 'Precio de lista: ' + fmt(subtotal);
         } else {
-            discountEl.textContent = subtotal > 0 ? ('Agrega servicios principales para activar descuentos' + hrsInfo) : '';
+            discountEl.textContent = subtotal > 0 ? 'Agrega servicios principales para activar descuentos' + hrsInfo : '';
             savingsEl.textContent = '';
         }
 
-        /* Sugerencia de paquete */
         suggestionEl.style.display = 'none';
         if(total > 0){
             for(var i = F7.packages.length - 1; i >= 0; i--){
                 var pkg = F7.packages[i];
-                var pkgPrice = F7.calcPrice(i, Math.max(totalHrs, hrs), sessionHrs).price;
+                var pkgPrice = F7.calcPrice(i, totalHrs, builderSesionHours).price;
                 if(pkgPrice <= total && (total - pkgPrice) >= 500){
                     var ahorro = total - pkgPrice;
-                    suggestionEl.innerHTML = '&#128161; <strong>Te conviene el paquete ' + pkg.name + '</strong> por ' + fmt(pkgPrice) + ' MXN &mdash; incluye m&aacute;s servicios y <strong>ahorras ' + fmt(ahorro) + '</strong>. <a href="' + pkg.file + '" style="color:var(--gold);text-decoration:underline">Ver detalle &rarr;</a>';
+                    suggestionEl.innerHTML = '&#128161; <strong>Te conviene el paquete ' + pkg.name + '</strong> por ' + fmt(pkgPrice) + ' MXN &mdash; incluye mas servicios y <strong>ahorras ' + fmt(ahorro) + '</strong>. <a href="' + pkg.file + '" style="color:var(--gold);text-decoration:underline">Ver detalle &rarr;</a>';
                     suggestionEl.style.display = 'block';
                     break;
                 }
