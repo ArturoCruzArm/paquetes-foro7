@@ -643,7 +643,7 @@
 <footer class="footer"><p>Foro 7 Producciones · Fotografía, Video e Invitaciones · León, Gto. · © 2026</p></footer>
 
 <script src="foro7-config.js"></script>
-<script src="foro7-engine.js?v=8"></script>
+<script src="foro7-engine.js?v=9"></script>
 <script>
 /* ========== SPLASH SCREEN ========== */
 (function(){
@@ -863,24 +863,36 @@
         totalHrs = totalHrs || 0;
         var cfg = F7.discountConfig || {};
         var perService = cfg.perService || 10;
-        var serviceApplied = mainCount > 0;
-        var nextService = mainCount < 5 ? 'Agrega ' + (mainCount === 0 ? 'foto, video, dron, live o web' : 'otro servicio principal') + ' y suma +' + perService + '%' : 'Ya alcanzaste el máximo práctico de servicios';
-        var hourTarget = totalHrs >= 6 ? 'Bono máximo por horas aplicado' : totalHrs >= 5 ? 'Agrega 1 hr más para llegar a 6 hrs y subir a 20%' : totalHrs >= 4 ? 'Agrega 1 hr más para llegar a 5 hrs y subir a 15%' : totalHrs >= 3 ? 'Agrega 1 hr más para llegar a 4 hrs y subir a 10%' : 'Contrata 3 hrs o más para activar bono por duración';
-        var hourApplied = rules.hours > 0;
         var hasEdit = (context.editSubtotal || 0) > 0;
         var hasPhysical = (context.physSubtotal || 0) > 0;
-        var rows = [
-            {ok:serviceApplied, title:'Servicios principales', value:serviceApplied ? (rules.services + '% activo') : 'Disponible', tip:serviceApplied ? (mainCount + ' servicio' + (mainCount>1?'s':'') + ' seleccionado' + (mainCount<5 ? ' · ' + nextService : '')) : nextService},
-            {ok:hourApplied, title:'Bono por horas', value:hourApplied ? (rules.hours + '% activo') : 'Disponible', tip:hourTarget},
-            {ok:serviceApplied && rules.serviceCap >= 45, title:'Tope servicios', value:'Hasta ' + (cfg.serviceCap || 45) + '%', tip:rules.serviceCap >= 45 ? 'Tope alcanzado en servicios principales' : 'Sube con más servicios u horas'},
-            {ok:hasEdit && rules.editCap >= 35, title:'Video y edición', value:'Hasta ' + (cfg.editCap || 35) + '%', tip:hasEdit ? (rules.editCap >= 35 ? 'Tope de edición alcanzado' : 'Agrega servicios/horas para mejorar el descuento de videos') : 'Agrega video resumen, película, reel o canciones para usar este descuento'},
-            {ok:hasPhysical && rules.physicalCap >= 25, title:'Físicos', value:'Hasta ' + (cfg.physicalCap || 25) + '%', tip:hasPhysical ? (rules.physicalCap >= 25 ? 'Tope de físicos alcanzado' : 'Agrega servicios/horas para mejorar impresos, USB y fotolibro') : 'Agrega impresas, ampliación, USB o fotolibro para usar este descuento'}
-        ];
+        var combined = rules.combined || 0;
+        var nextService = mainCount < 5 ? 'Agrega ' + (mainCount === 0 ? 'foto, video, dron, live o web' : 'otro servicio principal') + ' para sumar +' + perService + '% al descuento base' : 'Ya tienes 5 servicios principales seleccionados';
+        var hourTarget = totalHrs >= 6 ? 'Bono maximo por horas aplicado' : totalHrs >= 5 ? 'Agrega 1 hr mas para llegar a 6 hrs y subir el bono a 20%' : totalHrs >= 4 ? 'Agrega 1 hr mas para llegar a 5 hrs y subir el bono a 15%' : totalHrs >= 3 ? 'Agrega 1 hr mas para llegar a 4 hrs y subir el bono a 10%' : 'Contrata 3 hrs o mas para activar bono por duracion';
+        var serviceTip = mainCount > 0 ? (mainCount + ' servicio' + (mainCount>1?'s':'') + ' seleccionado' + (mainCount<5 ? ' · ' + nextService : '')) : nextService;
+        var rows = [];
+        rows.push({ok:mainCount > 0 || rules.hours > 0, tag:'Base', title:'Descuento base acumulado', value:combined + '%', tip:'Servicios (' + rules.services + '%) + bono por horas (' + rules.hours + '%). Esta base no se cobra directo: abajo ves el descuento real por categoria.'});
+        rows.push({ok:mainCount > 0, tag:mainCount > 0 ? 'Aplicado' : 'Como activarla', title:'Servicios principales', value:rules.serviceCap + '% real', tip:combined > rules.serviceCap ? 'Base ' + combined + '% limitada por tope de servicios ' + (cfg.serviceCap || 45) + '%' : 'Foto, video, dron, live y web usan este descuento'});
+        if(hasEdit){
+            rows.push({ok:true, tag:'Aplicado', title:'Video/edicion', value:rules.editCap + '% real', tip:combined > rules.editCap ? 'Base ' + combined + '% limitada por tope de edicion ' + (cfg.editCap || 35) + '%' : 'Videos, reels y canciones usan este descuento'});
+        } else {
+            rows.push({ok:false, tag:'Como activarla', title:'Video y edicion', value:'Hasta ' + (cfg.editCap || 35) + '%', tip:'Agrega video resumen, película, reel o canciones para usar este descuento'});
+        }
+        if(hasPhysical){
+            rows.push({ok:true, tag:'Aplicado', title:'Fisicos', value:rules.physicalCap + '% real', tip:combined > rules.physicalCap ? 'Base ' + combined + '% limitada por tope de fisicos ' + (cfg.physicalCap || 25) + '%' : 'Impresos, ampliacion, USB y fotolibro usan este descuento'});
+        } else {
+            rows.push({ok:false, tag:'Como activarla', title:'Fisicos', value:'Hasta ' + (cfg.physicalCap || 25) + '%', tip:'Agrega impresas, ampliación, USB o fotolibro para usar este descuento'});
+        }
+        if(mainCount < 5){
+            rows.push({ok:false, tag:'Siguiente mejora', title:'Mas servicios', value:'+' + perService + '% base', tip:serviceTip});
+        }
+        if(totalHrs < 6){
+            rows.push({ok:false, tag:'Siguiente mejora', title:'Mas horas', value:'Bono por horas', tip:hourTarget});
+        }
         rulesPromo.innerHTML = '<strong>' + source + '</strong><div style="display:grid;gap:.35rem;margin-top:.5rem">' + rows.map(function(r){
             var color = r.ok ? '#4ecdc4' : 'var(--smoke)';
             var border = r.ok ? 'rgba(78,205,196,.35)' : 'var(--border)';
             var bg = r.ok ? 'rgba(78,205,196,.08)' : 'rgba(255,255,255,.03)';
-            var tag = r.ok ? 'Aplicada' : 'Cómo activarla';
+            var tag = r.tag || (r.ok ? 'Aplicada' : 'Como activarla');
             return '<div style="border:1px solid '+border+';background:'+bg+';padding:.45rem .55rem;text-align:left;border-radius:3px"><span style="color:'+color+';font-weight:700">'+(r.ok?'✓':'○')+' '+r.title+' · '+r.value+'</span><br><span style="font-size:.68rem;color:var(--smoke)">'+tag+': '+r.tip+'</span></div>';
         }).join('') + '</div>';
     }
