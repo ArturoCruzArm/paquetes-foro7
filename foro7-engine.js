@@ -717,6 +717,37 @@ F7.saveToSupabase = function(data, pkgIndex, customInfo){
     });
 };
 
+/* --- Sync en background desde Supabase, campo por campo --- */
+F7.syncFromSupabase = function(){
+    if(!F7.supabaseKey) return;
+    var token = F7.getSessionToken();
+    var local = F7.getData() || {};
+
+    F7.sb('quote_sessions?session_token=eq.' + encodeURIComponent(token) + '&select=client_name,client_phone,total_hours,status', {method:'GET'})
+        .then(function(res){ return res.ok ? res.json() : []; })
+        .then(function(rows){
+            if(!rows || !rows.length) return;
+            var remote = rows[0];
+            var changed = false;
+
+            /* Regla campo por campo: gana el valor no vacio */
+            if(remote.client_name && !local.name){ local.name = remote.client_name; changed = true; }
+            if(remote.client_phone && !local.phone){ local.phone = remote.client_phone; changed = true; }
+            /* Horas: solo sincronizar si local no tiene datos de segmentos */
+            if(remote.total_hours && !local.totalHours){ local.totalHours = remote.total_hours; changed = true; }
+
+            if(changed) F7.saveData(local);
+        })
+        .catch(function(){});
+};
+
+/* Ejecutar sync al cargar, sin bloquear */
+if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(F7.syncFromSupabase, 800); });
+} else {
+    setTimeout(F7.syncFromSupabase, 800);
+}
+
 window.F7 = F7;
 
 })(window);
