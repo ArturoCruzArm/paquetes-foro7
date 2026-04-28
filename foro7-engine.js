@@ -227,9 +227,11 @@ F7.calcPrice = function(pkgIndex, hours, sessionHrs){
     return r;
 };
 
+/* Exponer F7 globalmente antes de cualquier side effect */
+window.F7 = F7;
 
 /* ─── Inyectar CSS del modal de cotización ─── */
-(function(){
+try{(function(){
     var style = document.createElement('style');
     style.textContent = ''
     /* Modal overlay */
@@ -275,9 +277,7 @@ F7.calcPrice = function(pkgIndex, hours, sessionHrs){
     +'@page{size:letter;margin:0} @media print{html,body{background:#fff!important;color:#111!important;width:216mm;min-height:279mm}body>*:not(.q-modal){display:none!important}.q-modal{position:static!important;background:#fff!important;display:block!important;padding:0!important}.q-modal-inner{margin:0!important;max-width:none!important;width:100%!important}.q-actions{display:none!important}.quote-doc{background:#fff!important;color:#111!important;width:216mm;min-height:279mm;padding:14mm 16mm;box-shadow:none!important}.quote-doc *{color:inherit}.q-table{border-color:#ddd!important;min-width:0!important;max-width:100%!important}.q-table td{color:#111!important;background:#fff!important}}'
     +'@media(max-width:500px){.quote-doc{padding:1.5rem 1rem}.q-header{flex-direction:column;text-align:center;gap:.5rem}.q-company{text-align:center}.q-meta{flex-direction:column;gap:.2rem}}';
     document.head.appendChild(style);
-})();
-
-/* ─── Generar cotización ─── */
+})();}catch(e){}
 F7.generateQuoteHTML = function(pkgIndex){
     var data = F7.getFreshData();
     if(!data || !data.totalHours) return null;
