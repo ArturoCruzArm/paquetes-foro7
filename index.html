@@ -783,6 +783,7 @@
 
         // Save to localStorage
         F7.saveData(eventData);
+        document.dispatchEvent(new CustomEvent('f7schedule', {detail: eventData}));
 
         splash.classList.add('hide');
         setTimeout(function(){ splash.style.display='none'; }, 500);
@@ -805,6 +806,7 @@
         eventData.totalHours = 6;
         eventData.sessionHours = 0;
         F7.saveData(eventData);
+        document.dispatchEvent(new CustomEvent('f7schedule', {detail: eventData}));
         updateAllPrices();
     });
 
@@ -841,41 +843,45 @@
     var builderSesionHours = 2;
     var builderEventHours = 5;
 
-    (function initFromSplash(){
-        var d = F7.getData();
+    function applySchedule(d){
         var schedDesc = document.getElementById('builderScheduleDesc');
         var hrsDisplay = document.getElementById('builderHrsDisplay');
         var sesionDesc = document.getElementById('sesionDesc');
+        var cbSesion   = document.getElementById('cbSesion');
 
         if(!d || !d.totalHours){
             if(schedDesc) schedDesc.textContent = 'Completa tu horario arriba para ver precios reales';
+            if(hrsDisplay) hrsDisplay.textContent = '--';
             return;
         }
 
         var sesActive = !!(d.segments && d.segments.sesion && d.segments.sesion.active);
         builderSesionHours = sesActive ? (d.segments.sesion.hours || 2) : 2;
-        builderEventHours = Math.max(1, d.totalHours - (sesActive ? builderSesionHours : 0));
+        builderEventHours  = Math.max(1, d.totalHours - (sesActive ? builderSesionHours : 0));
 
-        /* Descripción del horario */
         var parts = [];
-        var segLabels = {sesion:'Sesión',casa:'Casa',misa:'Misa',fiesta:'Fiesta'};
+        var segLabels = {sesion:'Sesion',casa:'Casa',misa:'Misa',fiesta:'Fiesta'};
         ['sesion','casa','misa','fiesta'].forEach(function(k){
             var seg = d.segments && d.segments[k];
-            if(seg && seg.active) parts.push(segLabels[k]+' '+seg.start+'–'+seg.end+' ('+seg.hours+'h)');
+            if(seg && seg.active) parts.push(segLabels[k]+' '+seg.start+'-'+seg.end+' ('+seg.hours+'h)');
         });
-        if(schedDesc) schedDesc.textContent = parts.length ? parts.join(' · ') : (d.totalHours + ' hrs total');
+        if(schedDesc) schedDesc.textContent = parts.length ? parts.join(' | ') : (d.totalHours + ' hrs total');
         if(hrsDisplay) hrsDisplay.textContent = d.totalHours + ' hrs';
 
-        /* Pre-marcar sesión si splash la tenía */
-        if(sesActive){
-            var cbSesion = document.getElementById('cbSesion');
-            if(cbSesion) cbSesion.checked = true;
-            if(sesionDesc){
+        if(cbSesion) cbSesion.checked = sesActive;
+        if(sesionDesc){
+            if(sesActive && d.segments && d.segments.sesion){
                 var s = d.segments.sesion;
-                sesionDesc.textContent = builderSesionHours + ' hrs · ' + s.start + '–' + s.end + ' · Tú eliges el lugar';
+                sesionDesc.textContent = builderSesionHours + ' hrs - ' + s.start + '-' + s.end + ' - Tu eliges el lugar';
+            } else {
+                sesionDesc.textContent = '~2 hrs adicionales - Tu eliges el lugar';
             }
         }
-    })();
+    }
+
+    applySchedule(F7.getData());
+    document.addEventListener('f7schedule', function(e){ applySchedule(e.detail); calcBuilder(); });
+
 
     function calcBuilder(){
         var hrs = builderEventHours;
