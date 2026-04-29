@@ -780,6 +780,58 @@ F7.saveToSupabase = function(data, pkgIndex, customInfo){
     });
 };
 
+/* --- Horas reales por servicio segun segmentos del evento --- */
+F7.calcServiceHours = function(segments){
+    var foto = 0, video = 0, dron = 0;
+    if(!segments) return {foto:0, video:0, dron:0};
+
+    /* Sesion: foto+video duran todo, dron 30 min */
+    var ses = segments.sesion;
+    if(ses && ses.active && ses.hours){
+        foto  += ses.hours;
+        video += ses.hours;
+        dron  += Math.min(ses.hours, 0.5);
+    }
+
+    /* Casa: 15 min cada servicio */
+    var casa = segments.casa;
+    if(casa && casa.active && casa.hours){
+        foto  += Math.min(casa.hours, 0.25);
+        video += Math.min(casa.hours, 0.25);
+        dron  += Math.min(casa.hours, 0.25);
+    }
+
+    /* Misa: foto 40 min, video 1 hr, dron 20 min */
+    var misa = segments.misa;
+    if(misa && misa.active && misa.hours){
+        foto  += Math.min(misa.hours, 0.75);   /* ~40 min redondeado a 0.75 */
+        video += Math.min(misa.hours, 1.0);
+        dron  += Math.min(misa.hours, 0.25);   /* ~20 min redondeado a 0.25 */
+    }
+
+    /* Fiesta: foto 3 hrs, video fiesta-1hr, dron 40 min */
+    var fiesta = segments.fiesta;
+    if(fiesta && fiesta.active && fiesta.hours){
+        foto  += Math.min(fiesta.hours, 3.0);
+        video += Math.max(0.5, fiesta.hours - 1);
+        dron  += Math.min(fiesta.hours, 0.75); /* ~40 min redondeado a 0.75 */
+    }
+
+    /* Redondear a 0.25 hr mas cercano */
+    function r(v){ return Math.round(v * 4) / 4; }
+    return {foto:r(foto), video:r(video), dron:r(dron)};
+};
+
+/* Convertir horas decimales a texto legible (1.5 -> "1 hr 30 min") */
+F7.fmtHrs = function(h){
+    if(!h) return '0 min';
+    var mins = Math.round(h * 60);
+    if(mins < 60) return mins + ' min';
+    var hrs = Math.floor(mins / 60);
+    var m   = mins % 60;
+    return hrs + ' hr' + (hrs > 1 ? 's' : '') + (m ? ' ' + m + ' min' : '');
+};
+
 /* --- Sync en background desde Supabase, campo por campo --- */
 F7.syncFromSupabase = function(){
     if(!F7.supabaseKey) return;
